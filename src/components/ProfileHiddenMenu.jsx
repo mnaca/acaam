@@ -1,34 +1,34 @@
-import React from 'react';
-import { createUseStyles } from "react-jss";
+import React from "react";
+import styled from "styled-components";
 
-const useStyles = createUseStyles({
-  'hidden-menu': {
-    position: 'absolute',
-    top: 46,
-    listStyleType: 'none',
-    backgroundColor: 'white',
-    margin: 0,
-    width: '100%',
-    marginTop: 10,
-    borderRadius: '4.5%',
-    padding: '3px 20px 6px 20px'
-  },
+const HiddenMenu = styled.ul`
+  position: absolute;
+  top: 46px;
+  list-style-type: none;
+  background-color: white;
+  margin: 0;
+  padding-left: 0;
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 4.5%;
+  overflow: hidden;
+`;
 
-  'hidden-menu-item': {
-    borderBottom: '1px solid #c3c3c3',
-    marginTop: 4
-  },
-});
+const HiddenMenuItem = styled.li`
+  cursor: pointer;
+  padding: 9px 20px;
+  &:hover {
+    background-color: #dedede;
+  };
+`;
 
 export default function ProfileHiddenMenu(props) {
-  const classes = useStyles();
-
   return props.opened ? (
-    <ul className={classes["hidden-menu"]}>
-      <li className={classes["hidden-menu-item"]}>Register</li>
-      <li className={classes["hidden-menu-item"]}>Sign in</li>
-      <li className={classes["hidden-menu-item"]}>Register</li>
-      <li className={classes["hidden-menu-item"]}>Sign in</li>
-    </ul>
-  ) : null 
+    <HiddenMenu>
+      <HiddenMenuItem>Register</HiddenMenuItem>
+      <HiddenMenuItem>Sign in</HiddenMenuItem>
+      <HiddenMenuItem>Register</HiddenMenuItem>
+      <HiddenMenuItem lastChild>Sign in</HiddenMenuItem>
+    </HiddenMenu>
+  ) : null;
 }

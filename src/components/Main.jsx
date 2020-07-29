@@ -1,37 +1,29 @@
 import React from "react";
 import Header from "./Header";
 import Banner from "./Banner";
-import { createUseStyles } from "react-jss";
 import background from "../images/background.jpg";
+import styled from "styled-components";
 
-// Create your Styles. Remember, since React-JSS uses the default preset,
-// most plugins are available without further configuration needed.
-const useStyles = createUseStyles({
-  wrapper: {
-    backgroundImage: `url(${background})`,
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: '100%',
-    height: 700
-  }
-});
+const Wrapper = styled.div`
+  background-image: url(${background});
+  background-repeat: no-repeat;
+  background-size: 100%;
+  height: 700px;
+`;
+
+const HeaderWrapper = styled.div`
+  padding: 0 20px
+`;
 
 export default function Main(props) {
-  const classes = useStyles();
-
   return (
-    <div className={classes.wrapper}>
-      <div
-        className="header-wrapper"
-        style={{ padding: "0 20px" }}
-      >
+    <Wrapper>
+      <HeaderWrapper>
         <Header />
-      </div>
-      <div
-        className={classes["banner-wrapper"]}
-        style={{ backgroundColor: "lightyellow", padding: "0 20px" }}
-      >
+      </HeaderWrapper>
+      <div>
         <Banner />
       </div>
-    </div>
+    </Wrapper>
   );
 }

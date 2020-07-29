@@ -1,41 +1,39 @@
 import React, { useState } from "react";
 import ProfileHiddenMenu from "./ProfileHiddenMenu";
-import { createUseStyles } from "react-jss";
 import { faBars, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styled from "styled-components";
 
-const useStyles = createUseStyles({
-  "profile-menu": {
-    display: "inline-flex",
-    padding: '7px 12px',
-    alignItems: "center",
-    cursor: 'pointer',
-    backgroundColor: 'white',
-    borderRadius: '10%',
-    marginLeft: 'auto'
-  },
-  "profile-wrapper": {
-    display: 'flex',
-    position: 'relative',
-    width: 100
-  }
-});
+const ProfileWrapper = styled.div`
+  display: flex;
+  position: relative;
+  width: 150px;
+`;
+
+const ProfileMenu = styled.div`
+  display: inline-flex;
+  padding: 7px 12px;
+  align-items: center;
+  cursor: pointer;
+  background-color: white;
+  border-radius: 10%;
+  margin-left: auto;
+`;
 
 export default function Profile(props) {
-  const classes = useStyles();
   const [opened, setOpened] = useState(false);
 
   const onHandleMenu = () => {
     setOpened(!opened);
-  }
+  };
 
   return (
-    <div className={classes["profile-wrapper"]}>
-      <div className={classes["profile-menu"]} onClick={onHandleMenu}>
+    <ProfileWrapper>
+      <ProfileMenu onClick={onHandleMenu}>
         <FontAwesomeIcon icon={faBars} style={{ marginRight: 10 }} />
         <FontAwesomeIcon icon={faUserCircle} size="2x" />
-      </div>
+      </ProfileMenu>
       <ProfileHiddenMenu opened={opened} />
-    </div>
+    </ProfileWrapper>
   );
 }
