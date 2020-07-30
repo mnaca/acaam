@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { connect, useSelector } from "react-redux";
 
-const HiddenMenu = styled.ul`
+export const HiddenMenu = styled.ul`
   position: absolute;
   top: 46px;
   list-style-type: none;
@@ -14,21 +15,27 @@ const HiddenMenu = styled.ul`
   overflow: hidden;
 `;
 
-const HiddenMenuItem = styled.li`
+export const HiddenMenuItem = styled.li`
   cursor: pointer;
-  padding: 9px 20px;
+  padding: 9px 0;
+  transition: 0.3s;
   &:hover {
     background-color: #dedede;
   };
+  text-align: center;
 `;
 
-export default function ProfileHiddenMenu(props) {
-  return props.opened ? (
+function ProfileHiddenMenu(props) {
+  const opened = useSelector((state) => state.profileHiddenMenuOpened);
+
+  return opened ? (
     <HiddenMenu>
       <HiddenMenuItem>Register</HiddenMenuItem>
       <HiddenMenuItem>Sign in</HiddenMenuItem>
       <HiddenMenuItem>Register</HiddenMenuItem>
-      <HiddenMenuItem lastChild>Sign in</HiddenMenuItem>
+      <HiddenMenuItem>Host your home</HiddenMenuItem>
     </HiddenMenu>
   ) : null;
 }
+
+export default connect()(ProfileHiddenMenu);

@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import ProfileHiddenMenu from "./ProfileHiddenMenu";
 import { faBars, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
+import Language from "./Language";
+import { connect, useDispatch } from "react-redux";
+import { createToggleProfileHiddenMenu } from "../actions/actions";
 
 const ProfileWrapper = styled.div`
   display: flex;
+  justify-content: flex-end;
   position: relative;
   width: 150px;
 `;
@@ -17,23 +21,26 @@ const ProfileMenu = styled.div`
   cursor: pointer;
   background-color: white;
   border-radius: 10%;
-  margin-left: auto;
+  margin-left: 10px;
 `;
 
-export default function Profile(props) {
-  const [opened, setOpened] = useState(false);
+function Profile(props) {
+  const dispatch = useDispatch();
 
   const onHandleMenu = () => {
-    setOpened(!opened);
+    dispatch(createToggleProfileHiddenMenu());
   };
 
   return (
     <ProfileWrapper>
+      <Language />
       <ProfileMenu onClick={onHandleMenu}>
         <FontAwesomeIcon icon={faBars} style={{ marginRight: 10 }} />
         <FontAwesomeIcon icon={faUserCircle} size="2x" />
       </ProfileMenu>
-      <ProfileHiddenMenu opened={opened} />
+      <ProfileHiddenMenu />
     </ProfileWrapper>
   );
 }
+
+export default connect()(Profile);
