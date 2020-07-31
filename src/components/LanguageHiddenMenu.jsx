@@ -7,7 +7,6 @@ import arm from "../images/arm.png";
 import eng from "../images/eng.png";
 
 const LanguageHiddenMenuCmp = styled(HiddenMenu)`
-  right: 0px;
   width: 100px;
 `;
 

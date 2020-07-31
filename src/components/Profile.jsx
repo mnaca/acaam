@@ -37,8 +37,8 @@ function Profile(props) {
       <ProfileMenu onClick={onHandleMenu}>
         <FontAwesomeIcon icon={faBars} style={{ marginRight: 10 }} />
         <FontAwesomeIcon icon={faUserCircle} size="2x" />
+        <ProfileHiddenMenu />
       </ProfileMenu>
-      <ProfileHiddenMenu />
     </ProfileWrapper>
   );
 }
