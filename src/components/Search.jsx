@@ -10,6 +10,9 @@ const SearchCmp = styled.div`
   border: 2px solid #364f6b;
   padding: ${props => props.paddingLeft ? '5px 20px 5px' : 0};
   border-radius: ${(props) => props.borderRadius};
+  &:hover {
+    background-color: ${props => !props.opened ? 'rgba(54, 79, 107, 0.1)' : null};
+  }
 `;
 
 const SearchItem = styled.div`
@@ -19,7 +22,7 @@ const SearchItem = styled.div`
   border-right: ${props => !props.last ? '1px solid #364f6b' : null};
   border-radius: ${props => props.first ? '40px 0 0 40px' : props.last ? '0 40px 40px 0' : '0'};
   &:hover {
-    background-color: rgba(54,79,107,0.2);
+    background-color: rgba(54,79,107,0.1);
   }
 `;
 
@@ -47,7 +50,7 @@ export default function Search(props) {
   };
 
   return (
-    <SearchCmp borderRadius={borderRadius} paddingLeft={opened}>
+    <SearchCmp borderRadius={borderRadius} paddingLeft={opened} opened={opened}>
       {opened ? (
         <>
           <SearchItem first>

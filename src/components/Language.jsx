@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import LanguageIcon from '@material-ui/icons/Language';
-import LanguageHiddenMenu from './LanguageHiddenMenu';
-import { connect, useDispatch } from 'react-redux';
-import { createToggleLanguageHiddenMenu } from '../actions/actions';
+import React from "react";
+import styled from "styled-components";
+import LanguageIcon from "@material-ui/icons/Language";
+import LanguageHiddenMenu from "./LanguageHiddenMenu";
+import { connect, useDispatch } from "react-redux";
+import { createToggleLanguageHiddenMenu } from "../actions/actions";
 
 const LanguageCmp = styled.div`
   position: relative;
@@ -15,6 +15,9 @@ const LanguageCmp = styled.div`
   cursor: pointer;
   border: 2px solid #364f6b;
   margin-left: 10px;
+  &:hover {
+    background-color: rgba(54, 79, 107, 0.1);
+  }
 `;
 
 const StyledLanguageIcon = styled(LanguageIcon)`
@@ -25,7 +28,8 @@ const StyledLanguageIcon = styled(LanguageIcon)`
 function Language(props) {
   const dispatch = useDispatch();
 
-  const onHandleMenu = () => {
+  const onHandleMenu = (event) => {
+    event.stopPropagation();
     dispatch(createToggleLanguageHiddenMenu());
   };
 
@@ -34,8 +38,7 @@ function Language(props) {
       <StyledLanguageIcon />
       <LanguageHiddenMenu />
     </LanguageCmp>
-  )
+  );
 }
 
 export default connect()(Language);
-

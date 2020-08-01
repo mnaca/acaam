@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import Banner from "./Banner";
 import styled from "styled-components";
-import background from '../images/background.jpg';
+import background from "../images/background.jpg";
 import Profile from "./Profile";
 import Categories from "./Categories";
+import { connect, useDispatch } from "react-redux";
+import { createCloseAllMenu } from "../actions/actions";
+import Footer from "./Footer";
 // import Background from "./Background";
 
 const HeaderWrapper = styled.div`
@@ -23,16 +26,21 @@ const BannerWrapper = styled.div`
   transition: 1s;
 `;
 
-export default function Main(props) {
+function Main(props) {
   const [imageHeight, setImageHeight] = useState(
     (window.innerWidth * 700) / 1920 - 60
   );
+
   const images = [];
   const [imageIndex, setImageIndex] = useState(0);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     window.onresize = () => {
       setImageHeight((window.innerWidth * 700) / 1920 - 60);
+    };
+    window.onclick = (e) => {
+      dispatch(createCloseAllMenu());
     };
 
     const timerId = setInterval(() => {
@@ -47,7 +55,7 @@ export default function Main(props) {
       window.onresize = null;
       clearInterval(timerId);
     };
-  }, [imageIndex, images.length]);
+  }, [imageIndex, images.length, dispatch]);
   return (
     <>
       <HeaderWrapper>
@@ -60,6 +68,9 @@ export default function Main(props) {
         <button onClick={() => setImageIndex(imageIndex + 1)}>Right</button> */}
       </BannerWrapper>
       <Categories />
+      <Footer />
     </>
   );
 }
+
+export default connect()(Main);

@@ -1,5 +1,4 @@
 import React from 'react';
-import Profile from './Profile';
 import styled from 'styled-components';
 
 const BannerCmp = styled.div`

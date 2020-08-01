@@ -25,6 +25,9 @@ const ProfileMenu = styled.div`
   border: 2px solid #364f6b;
   border-radius: 10%;
   margin-left: 10px;
+  &:hover {
+    background-color: rgba(54, 79, 107, 0.1);
+  }
 `;
 
 const StyledMenuIcon = styled(MenuIcon)`
@@ -39,7 +42,8 @@ const StyledUserIcon = styled(AccountCircleIcon)`
 function Profile(props) {
   const dispatch = useDispatch();
 
-  const onHandleMenu = () => {
+  const onHandleMenu = (event) => {
+    event.stopPropagation();
     dispatch(createToggleProfileHiddenMenu());
   };
 

@@ -9,16 +9,19 @@ const CategoriesCmp = styled.div`
   justify-content: center;
   margin-top: 40px;
   padding: 0 50px;
-  margin-bottom: 500px;
 `;
 
 const Category = styled.div`
+  cursor: pointer;
   color: #364f6b;
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0px 0px 10px 1px rgba(93,120,148,1);
   flex: 1;
   margin-right: ${props => !props.last ? '50px' : null};
+  &:active {
+    border-raduis: 25px;
+  }
 `;
 
 export default function Categories(props) {

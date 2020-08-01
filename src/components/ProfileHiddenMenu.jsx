@@ -21,10 +21,10 @@ export const HiddenMenuItem = styled.li`
   cursor: pointer;
   padding: 9px 0;
   transition: 0.3s;
-  &:hover {
-    background-color: #dedede;
-  };
   text-align: center;
+  &:hover {
+    background-color: rgba(54, 79, 107, 0.2);
+  }
 `;
 
 function ProfileHiddenMenu(props) {
