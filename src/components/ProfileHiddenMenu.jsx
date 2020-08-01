@@ -10,10 +10,11 @@ export const HiddenMenu = styled.ul`
   background-color: white;
   margin: 0;
   padding-left: 0;
-  width: 100%;
+  width: 150px;
   margin-top: 10px;
   border-radius: 4.5%;
   overflow: hidden;
+  border: 2px solid #364f6b;
 `;
 
 export const HiddenMenuItem = styled.li`

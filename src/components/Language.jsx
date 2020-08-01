@@ -10,13 +10,16 @@ const LanguageCmp = styled.div`
   background-color: white;
   display: flex;
   align-items: center;
-  padding: 0 11px;
+  padding: 10px 11px;
   border-radius: 13%;
   cursor: pointer;
+  border: 2px solid #364f6b;
+  margin-left: 10px;
 `;
 
 const StyledLanguageIcon = styled(LanguageIcon)`
   transform: scale(1.25);
+  color: #364f6b;
 `;
 
 function Language(props) {

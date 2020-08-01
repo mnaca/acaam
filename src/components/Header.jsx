@@ -18,7 +18,7 @@ const LogoText = styled.span`
   position: relative;
   bottom: 1px;
   font-family: 'Pacifico', cursive;
-  font-size: 50px;
+  font-size: 35px;
   line-height: 0;
   color: #364f6b;
 `;
@@ -27,7 +27,7 @@ export default function Header(props) {
   return (
     <HeaderCmp>
       <Logo>
-        <img src={logo} alt="Logo" width={90} />
+        <img src={logo} alt="Logo" width={70} />
         <LogoText>NACA</LogoText>
       </Logo>
     </HeaderCmp>

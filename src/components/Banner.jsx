@@ -11,7 +11,7 @@ const BannerCmp = styled.div`
 export default function Banner(props) {
   return (
     <BannerCmp>
-      <Profile />
+      
     </BannerCmp>
   )
 }
