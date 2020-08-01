@@ -4,6 +4,7 @@ import Banner from "./Banner";
 import styled from "styled-components";
 import background from '../images/background.jpg';
 import Profile from "./Profile";
+import Categories from "./Categories";
 // import Background from "./Background";
 
 const HeaderWrapper = styled.div`
@@ -58,6 +59,7 @@ export default function Main(props) {
         {/* <button onClick={() => setImageIndex(imageIndex - 1)}>Left</button>
         <button onClick={() => setImageIndex(imageIndex + 1)}>Right</button> */}
       </BannerWrapper>
+      <Categories />
     </>
   );
 }

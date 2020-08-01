@@ -8,6 +8,7 @@ import eng from "../images/eng.png";
 
 const LanguageHiddenMenuCmp = styled(HiddenMenu)`
   width: 100px;
+  left: 0;
 `;
 
 const LanguageHiddenMenuItem = styled(HiddenMenuItem)`

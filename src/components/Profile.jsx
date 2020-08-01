@@ -16,6 +16,7 @@ const ProfileWrapper = styled.div`
 `;
 
 const ProfileMenu = styled.div`
+  position: relative;
   display: inline-flex;
   padding: 7px 12px;
   align-items: center;

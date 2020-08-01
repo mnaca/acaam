@@ -5,7 +5,7 @@ import { connect, useSelector } from "react-redux";
 export const HiddenMenu = styled.ul`
   position: absolute;
   right: 0;
-  top: 46px;
+  top: 50px;
   list-style-type: none;
   background-color: white;
   margin: 0;
