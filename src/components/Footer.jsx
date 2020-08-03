@@ -16,12 +16,19 @@ const FooterCmp = styled.div`
   font-size: 17px;
 `;
 
+const Link = styled.a`
+  display: inline-block;
+  margin-left: 5px;
+  margin-right: 5px;
+`;
+
+
 export default function Footer(props) {
   return (
     <FooterCmp>
       <div style={{ display: "flex", alignItems: "center" }}>
-        © 2020 Mnaca, Inc. All rights reserved · <a href="/home">Privacy</a> ·
-        <a href="/home">Terms</a> · <a href="/home">Sitemap</a>
+        © 2020 Mnaca, Inc. All rights reserved · <Link href="/home">Privacy</Link> ·
+        <Link href="/home">Terms</Link> · <Link href="/home">Sitemap</Link>
       </div>
       <div>
         <FacebookIcon

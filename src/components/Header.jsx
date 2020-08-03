@@ -11,6 +11,7 @@ const HeaderCmp = styled.header`
 `;
 
 const Logo = styled.div`
+  cursor: pointer;
   margin-top: 7.5px;
 `;
 
