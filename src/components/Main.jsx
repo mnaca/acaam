@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import Banner from "./Banner";
 import styled from "styled-components";
-import background from '../images/background.jpg';
+import background from "../images/background.jpg";
 import Profile from "./Profile";
 import Categories from "./Categories";
+import { Switch, Route } from "react-router-dom";
 // import Background from "./Background";
 
 const HeaderWrapper = styled.div`
@@ -54,12 +55,19 @@ export default function Main(props) {
         <Header />
         <Profile />
       </HeaderWrapper>
-      <BannerWrapper imageHeight={imageHeight}>
-        <Banner />
-        {/* <button onClick={() => setImageIndex(imageIndex - 1)}>Left</button>
+      <Switch>
+        <Route path="/apartments">
+          <h1>Apartments</h1>
+        </Route>
+        <Route path="/">
+          <BannerWrapper imageHeight={imageHeight}>
+            <Banner />
+            {/* <button onClick={() => setImageIndex(imageIndex - 1)}>Left</button>
         <button onClick={() => setImageIndex(imageIndex + 1)}>Right</button> */}
-      </BannerWrapper>
-      <Categories />
+          </BannerWrapper>
+          <Categories />
+        </Route>
+      </Switch>
     </>
   );
 }
