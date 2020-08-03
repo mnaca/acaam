@@ -3,7 +3,9 @@ import Header from "./Header";
 import Banner from "./Banner";
 import styled from "styled-components";
 import background from "../images/background.jpg";
-import apartmentsBanner from "../images/apartmentsBanner.jpg";
+import apartmentsBanner from "../images/apartments-banner.jpg";
+import vacationRentalsBanner from "../images/vacation-rentals-banner.jpg";
+import sharedRoomsBanner from "../images/shared-rooms-banner.jpg";
 import Profile from "./Profile";
 import Categories from "./Categories";
 import { connect, useDispatch } from "react-redux";
@@ -32,7 +34,9 @@ const BannerWrapper = styled.div`
 `;
 
 function Main(props) {
-  const [imageHeight, setImageHeight] = useState((window.innerWidth * 700) / 1920 - 60);
+  const [imageHeight, setImageHeight] = useState(
+    (window.innerWidth * 700) / 1920 - 60
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -61,15 +65,21 @@ function Main(props) {
             imageHeight={imageHeight}
             url={apartmentsBanner}
           ></BannerWrapper>
-          <AllProposals type="Apartments" />
+          <AllProposals type="apartments" />
         </Route>
         <Route path="/rentals">
-          <BannerWrapper imageHeight={imageHeight} url={apartmentsBanner}></BannerWrapper>
-          <AllProposals type="Rentals" />
+          <BannerWrapper
+            imageHeight={imageHeight}
+            url={vacationRentalsBanner}
+          ></BannerWrapper>
+          <AllProposals type="vacationRentals" />
         </Route>
         <Route path="/rooms">
-          <BannerWrapper imageHeight={imageHeight} url={apartmentsBanner}></BannerWrapper>
-          <AllProposals type="Rooms" />
+          <BannerWrapper
+            imageHeight={imageHeight}
+            url={sharedRoomsBanner}
+          ></BannerWrapper>
+          <AllProposals type="sharedRooms" />
         </Route>
         <Route path="/login">
           <Login />
