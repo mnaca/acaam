@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { connect, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export const HiddenMenu = styled.ul`
   position: absolute;
@@ -27,15 +28,26 @@ export const HiddenMenuItem = styled.li`
   }
 `;
 
+const StyledLink = styled(Link)`
+  display: block;
+  cursor: pointer;
+  padding: 9px 0;
+  transition: 0.3s;
+  text-align: center;
+  text-decoration: none;
+  color: #364f6b;
+  &:hover {
+    background-color: rgba(54, 79, 107, 0.2);
+  }
+`
+
 function ProfileHiddenMenu(props) {
   const opened = useSelector((state) => state.profileHiddenMenuOpened);
 
   return opened ? (
     <HiddenMenu>
-      <HiddenMenuItem>Register</HiddenMenuItem>
-      <HiddenMenuItem>Sign in</HiddenMenuItem>
-      <HiddenMenuItem>Register</HiddenMenuItem>
-      <HiddenMenuItem>Host your home</HiddenMenuItem>
+      <StyledLink to="/login">Sign in/Sign up</StyledLink>
+      <StyledLink to="/host">Host your home</StyledLink>
     </HiddenMenu>
   ) : null;
 }

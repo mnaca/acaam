@@ -3,11 +3,15 @@ import Header from "./Header";
 import Banner from "./Banner";
 import styled from "styled-components";
 import background from "../images/background.jpg";
+import apartmentsBanner from "../images/apartmentsBanner.jpg";
 import Profile from "./Profile";
 import Categories from "./Categories";
 import { connect, useDispatch } from "react-redux";
 import { createCloseAllMenu } from "../actions/actions";
 import Footer from "./Footer";
+import { Switch, Route, Redirect } from "react-router-dom";
+import AllProposals from "./AllProposals";
+import Login from "./Login";
 // import Background from "./Background";
 
 const HeaderWrapper = styled.div`
@@ -18,7 +22,8 @@ const HeaderWrapper = styled.div`
 `;
 
 const BannerWrapper = styled.div`
-  background-image: url(${background});
+  background-image: ${(props) =>
+    props.url ? `url(${props.url})` : `url(${background})`};
   background-repeat: no-repeat;
   background-size: 100%;
   height: ${(props) => props.imageHeight}px;
@@ -27,47 +32,56 @@ const BannerWrapper = styled.div`
 `;
 
 function Main(props) {
-  const [imageHeight, setImageHeight] = useState(
-    (window.innerWidth * 700) / 1920 - 60
-  );
-
-  const images = [];
-  const [imageIndex, setImageIndex] = useState(0);
+  const [imageHeight, setImageHeight] = useState((window.innerWidth * 700) / 1920 - 60);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    window.onresize = () => {
-      setImageHeight((window.innerWidth * 700) / 1920 - 60);
-    };
     window.onclick = (e) => {
       dispatch(createCloseAllMenu());
     };
 
-    const timerId = setInterval(() => {
-      if (imageIndex === images.length - 1) {
-        setImageIndex(0);
-      } else {
-        setImageIndex(imageIndex + 1);
-      }
-    }, 3000);
+    window.onresize = () => {
+      setImageHeight((window.innerWidth * 700) / 1920 - 60);
+    };
 
     return () => {
+      window.onclick = null;
       window.onresize = null;
-      clearInterval(timerId);
     };
-  }, [imageIndex, images.length, dispatch]);
+  }, [dispatch]);
   return (
     <>
       <HeaderWrapper>
         <Header />
         <Profile />
       </HeaderWrapper>
-      <BannerWrapper imageHeight={imageHeight}>
-        <Banner />
-        {/* <button onClick={() => setImageIndex(imageIndex - 1)}>Left</button>
-        <button onClick={() => setImageIndex(imageIndex + 1)}>Right</button> */}
-      </BannerWrapper>
-      <Categories />
+      <Switch>
+        <Route path="/apartments">
+          <BannerWrapper
+            imageHeight={imageHeight}
+            url={apartmentsBanner}
+          ></BannerWrapper>
+          <AllProposals type="Apartments" />
+        </Route>
+        <Route path="/rentals">
+          <BannerWrapper imageHeight={imageHeight} url={apartmentsBanner}></BannerWrapper>
+          <AllProposals type="Rentals" />
+        </Route>
+        <Route path="/rooms">
+          <BannerWrapper imageHeight={imageHeight} url={apartmentsBanner}></BannerWrapper>
+          <AllProposals type="Rooms" />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route exact path="/">
+          <BannerWrapper imageHeight={imageHeight}>
+            <Banner />
+          </BannerWrapper>
+          <Categories />
+        </Route>
+        <Redirect to="/" />
+      </Switch>
       <Footer />
     </>
   );
