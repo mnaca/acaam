@@ -8,12 +8,14 @@ import vacationRentalsBanner from "../images/vacation-rentals-banner.jpg";
 import sharedRoomsBanner from "../images/shared-rooms-banner.jpg";
 import Profile from "./Profile";
 import Categories from "./Categories";
-import { connect, useDispatch } from "react-redux";
-import { createCloseAllMenu } from "../actions/actions";
+import { connect, useDispatch, useSelector } from "react-redux";
+import { createCloseAllMenu, createSetUser } from "../actions/actions";
 import Footer from "./Footer";
 import { Switch, Route, Redirect } from "react-router-dom";
 import AllProposals from "./AllProposals";
 import Login from "./Login";
+import { auth } from "../firebase";
+import HostHome from "./HostHome";
 // import Background from "./Background";
 
 const HeaderWrapper = styled.div`
@@ -43,6 +45,13 @@ function Main(props) {
     (window.innerWidth * 700) / 1920 - 60
   );
   const dispatch = useDispatch();
+  const stateUser = useSelector((state) => state.user);
+
+  useEffect(function () {
+    auth.onAuthStateChanged((user) => {
+      dispatch(createSetUser(user));
+    });
+  }, [dispatch]);
 
   useEffect(() => {
     window.onclick = (e) => {
@@ -86,9 +95,10 @@ function Main(props) {
           ></BannerWrapper>
           <AllProposals type="sharedRooms" />
         </Route>
-        <Route path="/login">
-          <Login />
+        <Route path="/host">
+          <HostHome />
         </Route>
+        <Route path="/login">{!stateUser ? <Login /> : <Redirect to="/" />}</Route>
         <Route exact path="/">
           <BannerWrapper imageHeight={imageHeight}>
             <Banner />

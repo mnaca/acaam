@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { connect, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { auth } from "../firebase";
+import { createSetUser } from "../actions/actions";
 
 export const HiddenMenu = styled.ul`
   position: absolute;
@@ -39,15 +41,29 @@ const StyledLink = styled(Link)`
   &:hover {
     background-color: rgba(54, 79, 107, 0.2);
   }
-`
+`;
 
 function ProfileHiddenMenu(props) {
   const opened = useSelector((state) => state.profileHiddenMenuOpened);
+  const user = useSelector((state) => state.user);
 
   return opened ? (
     <HiddenMenu>
-      <StyledLink to="/login">Sign in/Sign up</StyledLink>
-      <StyledLink to="/host">Host your home</StyledLink>
+      {user ? (
+        <StyledLink
+          onClick={() =>
+            auth.signOut().then(() => createSetUser(null)).catch((error) => {
+              alert(error);
+            })
+          }
+          to="/"
+        >
+          Logout
+        </StyledLink>
+      ) : (
+        <StyledLink to="/login">Sign in/Sign up</StyledLink>
+      )}
+      <StyledLink to={user ? "/host" : "/login"}>Host your home</StyledLink>
     </HiddenMenu>
   ) : null;
 }

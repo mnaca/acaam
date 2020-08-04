@@ -4,7 +4,7 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import MenuIcon from "@material-ui/icons/Menu";
 import styled from "styled-components";
 import Language from "./Language";
-import { connect, useDispatch } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { createToggleProfileHiddenMenu } from "../actions/actions";
 import Search from "./Search";
 
@@ -46,9 +46,12 @@ function Profile(props) {
     event.stopPropagation();
     dispatch(createToggleProfileHiddenMenu());
   };
+  
+  const user = useSelector((state) => state.user)
 
   return (
     <ProfileWrapper>
+      <h4>{user ? user.email : "Not Loginned"}</h4>
       <Search />
       <Language />
       <ProfileMenu onClick={onHandleMenu}>

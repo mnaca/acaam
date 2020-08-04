@@ -1,26 +1,29 @@
-import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import React, { useState } from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import { auth, db } from "../firebase";
+import { connect, useDispatch } from "react-redux";
+import { createSetUser } from "../actions/actions";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -28,8 +31,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Login() {
+function Login() {
   const classes = useStyles();
+  const [mail, setMail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
   return (
     <Container component="main" maxWidth="xs">
@@ -52,6 +58,8 @@ export default function Login() {
             name="email"
             autoComplete="email"
             autoFocus
+            value={mail}
+            onChange={(e) => setMail(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -63,20 +71,53 @@ export default function Login() {
             type="password"
             id="password"
             autoComplete="current-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
-          <Button style={{backgroundColor: '#364f6b', color: "white"}}
-            type="submit"
+          <Button
+            style={{ backgroundColor: "#364f6b", color: "white" }}
             fullWidth
             variant="outlined"
             className={classes.submit}
+            onClick={() => {
+              auth
+                .signInWithEmailAndPassword(mail, password)
+                .then((user) => {
+                  alert("Success");
+                  dispatch(createSetUser(user));
+                })
+                .catch((error) => {
+                  alert(error);
+                });
+            }}
           >
             Sign In
           </Button>
-          <Button style={{backgroundColor: '#364f6b', color: "white"}}
-            type="submit"
+          <Button
+            style={{ backgroundColor: "#364f6b", color: "white" }}
             fullWidth
             variant="outlined"
             className={classes.submit}
+            onClick={() => {
+              auth
+                .createUserWithEmailAndPassword(
+                  mail,
+                  password
+                )
+                .then((data) => {
+                  alert("Success register")
+                  dispatch(createSetUser(data.user));
+                  const userId = data.user.uid;
+
+                  db.collection("users")
+                    .doc(userId)
+                    .set({ mail: mail, password: password, id: userId });
+                  
+                })
+                .catch((error) => {
+                  alert(error);
+                });
+            }}
           >
             Sign Up
           </Button>
@@ -85,3 +126,5 @@ export default function Login() {
     </Container>
   );
 }
+
+export default connect()(Login);

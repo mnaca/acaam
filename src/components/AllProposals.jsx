@@ -6,7 +6,7 @@ import styled from "styled-components";
 const AllProposalsCmp = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: 0 100px;
+  padding: 0 100px 150px 100px;
   margin-top: 50px;
   grid-gap: 20px 20px;
 `;
