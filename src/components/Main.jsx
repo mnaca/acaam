@@ -33,6 +33,11 @@ const BannerWrapper = styled.div`
   transition: 1s;
 `;
 
+const MainCmp = styled.div`
+  position: relative;
+  min-height: 100vh;
+`;
+
 function Main(props) {
   const [imageHeight, setImageHeight] = useState(
     (window.innerWidth * 700) / 1920 - 60
@@ -54,7 +59,7 @@ function Main(props) {
     };
   }, [dispatch]);
   return (
-    <>
+    <MainCmp>
       <HeaderWrapper>
         <Header />
         <Profile />
@@ -93,7 +98,7 @@ function Main(props) {
         <Redirect to="/" />
       </Switch>
       <Footer />
-    </>
+    </MainCmp>
   );
 }
 

@@ -9,7 +9,7 @@ const CategoriesCmp = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 40px;
-  padding: 0 50px;
+  padding: 0 50px 120px 50px;
 `;
 
 const StyledLink = styled(Link)`
