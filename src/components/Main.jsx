@@ -18,6 +18,8 @@ import { auth } from "../firebase";
 import HostHome from "./HostHome";
 // import Background from "./Background";
 
+
+
 const HeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;

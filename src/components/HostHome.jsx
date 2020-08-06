@@ -8,7 +8,6 @@ export default function HostHome(props) {
     }, 3000);
   }, [])
   const [step, setStep] = useState(1);
-  const images = [];
   const [options] = useState({});
   const setOption = (keys, values) => {
     for (let i = 0; i < keys.length; i++) {
@@ -17,6 +16,6 @@ export default function HostHome(props) {
   }
 
   return (
-    <HostHomeStep step={step} setStep={setStep} setOption={setOption} />
+    <HostHomeStep step={"mher"} />
   )
 }
