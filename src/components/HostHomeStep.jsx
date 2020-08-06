@@ -48,6 +48,15 @@ const BackStyledButton = styled(StyledButton)`
   margin-right: 15px !important;
 `;
 
+const PlusMinusButton = styled(Button)`
+  color: #364f6b !important;
+  border: 1px solid #364f6b !important;
+  padding: 14px !important;
+  line-height: 0.5em !important;
+  min-width: 0 !important;
+  border-radius: 50% !important;
+`;
+
 export default function HostHomeStep(props) {
   let returnedJSX = null;
   const classes = useStyles();
@@ -57,6 +66,8 @@ export default function HostHomeStep(props) {
   const [district, setDistrict] = useState("");
   const [guests, setGuests] = useState("");
   const [bathrooms, setBathrooms] = useState(0);
+  const [bedrooms, setBedrooms] = useState("");
+  const [beds, setBeds] = useState(0);
 
   if (props.step === 1) {
     returnedJSX = (
@@ -221,43 +232,33 @@ export default function HostHomeStep(props) {
               margin: "20px 0",
             }}
           >
-            <Button
+            <PlusMinusButton
               variant="outlined"
               color="primary"
-              style={{
-                color: "#364f6b",
-                border: "1px solid #364f6b",
-                padding: "14px",
-                lineHeight: "0.5em",
-                minWidth: 0,
-                borderRadius: "50%",
-              }}
               onClick={() =>
                 bathrooms >= 1 ? setBathrooms(bathrooms - 1) : null
               }
             >
               -
-            </Button>
-            <div style={{ display: "inline-block", margin: "0 70px", color: "#364f6b" }}>
+            </PlusMinusButton>
+            <div
+              style={{
+                display: "inline-block",
+                margin: "0 70px",
+                color: "#364f6b",
+              }}
+            >
               {bathrooms}
             </div>
-            <Button
+            <PlusMinusButton
               variant="outlined"
               color="primary"
-              style={{
-                color: "#364f6b",
-                border: "1px solid #364f6b",
-                padding: "14px",
-                lineHeight: "0.5em",
-                minWidth: 0,
-                borderRadius: "50%",
-              }}
               onClick={() =>
                 bathrooms < 9 ? setBathrooms(bathrooms + 1) : null
               }
             >
               +
-            </Button>
+            </PlusMinusButton>
           </div>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <BackStyledButton
@@ -281,6 +282,82 @@ export default function HostHomeStep(props) {
             >
               NEXT
             </NextStyledButton>
+          </div>
+        </HostHomeStepText>
+      </HostHomeStepCmp>
+    );
+  } else if (props.step === 4) {
+    returnedJSX = (
+      <HostHomeStepCmp>
+        <HostHomeStepText>
+          <h2 style={{ marginTop: 10 }}>
+            How many guests can your place accommodate?
+          </h2>
+          <h4 style={{ marginTop: 10 }}>STEP {props.step}</h4>
+          <h3 style={{ marginTop: 10 }}>
+            Check that you have enough beds to accommodate all your guests
+            comfortably.
+          </h3>
+          <div style={{ marginTop: 10 }}>
+            <h4>How many bedrooms can guests use?</h4>
+            <FormControl
+              style={{ minWidth: "100%" }}
+              required
+              className={classes.formControl}
+            >
+              <InputLabel>Bedrooms</InputLabel>
+              <Select
+                style={{ width: "100%" }}
+                value={bedrooms}
+                onChange={(e) => setBedrooms(e.target.value)}
+                className={classes.selectEmpty}
+              >
+                {new Array(50)
+                  .fill(null)
+                  .map((item, index) => index + 1)
+                  .map((bedrooms) => (
+                    <MenuItem key={bedrooms} value={bedrooms}>
+                      {bedrooms} bedrooms
+                    </MenuItem>
+                  ))}
+              </Select>
+              <FormHelperText>Required</FormHelperText>
+            </FormControl>
+          </div>
+          <div style={{ marginTop: 10 }}>
+            <h4>How many bed can guests use?</h4>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                marginTop: "25px",
+              }}
+            >
+              <div style={{ marginRight: "20vw" }}>Beds</div>
+              <PlusMinusButton
+                variant="outlined"
+                color="primary"
+                onClick={() => (beds >= 1 ? setBeds(beds - 1) : null)}
+              >
+                -
+              </PlusMinusButton>
+              <div style={{ margin: "0 30px", width: 20 }}>{beds}</div>
+              <PlusMinusButton
+                variant="outlined"
+                color="primary"
+                onClick={() => setBeds(beds + 1)}
+              >
+                +
+              </PlusMinusButton>
+            </div>
+          </div>
+          <div style={{ marginTop: 10 }}>
+            <h3>Sleeping arrangements</h3>
+            <h4>
+              Sharing the types of beds in each room can help people understand
+              the sleeping arrangements.
+            </h4>
           </div>
         </HostHomeStepText>
       </HostHomeStepCmp>
