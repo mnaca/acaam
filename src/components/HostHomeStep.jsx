@@ -14,7 +14,6 @@ import {
   Checkbox,
 } from "@material-ui/core";
 
-
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -52,11 +51,7 @@ const BackStyledButton = styled(StyledButton)`
   margin-right: 15px !important;
 `;
 
-const FormStyleDiv = styled.div`
-margin: auto;
-width: 20%;
-`;
-
+const FormStyleDiv = styled.div``;
 
 export default function HostHomeStep(props) {
   let returnedJSX = null;
@@ -248,7 +243,13 @@ export default function HostHomeStep(props) {
             >
               -
             </Button>
-            <div style={{ display: "inline-block", margin: "0 70px", color: "#364f6b" }}>
+            <div
+              style={{
+                display: "inline-block",
+                margin: "0 70px",
+                color: "#364f6b",
+              }}
+            >
               {bathrooms}
             </div>
             <Button
@@ -295,116 +296,79 @@ export default function HostHomeStep(props) {
         </HostHomeStepText>
       </HostHomeStepCmp>
     );
-  }else if (props.step === 4){
+  } else if (props.step === 4) {
     returnedJSX = (
       <HostHomeStepCmp>
         <HostHomeStepText>
-      <FormStyleDiv>
-          <FormGroup column>
-        <h2 style = {{color: '#364F6B'}}>Please choose the amenities</h2>
-      <FormControlLabel style = {{color: '#364F6B'}}
-        control={
-          <Checkbox
-            color="primary"
-          />
-        }
-        label="Essentials"
-      />
-      <FormControlLabel style = {{color: '#364F6B'}}
-        control={
-          <Checkbox
-            color="primary"
-          />
-        }
-        label="WiFi"
-      />
-      <FormControlLabel style = {{color: '#364F6B'}}
-        control={
-          <Checkbox
-            color="primary"
-          />
-        }
-        label="TV"
-      />
-      <FormControlLabel style = {{color: '#364F6B'}}
-        control={
-          <Checkbox
-            color="primary"
-          />
-        }
-        label="Heat"
-      />
-      <FormControlLabel style = {{color: '#364F6B'}}
-        control={
-          <Checkbox
-            color="primary"
-          />
-        }
-        label="Air conditioning"
-      />
-      <FormControlLabel style = {{color: '#364F6B'}}
-        control={
-          <Checkbox
-            color="primary"
-          />
-        }
-        label="Breakfast, coffee, tea"
-      />
-      <FormControlLabel style = {{color: '#364F6B'}}
-        control={
-          <Checkbox
-            color="primary"
-          />
-        }
-        label="Game console"
-      />
-      <FormControlLabel style = {{color: '#364F6B'}}
-        control={
-          <Checkbox
-            color="primary"
-          />
-        }
-        label="Fireplace"
-      />
-      <FormControlLabel style = {{color: '#364F6B'}}
-        control={
-          <Checkbox
-            color="primary"
-          />
-        }
-        label="Workspace"
-      />
-    </FormGroup>
-      </FormStyleDiv>
-      <BackStyledButton
-      variant="outlined"
-      color="primary"
-      className={classes.button}
-      onClick={() => {
-        props.setStep(props.step - 1);
-      }}
-    >
-      BACK
-    </BackStyledButton>
-    <NextStyledButton
-      variant="contained"
-      color="primary"
-      className={classes.button}
-      onClick={() => {
-        props.setStep(props.step + 1);
-        // props.setOption(
-        //   ["city", "district", "guests"],
-        //   [city, district, guests]
-        // );
-      }}
-    >
-      NEXT
-    </NextStyledButton>
-    </HostHomeStepText>
-   </HostHomeStepCmp> 
-  );
+          <FormStyleDiv style={{ marginBottom: 15 }}>
+            <FormGroup column>
+              <h2 style={{ color: "#364F6B", marginBottom: 20 }}>
+                Please choose the amenities
+              </h2>
+              {[
+                "Essentials",
+                "WiFi",
+                "TV",
+                "Heat",
+                "Air conditioning",
+                "Breakfast, coffee, tea",
+                "Game console",
+                "Fireplace",
+                "Workspace",
+              ].map((label) => {
+                return (
+                  <FormControlLabel
+                    style={{
+                      margin: "8px auto 0 auto",
+                      color: "#364f6b",
+                      width: "200px",
+                    }}
+                    control={
+                      <Checkbox color="primary" style={{ color: "#364f6b" }} />
+                    }
+                    label={label}
+                    key={label}
+                  />
+                );
+              })}
+            </FormGroup>
+          </FormStyleDiv>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              width: "60%",
+              margin: "15px auto 0 auto",
+            }}
+          >
+            <BackStyledButton
+              variant="outlined"
+              color="primary"
+              className={classes.button}
+              onClick={() => {
+                props.setStep(props.step - 1);
+              }}
+            >
+              BACK
+            </BackStyledButton>
+            <NextStyledButton
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              onClick={() => {
+                props.setStep(props.step + 1);
+                // props.setOption(
+                //   ["city", "district", "guests"],
+                //   [city, district, guests]
+                // );
+              }}
+            >
+              NEXT
+            </NextStyledButton>
+          </div>
+        </HostHomeStepText>
+      </HostHomeStepCmp>
+    );
+  }
+  return returnedJSX;
 }
-return returnedJSX;
-};
-
-  
