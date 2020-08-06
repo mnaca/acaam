@@ -2,11 +2,6 @@ import React, { useState, useEffect } from 'react';
 import HostHomeStep from './HostHomeStep';
 
 export default function HostHome(props) {
-  useEffect(() => {
-    setInterval(() => {
-      console.log(options);
-    }, 3000);
-  }, [])
   const [step, setStep] = useState(1);
   const [options] = useState({});
   const setOption = (keys, values) => {
@@ -16,6 +11,6 @@ export default function HostHome(props) {
   }
 
   return (
-    <HostHomeStep step={"mher"} />
+    <HostHomeStep step={step} setOption={setOption} setStep={setStep} />
   )
 }

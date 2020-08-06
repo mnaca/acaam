@@ -25,13 +25,19 @@ const HostHomeStepCmp = styled.div`
   margin-top: 50px;
 `;
 
-const StyledForm = styled.form`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-`;
-
 const StyledButton = styled(Button)`
   width: 125px;
+  color: #364f6b !important;
+`;
+
+const NextStyledButton = styled(Button)`
+  background-color: #364f6b !important;
+  width: 125px;
+`;
+
+const BackStyledButton = styled(StyledButton)`
+  border: 1px solid #364f6b !important;
+  margin-right: 15px !important; 
 `;
 
 const HostHomeStepText = styled.div`
@@ -47,7 +53,7 @@ export default function HostHomeStep(props) {
   const [district, setDistrict] = useState("");
   const [guests, setGuests] = useState("");
 
-  if (props.step === "Mher") {
+  if (props.step === 1) {
     returnedJSX = (
       <HostHomeStepCmp>
         <HostHomeStepText>
@@ -57,7 +63,7 @@ export default function HostHomeStep(props) {
           </h3>
           <h4 style={{ marginTop: 10 }}>STEP {props.step}</h4>
           <h2 style={{ marginTop: 10 }}>What kind of place do you have?</h2>
-          <StyledForm>
+          <form style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}>
             <FormControl required className={classes.formControl}>
               <InputLabel>City</InputLabel>
               <Select
@@ -101,12 +107,22 @@ export default function HostHomeStep(props) {
             <div
               style={{
                 display: "flex",
-                justifyContent: "flex-end",
-                gridColumnStart: 3,
+                gridColumnStart: 1,
+                gridColumnEnd: 4,
+                justifyContent: "space-between"
               }}
             >
-              <StyledButton
-                style={{ backgroundColor: "#364F6B" }}
+              <BackStyledButton
+                variant="outlined"
+                color="primary"
+                className={classes.button}
+                onClick={() => {
+                  props.setStep(props.step - 1);
+                }}
+              >
+                BACK
+              </BackStyledButton>
+              <NextStyledButton
                 variant="contained"
                 color="primary"
                 className={classes.button}
@@ -119,39 +135,72 @@ export default function HostHomeStep(props) {
                 }}
               >
                 NEXT
-              </StyledButton>
+              </NextStyledButton>
             </div>
-          </StyledForm>
+          </form>
         </HostHomeStepText>
       </HostHomeStepCmp>
     );
-  } else if (props.step === "Ando") {
-    <HostHomeStepCmp>
-      <HostHomeStepText>
-        <h2 style={{ color: "#364f6b" }}>Choose a property type</h2>
-        <FormControl required className={classes.formControl}>
-          <InputLabel>Select one</InputLabel>
-          <Select
-            value={house}
-            onChange={(e) => setHouse(e.target.value)}
-            className={classes.selectEmpty}
+  } else if (props.step === 2) {
+    returnedJSX = (
+      <HostHomeStepCmp>
+        <HostHomeStepText>
+          <h2 style={{ color: "#364f6b" }}>Choose a property type</h2>
+          <form
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
           >
-            <MenuItem value="Apartment">Apartment</MenuItem>
-            <MenuItem value="House">House</MenuItem>
-            <MenuItem value="Shared room">Shared room</MenuItem>
-          </Select>
-          {/* <FormHelperText>Required</FormHelperText> */}
-        </FormControl>
-        <Button
-          style={{ backgroundColor: "#364f6b", top: "22px", left: "43px" }}
-          variant="contained"
-          color="primary"
-          className={classes.button}
-        >
-          Next
-        </Button>
-      </HostHomeStepText>
-    </HostHomeStepCmp>;
+            <FormControl required className={classes.formControl}>
+              <InputLabel>Select one</InputLabel>
+              <Select
+                value={house}
+                onChange={(e) => setHouse(e.target.value)}
+                className={classes.selectEmpty}
+              >
+                <MenuItem value="Apartment">Apartment</MenuItem>
+                <MenuItem value="House">House</MenuItem>
+                <MenuItem value="Shared room">Shared room</MenuItem>
+              </Select>
+              <FormHelperText>Required</FormHelperText>
+            </FormControl>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <BackStyledButton
+                variant="outlined"
+                color="primary"
+                className={classes.button}
+                onClick={() => {
+                  props.setStep(props.step - 1);
+                }}
+              >
+                BACK
+              </BackStyledButton>
+              <NextStyledButton
+                variant="contained"
+                color="primary"
+                className={classes.button}
+                onClick={() => {
+                  props.setStep(props.step + 1);
+                  props.setOption(
+                    ["city", "district", "guests"],
+                    [city, district, guests]
+                  );
+                }}
+              >
+                NEXT
+              </NextStyledButton>
+            </div>
+          </form>
+        </HostHomeStepText>
+      </HostHomeStepCmp>
+    );
   }
+
   return returnedJSX;
 }
