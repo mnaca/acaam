@@ -23,6 +23,14 @@ const useStyles = makeStyles((theme) => ({
 const HostHomeStepCmp = styled.div`
   padding: 0 100px;
   margin-top: 50px;
+  display: flex;
+  justify-content: center;
+`;
+
+const HostHomeStepText = styled.div`
+  flex: 1;
+  text-align: center;
+  color: #364f6b;
 `;
 
 const StyledButton = styled(Button)`
@@ -37,11 +45,7 @@ const NextStyledButton = styled(Button)`
 
 const BackStyledButton = styled(StyledButton)`
   border: 1px solid #364f6b !important;
-  margin-right: 15px !important; 
-`;
-
-const HostHomeStepText = styled.div`
-  color: #364f6b;
+  margin-right: 15px !important;
 `;
 
 export default function HostHomeStep(props) {
@@ -52,6 +56,7 @@ export default function HostHomeStep(props) {
   const [city, setCity] = useState("");
   const [district, setDistrict] = useState("");
   const [guests, setGuests] = useState("");
+  const [bathrooms, setBathrooms] = useState(0);
 
   if (props.step === 1) {
     returnedJSX = (
@@ -109,7 +114,7 @@ export default function HostHomeStep(props) {
                 display: "flex",
                 gridColumnStart: 1,
                 gridColumnEnd: 4,
-                justifyContent: "space-between"
+                justifyContent: "space-between",
               }}
             >
               <BackStyledButton
@@ -146,9 +151,11 @@ export default function HostHomeStep(props) {
       <HostHomeStepCmp>
         <HostHomeStepText>
           <h2 style={{ color: "#364f6b" }}>Choose a property type</h2>
+          <h4 style={{ marginTop: 10 }}>STEP {props.step}</h4>
           <form
             style={{
               display: "flex",
+              flex: 1,
               flexDirection: "column",
             }}
           >
@@ -197,6 +204,84 @@ export default function HostHomeStep(props) {
               </NextStyledButton>
             </div>
           </form>
+        </HostHomeStepText>
+      </HostHomeStepCmp>
+    );
+  } else if (props.step === 3) {
+    returnedJSX = (
+      <HostHomeStepCmp>
+        <HostHomeStepText>
+          <h2>How many bathrooms do you want?</h2>
+          <h4 style={{ marginTop: 10 }}>STEP {props.step}</h4>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              margin: "20px 0",
+            }}
+          >
+            <Button
+              variant="outlined"
+              color="primary"
+              style={{
+                color: "#364f6b",
+                border: "1px solid #364f6b",
+                padding: "14px",
+                lineHeight: "0.5em",
+                minWidth: 0,
+                borderRadius: "50%",
+              }}
+              onClick={() =>
+                bathrooms >= 1 ? setBathrooms(bathrooms - 1) : null
+              }
+            >
+              -
+            </Button>
+            <div style={{ display: "inline-block", margin: "0 70px", color: "#364f6b" }}>
+              {bathrooms}
+            </div>
+            <Button
+              variant="outlined"
+              color="primary"
+              style={{
+                color: "#364f6b",
+                border: "1px solid #364f6b",
+                padding: "14px",
+                lineHeight: "0.5em",
+                minWidth: 0,
+                borderRadius: "50%",
+              }}
+              onClick={() =>
+                bathrooms < 9 ? setBathrooms(bathrooms + 1) : null
+              }
+            >
+              +
+            </Button>
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <BackStyledButton
+              variant="outlined"
+              color="primary"
+              className={classes.button}
+              onClick={() => {
+                props.setStep(props.step - 1);
+              }}
+            >
+              BACK
+            </BackStyledButton>
+            <NextStyledButton
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              onClick={() => {
+                props.setStep(props.step + 1);
+                props.setOption(["bathrooms"], [bathrooms]);
+              }}
+            >
+              NEXT
+            </NextStyledButton>
+          </div>
         </HostHomeStepText>
       </HostHomeStepCmp>
     );
