@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { Select, MenuItem, InputLabel, makeStyles, FormControl, FormHelperText } from "@material-ui/core";
+import { Select, MenuItem, InputLabel, makeStyles, FormControl, Button } from "@material-ui/core";
+
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -12,51 +13,48 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
 }));
-
 const HostHomeStepCmp = styled.div`
   display: flex;
   padding: 0 100px;
   margin-top: 50px;
 `;
-
+// const ButtonCmp=styled.button`
+// background-color: red;
+// `
 const HostHomeStepText = styled.div`
   flex: 1;
 `;
-
 const HostHomeStepImg = styled.div`
   flex: 1;
 `;
-
 export default function HostHomeStep(props) {
   let returnedJSX = null;
   const classes = useStyles();
   const user = useSelector((state) => state.user);
-  const [city, setCity] = useState("");
-  const [district, setDistrict] = useState("");
-  const [guests, setGuests] = useState("");
-
-  if (props.step === 1) {
+ 
+  const [house, setHouse]=useState("")
+  if (props.step === "Ando") {
     returnedJSX = (
       <HostHomeStepCmp>
-        <HostHomeStepText>
-          <h3>
-            Hi, {user ? user.email : "Stranger"}! You're welcome in our
-            travelling site. Let's get started
-          </h3>
-          <h4>STEP 1</h4>
-          <h2>What kind of place do you have?</h2>
+        <HostHomeStepText>          
+          <h2 style={{color: "#364f6b"}}>Choose a property type</h2>
           <FormControl required className={classes.formControl}>
-            <InputLabel>City</InputLabel>
+            <InputLabel>Select one</InputLabel>
             <Select
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
+              value={house}
+              onChange={(e) => setHouse(e.target.value)}
               className={classes.selectEmpty}
             >
-              <MenuItem value="yerevan">Yerevan</MenuItem>
+              <MenuItem value="Apartment">Apartment</MenuItem>
+              <MenuItem value="House">House</MenuItem>
+              <MenuItem value="Shared room">Shared room</MenuItem>
             </Select>
-            <FormHelperText>Required</FormHelperText>
+            {/* <FormHelperText>Required</FormHelperText> */}
           </FormControl>
-          <FormControl required className={classes.formControl}>
+          <Button  style={{backgroundColor: "#364f6b", top: "22px",left: "43px"}} variant="contained" color="primary" className={classes.button}>
+        Next
+      </Button>
+          {/* <FormControl required className={classes.formControl}>
             <InputLabel>District</InputLabel>
             <Select
               value={district}
@@ -82,13 +80,13 @@ export default function HostHomeStep(props) {
               ))}
             </Select>
             <FormHelperText>Required</FormHelperText>
-          </FormControl>
+          </FormControl> */}
         </HostHomeStepText>
         <HostHomeStepImg>
         </HostHomeStepImg>
       </HostHomeStepCmp>
     );
   }
-
   return returnedJSX;
 }
+

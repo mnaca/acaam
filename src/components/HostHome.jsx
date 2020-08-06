@@ -6,6 +6,6 @@ export default function HostHome(props) {
   const images = [];
 
   return (
-    <HostHomeStep step={1} />
+    <HostHomeStep step={"Ando"} />
   )
 }
