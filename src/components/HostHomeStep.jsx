@@ -13,8 +13,9 @@ import {
   FormControlLabel,
   Checkbox,
 } from "@material-ui/core";
+import Step7 from "./Steps/Step7";
 
-const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
@@ -22,36 +23,42 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  button: {
+    margin: theme.spacing(1),
+  },
+  input: {
+    display: "none",
+  },
 }));
-const HostHomeStepCmp = styled.div`
+export const HostHomeStepCmp = styled.div`
   padding: 0 100px;
   margin-top: 50px;
   display: flex;
   justify-content: center;
 `;
 
-const HostHomeStepText = styled.div`
+export const HostHomeStepText = styled.div`
   flex: 1;
   text-align: center;
   color: #364f6b;
 `;
 
-const StyledButton = styled(Button)`
+export const StyledButton = styled(Button)`
   width: 125px;
   color: #364f6b !important;
 `;
 
-const NextStyledButton = styled(Button)`
+export const NextStyledButton = styled(Button)`
   background-color: #364f6b !important;
   width: 125px;
 `;
 
-const BackStyledButton = styled(StyledButton)`
+export const BackStyledButton = styled(StyledButton)`
   border: 1px solid #364f6b !important;
   margin-right: 15px !important;
 `;
 
-const PlusMinusButton = styled(Button)`
+export const PlusMinusButton = styled(Button)`
   color: #364f6b !important;
   border: 1px solid #364f6b !important;
   padding: 14px !important;
@@ -60,7 +67,7 @@ const PlusMinusButton = styled(Button)`
   border-radius: 50% !important;
 `;
 
-const Bedroom = styled.div`
+export const Bedroom = styled.div`
   position: relative;
   padding: 20px;
   display: flex;
@@ -390,7 +397,7 @@ export default function HostHomeStep(props) {
       <HostHomeStepCmp>
         <HostHomeStepText>
           <h2>Sleeping arrangements</h2>
-          <h4>STEP {props.step}</h4>
+          <h4 style={{ marginTop: "15px" }}>STEP {props.step}</h4>
           <h3 style={{ marginTop: "10px" }}>
             Sharing the types of beds in each room can help people understand
             the sleeping arrangements.
@@ -472,11 +479,11 @@ export default function HostHomeStep(props) {
       <HostHomeStepCmp>
         <HostHomeStepText>
           <div style={{ marginBottom: 15 }}>
-            <FormGroup column>
-              <h2 style={{ color: "#364F6B", marginBottom: 20 }}>
+            <FormGroup>
+              <h2 style={{ color: "#364F6B", marginBottom: 12 }}>
                 Please choose the amenities
               </h2>
-              <h4>STEP {props.step}</h4>
+              <h4 style={{ marginBottom: 20 }}>STEP {props.step}</h4>
               {[
                 "Essentials",
                 "WiFi",
@@ -541,48 +548,13 @@ export default function HostHomeStep(props) {
         </HostHomeStepText>
       </HostHomeStepCmp>
     );
-  }else if (props.step === 7) {
+  } else if (props.step === 7) {
     returnedJSX = (
-      <HostHomeStepCmp>
-        <HostHomeStepText>
-          <h2>Add a photo to your ad</h2>
-          <h3>Photos help guests imagine how it is</h3>
-          <h4>STEP {props.step}</h4>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              width: "60%",
-              margin: "15px auto 0 auto",
-            }}
-          >
-            <BackStyledButton
-              variant="outlined"
-              color="primary"
-              className={classes.button}
-              onClick={() => {
-                props.setStep(props.step - 1);
-              }}
-            >
-              BACK
-            </BackStyledButton>
-            <NextStyledButton
-              variant="contained"
-              color="primary"                          
-              className={classes.button}
-              onClick={() => {
-                props.setStep(props.step + 1);
-                // props.setOption(
-                //   ["city", "district", "guests"],
-                //   [city, district, guests]
-                // );
-              }}
-            >
-              NEXT
-            </NextStyledButton>
-          </div>
-        </HostHomeStepText>
-      </HostHomeStepCmp>  
+      <Step7
+        step={props.step}
+        setStep={props.setStep}
+        setOption={props.setOption}
+      />
     );
   }
 
