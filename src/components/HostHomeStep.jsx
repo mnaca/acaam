@@ -476,6 +476,7 @@ export default function HostHomeStep(props) {
               <h2 style={{ color: "#364F6B", marginBottom: 20 }}>
                 Please choose the amenities
               </h2>
+              <h4>STEP {props.step}</h4>
               {[
                 "Essentials",
                 "WiFi",
@@ -490,7 +491,7 @@ export default function HostHomeStep(props) {
                 return (
                   <FormControlLabel
                     style={{
-                      margin: "8px auto 0 auto",
+                      margin: "0px auto 0 auto",
                       color: "#364f6b",
                       width: "200px",
                     }}
@@ -539,6 +540,49 @@ export default function HostHomeStep(props) {
           </div>
         </HostHomeStepText>
       </HostHomeStepCmp>
+    );
+  }else if (props.step === 7) {
+    returnedJSX = (
+      <HostHomeStepCmp>
+        <HostHomeStepText>
+          <h2>Add a photo to your ad</h2>
+          <h3>Photos help guests imagine how it is</h3>
+          <h4>STEP {props.step}</h4>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              width: "60%",
+              margin: "15px auto 0 auto",
+            }}
+          >
+            <BackStyledButton
+              variant="outlined"
+              color="primary"
+              className={classes.button}
+              onClick={() => {
+                props.setStep(props.step - 1);
+              }}
+            >
+              BACK
+            </BackStyledButton>
+            <NextStyledButton
+              variant="contained"
+              color="primary"                          
+              className={classes.button}
+              onClick={() => {
+                props.setStep(props.step + 1);
+                // props.setOption(
+                //   ["city", "district", "guests"],
+                //   [city, district, guests]
+                // );
+              }}
+            >
+              NEXT
+            </NextStyledButton>
+          </div>
+        </HostHomeStepText>
+      </HostHomeStepCmp>  
     );
   }
 
