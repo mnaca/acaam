@@ -51,7 +51,31 @@ const BackStyledButton = styled(StyledButton)`
   margin-right: 15px !important;
 `;
 
-const FormStyleDiv = styled.div``;
+const PlusMinusButton = styled(Button)`
+  color: #364f6b !important;
+  border: 1px solid #364f6b !important;
+  padding: 14px !important;
+  line-height: 0.5em !important;
+  min-width: 0 !important;
+  border-radius: 50% !important;
+`;
+
+const Bedroom = styled.div`
+  position: relative;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &::after {
+    content: "";
+    position: absolute;
+    width: 40%;
+    margin: 0 auto;
+    bottom: 0;
+    height: 1px;
+    background-color: #364f6b;
+  }
+`;
 
 export default function HostHomeStep(props) {
   let returnedJSX = null;
@@ -62,6 +86,8 @@ export default function HostHomeStep(props) {
   const [district, setDistrict] = useState("");
   const [guests, setGuests] = useState("");
   const [bathrooms, setBathrooms] = useState(0);
+  const [bedrooms, setBedrooms] = useState("");
+  const [bedroomsOptions, setBedroomsOptions] = useState([]);
 
   if (props.step === 1) {
     returnedJSX = (
@@ -80,6 +106,7 @@ export default function HostHomeStep(props) {
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
                 className={classes.selectEmpty}
+                style={{ color: "#364f6b" }}
               >
                 <MenuItem value="yerevan">Yerevan</MenuItem>
               </Select>
@@ -105,6 +132,7 @@ export default function HostHomeStep(props) {
                 value={guests}
                 onChange={(e) => setGuests(e.target.value)}
                 className={classes.selectEmpty}
+                style={{ color: "#364f6b" }}
               >
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((guestsNumber) => (
                   <MenuItem key={guestsNumber} value={guestsNumber}>
@@ -170,6 +198,7 @@ export default function HostHomeStep(props) {
                 value={house}
                 onChange={(e) => setHouse(e.target.value)}
                 className={classes.selectEmpty}
+                style={{ color: "#364f6b" }}
               >
                 <MenuItem value="Apartment">Apartment</MenuItem>
                 <MenuItem value="House">House</MenuItem>
@@ -226,23 +255,15 @@ export default function HostHomeStep(props) {
               margin: "20px 0",
             }}
           >
-            <Button
+            <PlusMinusButton
               variant="outlined"
               color="primary"
-              style={{
-                color: "#364f6b",
-                border: "1px solid #364f6b",
-                padding: "14px",
-                lineHeight: "0.5em",
-                minWidth: 0,
-                borderRadius: "50%",
-              }}
               onClick={() =>
                 bathrooms >= 1 ? setBathrooms(bathrooms - 1) : null
               }
             >
               -
-            </Button>
+            </PlusMinusButton>
             <div
               style={{
                 display: "inline-block",
@@ -252,23 +273,15 @@ export default function HostHomeStep(props) {
             >
               {bathrooms}
             </div>
-            <Button
+            <PlusMinusButton
               variant="outlined"
               color="primary"
-              style={{
-                color: "#364f6b",
-                border: "1px solid #364f6b",
-                padding: "14px",
-                lineHeight: "0.5em",
-                minWidth: 0,
-                borderRadius: "50%",
-              }}
               onClick={() =>
                 bathrooms < 9 ? setBathrooms(bathrooms + 1) : null
               }
             >
               +
-            </Button>
+            </PlusMinusButton>
           </div>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <BackStyledButton
@@ -300,11 +313,170 @@ export default function HostHomeStep(props) {
     returnedJSX = (
       <HostHomeStepCmp>
         <HostHomeStepText>
-          <FormStyleDiv style={{ marginBottom: 15 }}>
+          <h2 style={{ marginTop: 10 }}>
+            How many guests can your place accommodate?
+          </h2>
+          <h4 style={{ marginTop: 10 }}>STEP {props.step}</h4>
+          <h3 style={{ marginTop: 10 }}>
+            Check that you have enough beds to accommodate all your guests
+            comfortably.
+          </h3>
+          <div style={{ marginTop: 10 }}>
+            <h4>How many bedrooms can guests use?</h4>
+            <FormControl
+              style={{ minWidth: "100%" }}
+              required
+              className={classes.formControl}
+            >
+              <InputLabel>Bedrooms</InputLabel>
+              <Select
+                style={{ width: "100%", color: "#364f6b" }}
+                value={bedrooms}
+                onChange={(e) => setBedrooms(e.target.value)}
+                className={classes.selectEmpty}
+              >
+                {new Array(50)
+                  .fill(null)
+                  .map((item, index) => index + 1)
+                  .map((bedrooms) => (
+                    <MenuItem key={bedrooms} value={bedrooms}>
+                      {bedrooms} bedrooms
+                    </MenuItem>
+                  ))}
+              </Select>
+              <FormHelperText>Required</FormHelperText>
+            </FormControl>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <BackStyledButton
+              variant="outlined"
+              color="primary"
+              className={classes.button}
+              onClick={() => {
+                props.setStep(props.step - 1);
+              }}
+            >
+              BACK
+            </BackStyledButton>
+            <NextStyledButton
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              onClick={() => {
+                props.setStep(props.step + 1);
+                // props.setOption(
+                //   ["city", "district", "guests"],
+                //   [city, district, guests]
+                // );
+              }}
+            >
+              NEXT
+            </NextStyledButton>
+          </div>
+        </HostHomeStepText>
+      </HostHomeStepCmp>
+    );
+  } else if (props.step === 5) {
+    if (bedroomsOptions.length === 0) {
+      setBedroomsOptions(new Array(bedrooms).fill(0));
+    }
+
+    returnedJSX = (
+      <HostHomeStepCmp>
+        <HostHomeStepText>
+          <h2>Sleeping arrangements</h2>
+          <h4>STEP {props.step}</h4>
+          <h3 style={{ marginTop: "10px" }}>
+            Sharing the types of beds in each room can help people understand
+            the sleeping arrangements.
+          </h3>
+          <div style={{ marginTop: "20px" }}>
+            {new Array(bedrooms).fill(null).map((item, index) => {
+              return (
+                <Bedroom style={{}} key={index}>
+                  <h4 style={{ marginRight: 20 }}>Bedroom {index + 1}</h4>
+                  <div>
+                    <PlusMinusButton
+                      variant="outlined"
+                      color="primary"
+                      onClick={() => {
+                        if (bedroomsOptions[index] >= 1) {
+                          bedroomsOptions[index]--;
+                          setBedroomsOptions([...bedroomsOptions]);
+                        }
+                      }}
+                    >
+                      -
+                    </PlusMinusButton>
+                    <div style={{ margin: "0 15px", display: "inline-block" }}>
+                      {bedroomsOptions[index]} beds
+                    </div>
+                    <PlusMinusButton
+                      variant="outlined"
+                      color="primary"
+                      onClick={() => {
+                        bedroomsOptions[index]++;
+                        setBedroomsOptions([...bedroomsOptions]);
+                      }}
+                    >
+                      +
+                    </PlusMinusButton>
+                  </div>
+                </Bedroom>
+              );
+            })}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginTop: 25,
+              marginBottom: 100,
+            }}
+          >
+            <BackStyledButton
+              variant="outlined"
+              color="primary"
+              className={classes.button}
+              onClick={() => {
+                props.setStep(props.step - 1);
+              }}
+            >
+              BACK
+            </BackStyledButton>
+            <NextStyledButton
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              onClick={() => {
+                props.setStep(props.step + 1);
+                // props.setOption(
+                //   ["city", "district", "guests"],
+                //   [city, district, guests]
+                // );
+              }}
+            >
+              NEXT
+            </NextStyledButton>
+          </div>
+        </HostHomeStepText>
+      </HostHomeStepCmp>
+    );
+  } else if (props.step === 6) {
+    returnedJSX = (
+      <HostHomeStepCmp>
+        <HostHomeStepText>
+          <div style={{ marginBottom: 15 }}>
             <FormGroup column>
               <h2 style={{ color: "#364F6B", marginBottom: 20 }}>
                 Please choose the amenities
               </h2>
+              <h4>STEP {props.step}</h4>
               {[
                 "Essentials",
                 "WiFi",
@@ -319,7 +491,7 @@ export default function HostHomeStep(props) {
                 return (
                   <FormControlLabel
                     style={{
-                      margin: "8px auto 0 auto",
+                      margin: "0px auto 0 auto",
                       color: "#364f6b",
                       width: "200px",
                     }}
@@ -332,7 +504,7 @@ export default function HostHomeStep(props) {
                 );
               })}
             </FormGroup>
-          </FormStyleDiv>
+          </div>
           <div
             style={{
               display: "flex",
@@ -368,6 +540,49 @@ export default function HostHomeStep(props) {
           </div>
         </HostHomeStepText>
       </HostHomeStepCmp>
+    );
+  }else if (props.step === 7) {
+    returnedJSX = (
+      <HostHomeStepCmp>
+        <HostHomeStepText>
+          <h2>Add a photo to your ad</h2>
+          <h3>Photos help guests imagine how it is</h3>
+          <h4>STEP {props.step}</h4>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              width: "60%",
+              margin: "15px auto 0 auto",
+            }}
+          >
+            <BackStyledButton
+              variant="outlined"
+              color="primary"
+              className={classes.button}
+              onClick={() => {
+                props.setStep(props.step - 1);
+              }}
+            >
+              BACK
+            </BackStyledButton>
+            <NextStyledButton
+              variant="contained"
+              color="primary"                          
+              className={classes.button}
+              onClick={() => {
+                props.setStep(props.step + 1);
+                // props.setOption(
+                //   ["city", "district", "guests"],
+                //   [city, district, guests]
+                // );
+              }}
+            >
+              NEXT
+            </NextStyledButton>
+          </div>
+        </HostHomeStepText>
+      </HostHomeStepCmp>  
     );
   }
   return returnedJSX;
