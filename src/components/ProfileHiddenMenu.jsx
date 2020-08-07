@@ -7,6 +7,7 @@ import { createSetUser } from "../actions/actions";
 
 export const HiddenMenu = styled.ul`
   position: absolute;
+  z-index: 1;
   right: 0;
   top: 50px;
   list-style-type: none;
@@ -25,6 +26,7 @@ export const HiddenMenuItem = styled.li`
   padding: 9px 0;
   transition: 0.3s;
   text-align: center;
+  background-color: white;
   &:hover {
     background-color: rgba(54, 79, 107, 0.2);
   }

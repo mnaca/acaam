@@ -17,6 +17,7 @@ const HouseImages = styled.div`
   margin-bottom: ${(props) => (props.index === 0 ? "10px" : null)};
   box-shadow: 0px 0px 10px 1px rgba(93, 120, 148, 1);
   padding: 5px;
+  border-radius: ${(props) => (props.index === 0 ? "10px" : "6px")};
 `;
 
 export default function Step7(props) {
@@ -26,9 +27,9 @@ export default function Step7(props) {
   return (
     <HostHomeStepCmp>
       <HostHomeStepText>
-        <h2>Add a photo to your ad</h2>
-        <h3>Photos help guests imagine how it is</h3>
-        <h4>STEP {props.step}</h4>
+        <h2 style={{marginBottom: 10}}>Add a photo to your ad</h2>
+        <h3 style={{marginBottom: 10}}>Photos help guests imagine how it is</h3>
+        <h4 style={{marginBottom: 10}}>STEP {props.step}</h4>
         <Dropzone validFiles={images} setValidFiles={setImages} />
         {images.length > 0 ? (
           <div
@@ -47,6 +48,7 @@ export default function Step7(props) {
                       width: "100%",
                       height: "100%",
                       objectFit: "cover",
+                      borderRadius: "5px",
                     }}
                     src={URL.createObjectURL(item)}
                     alt=""

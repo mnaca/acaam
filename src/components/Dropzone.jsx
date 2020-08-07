@@ -8,7 +8,7 @@ function Dropzone(props) {
   const uploadRef = useRef();
   const uploadModalRef = useRef();
   const [selectedFiles, setSelectedFiles] = useState([]);
-  const {setValidFiles} = props;
+  const { setValidFiles } = props;
   const [unsupportedFiles, setUnsupportedFiles] = useState([]);
 
   useEffect(() => {
@@ -20,6 +20,9 @@ function Dropzone(props) {
         return acc;
       }
     }, []);
+    if (filteredArr.length > 10) {
+      filteredArr = filteredArr.slice(0, 10);
+    }
     setValidFiles([...filteredArr]);
   }, [selectedFiles, setValidFiles]);
 

@@ -14,6 +14,7 @@ import {
   Checkbox,
 } from "@material-ui/core";
 import Step7 from "./Steps/Step7";
+import Step8 from "./Steps/Step8";
 
 export const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -480,10 +481,10 @@ export default function HostHomeStep(props) {
         <HostHomeStepText>
           <div style={{ marginBottom: 15 }}>
             <FormGroup>
-              <h2 style={{ color: "#364F6B", marginBottom: 12 }}>
+              <h2 style={{ color: "#364F6B", marginBottom: 15 }}>
                 Please choose the amenities
               </h2>
-              <h4 style={{ marginBottom: 20 }}>STEP {props.step}</h4>
+              <h4 style={{ marginBottom: 15 }}>STEP {props.step}</h4>
               {[
                 "Essentials",
                 "WiFi",
@@ -551,6 +552,14 @@ export default function HostHomeStep(props) {
   } else if (props.step === 7) {
     returnedJSX = (
       <Step7
+        step={props.step}
+        setStep={props.setStep}
+        setOption={props.setOption}
+      />
+    );
+  } else if (props.step === 8) {
+    returnedJSX = (
+      <Step8
         step={props.step}
         setStep={props.setStep}
         setOption={props.setOption}
