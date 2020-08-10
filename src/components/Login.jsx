@@ -9,7 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { auth, db } from "../firebase";
 import { connect, useDispatch } from "react-redux";
-import { createSetUser } from "../actions/actions";
+import { createSetUser, createUser } from "../actions/actions";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -98,26 +98,7 @@ function Login() {
             fullWidth
             variant="outlined"
             className={classes.submit}
-            onClick={() => {
-              auth
-                .createUserWithEmailAndPassword(
-                  mail,
-                  password
-                )
-                .then((data) => {
-                  alert("Success register")
-                  dispatch(createSetUser(data.user));
-                  const userId = data.user.uid;
-
-                  db.collection("users")
-                    .doc(userId)
-                    .set({ mail: mail, password: password, id: userId });
-                  
-                })
-                .catch((error) => {
-                  alert(error);
-                });
-            }}
+            onClick={() => dispatch(createUser(mail, password)) }
           >
             Sign Up
           </Button>

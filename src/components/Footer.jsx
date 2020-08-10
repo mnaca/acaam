@@ -4,7 +4,7 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import InstagramIcon from "@material-ui/icons/Instagram";
 
-const FooterCmp = styled.div`
+const FooterCmp = styled.footer`
   box-sizing: border-box;
   width: 100%;
   position: absolute;

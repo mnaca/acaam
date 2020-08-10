@@ -70,4 +70,4 @@ function ProfileHiddenMenu(props) {
   ) : null;
 }
 
-export default connect()(ProfileHiddenMenu);
+export default ProfileHiddenMenu;

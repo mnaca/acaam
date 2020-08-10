@@ -156,6 +156,7 @@ export default function HostHomeStep(props) {
                 gridColumnStart: 1,
                 gridColumnEnd: 4,
                 justifyContent: "space-between",
+                marginBottom: 100
               }}
             >
               <BackStyledButton
@@ -218,6 +219,7 @@ export default function HostHomeStep(props) {
               style={{
                 display: "flex",
                 justifyContent: "space-between",
+                marginBottom: 100
               }}
             >
               <BackStyledButton
@@ -291,7 +293,7 @@ export default function HostHomeStep(props) {
               +
             </PlusMinusButton>
           </div>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 100 }}>
             <BackStyledButton
               variant="outlined"
               color="primary"
@@ -359,6 +361,7 @@ export default function HostHomeStep(props) {
             style={{
               display: "flex",
               justifyContent: "space-between",
+              marginBottom: 100
             }}
           >
             <BackStyledButton
@@ -406,7 +409,7 @@ export default function HostHomeStep(props) {
           <div style={{ marginTop: "20px" }}>
             {new Array(bedrooms).fill(null).map((item, index) => {
               return (
-                <Bedroom style={{}} key={index}>
+                <Bedroom key={index}>
                   <h4 style={{ marginRight: 20 }}>Bedroom {index + 1}</h4>
                   <div>
                     <PlusMinusButton
@@ -518,7 +521,7 @@ export default function HostHomeStep(props) {
               display: "flex",
               justifyContent: "space-between",
               width: "60%",
-              margin: "15px auto 0 auto",
+              margin: "15px auto 100px auto",
             }}
           >
             <BackStyledButton
