@@ -3,6 +3,13 @@
   margin: 0;
 }
 
+.menu {
+  position: absolute;
+  z-index: 1;
+  top: 10px;
+  right: 5px;
+  font-size: 35px !important;
+}
 .title {
   font-size: 2rem;
   text-align: center !important;

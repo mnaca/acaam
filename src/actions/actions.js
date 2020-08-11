@@ -1,9 +1,8 @@
-import { auth, db } from "../firebase";
-
 export const CLOSE_ALL_MENU = "CLOSE_ALL_MENU";
 export const TOGGLE_PROFILE_HIDDEN_MENU = "TOGGLE_PROFILE_HIDDEN_MENU";
 export const TOGGLE_LANGUAGE_HIDDEN_MENU = "TOGGLE_LANGUAGE_HIDDEN_MENU";
 export const SET_USER = "SET_USER";
+export const HOST_HOME = "HOST_HOME";
 
 export const createCloseAllMenu = () => {
   return {
@@ -23,33 +22,40 @@ export const createToggleProfileHiddenMenu = () => {
   }
 }
 
-export const createSetUser = (user) => {
+export const createSetUser = (userInfo) => {
   return {
     type: SET_USER,
-    user
+    userInfo
   }
 }
 
-export const createUser = (mail, password) => {
-  return function (dispatch) {
-    auth
-      .createUserWithEmailAndPassword(
-        mail,
-        password
-      )
-      .then((data) => {
-        alert("Success register")
-        dispatch(createSetUser(data.user));
-        const userId = data.user.uid;
+// export const createUser = (user) => {
+//   return function (dispatch) {
+//     auth
+//       .createUserWithEmailAndPassword(
+//         user.email,
+//         user.password
+//       )
+//       .then((data) => {
+//         alert("Success register")
+//         dispatch(createSetUser(user));
+//         const userId = data.user.uid;
 
-        db.collection("users")
-          .doc(userId)
-          .set({ mail: mail, password: password, id: userId });
+//         db.collection("users")
+//           .doc(userId)
+//           .set({ ...user });
 
-      })
-      .catch((error) => {
-        alert(error);
-      });
+//       })
+//       .catch((error) => {
+//         alert(error);
+//       });
+//   }
+// }
+
+export const createHostHome = (home) => {
+  return {
+    type: HOST_HOME,
+    home
   }
-}
+} 
 

@@ -47,11 +47,11 @@ function Profile(props) {
     dispatch(createToggleProfileHiddenMenu());
   };
   
-  const user = useSelector((state) => state.user)
+  const userInfo = useSelector((state) => state.userInfo)
 
   return (
     <ProfileWrapper>
-      <h4>{user ? user.email : "Not Loginned"}</h4>
+      <h4>{userInfo ? userInfo.email : "Not Loginned"}</h4>
       <Search />
       <Language />
       <ProfileMenu onClick={onHandleMenu}>

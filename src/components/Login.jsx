@@ -9,7 +9,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { auth, db } from "../firebase";
 import { connect, useDispatch } from "react-redux";
-import { createSetUser, createUser } from "../actions/actions";
+import { createSetUser } from "../actions/actions";
+import { Grid } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -38,16 +40,16 @@ function Login() {
   const dispatch = useDispatch();
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container style={{ marginBottom: 100 }} component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in / Sign up
+          Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form style={{ marginBottom: 100 }} className={classes.form} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
@@ -82,9 +84,14 @@ function Login() {
             onClick={() => {
               auth
                 .signInWithEmailAndPassword(mail, password)
-                .then((user) => {
+                .then((data) => {
                   alert("Success");
-                  dispatch(createSetUser(user));
+                  db.collection("users")
+                    .doc(data.user.uid)
+                    .get()
+                    .then((doc) => {
+                      dispatch(createSetUser(doc.data()));
+                    });
                 })
                 .catch((error) => {
                   alert(error);
@@ -93,15 +100,13 @@ function Login() {
           >
             Sign In
           </Button>
-          <Button
-            style={{ backgroundColor: "#364f6b", color: "white" }}
-            fullWidth
-            variant="outlined"
-            className={classes.submit}
-            onClick={() => dispatch(createUser(mail, password)) }
-          >
-            Sign Up
-          </Button>
+          <Grid container style={{ marginTop: 15 }}>
+            <Grid item style={{ marginLeft: "auto" }}>
+              <Link to="/register" variant="body2">
+                {"Don't have an account? Register"}
+              </Link>
+            </Grid>
+          </Grid>
         </form>
       </div>
     </Container>

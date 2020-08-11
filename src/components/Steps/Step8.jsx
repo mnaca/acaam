@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   HostHomeStepCmp,
   HostHomeStepText,
@@ -9,6 +9,8 @@ import {
 
 export default function Step8(props) {
   const classes = useStyles();
+  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState("");
 
   return (
     <HostHomeStepCmp>
@@ -27,6 +29,8 @@ export default function Step8(props) {
           guests.
         </h3>
         <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
           style={{
             borderRadius: "5px",
             marginTop: 15,
@@ -53,6 +57,8 @@ export default function Step8(props) {
         </h3>
         <input
           type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
           style={{
             borderRadius: "5px",
             marginTop: 15,
@@ -89,10 +95,10 @@ export default function Step8(props) {
             className={classes.button}
             onClick={() => {
               props.setStep(props.step + 1);
-              // props.setOption(
-              //   ["city", "district", "guests"],
-              //   [city, district, guests]
-              // );
+              props.setOption(
+                ["description", "title"],
+                [description, title]
+              );
             }}
           >
             NEXT

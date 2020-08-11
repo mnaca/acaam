@@ -16,10 +16,9 @@ import AllProposals from "./AllProposals";
 import Login from "./Login";
 import { auth } from "../firebase";
 import HostHome from "./HostHome";
+import Register from "./Register";
 
 // import Background from "./Background";
-
-
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -48,13 +47,16 @@ function Main(props) {
     (window.innerWidth * 700) / 1920 - 60
   );
   const dispatch = useDispatch();
-  const stateUser = useSelector((state) => state.user);
+  const userInfo = useSelector((state) => state.userInfo);
 
-  useEffect(function () {
-    auth.onAuthStateChanged((user) => {
-      dispatch(createSetUser(user));
-    });
-  }, [dispatch]);
+  useEffect(
+    function () {
+      auth.onAuthStateChanged((user) => {
+        dispatch(createSetUser(user));
+      });
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     window.onclick = (e) => {
@@ -99,9 +101,17 @@ function Main(props) {
           <AllProposals type="sharedRooms" />
         </Route>
         <Route path="/host">
-          <HostHome />
+          {auth.currentUser ? <HostHome /> : <Redirect to="/" />}
         </Route>
-        <Route path="/login">{!stateUser ? <Login /> : <Redirect to="/" />}</Route>
+        <Route path="/login">
+          {!auth.currentUser ? <Login /> : <Redirect to="/" />}
+        </Route>
+        <Route path="/register">
+          {!auth.currentUser ? <Register /> : <Redirect to="/" />}
+        </Route>
+        <Route path="/profile">
+          <h1>{userInfo ? userInfo.email : null}</h1>
+        </Route>
         <Route exact path="/">
           <BannerWrapper imageHeight={imageHeight}>
             <Banner />

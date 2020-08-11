@@ -29,7 +29,12 @@ export default function HostHome(props) {
   return (
     <>
       <Progress step={step}></Progress>
-      <HostHomeStep step={step} setOption={setOption} setStep={setStep} />
+      <HostHomeStep
+        step={7}
+        options={options}
+        setOption={setOption}
+        setStep={setStep}
+      />
     </>
   );
 }

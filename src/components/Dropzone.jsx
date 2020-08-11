@@ -20,11 +20,9 @@ function Dropzone(props) {
         return acc;
       }
     }, []);
-    if (filteredArr.length > 10) {
-      filteredArr = filteredArr.slice(0, 10);
-    }
+    if (props.profileImage) filteredArr.length = 1;
     setValidFiles([...filteredArr]);
-  }, [selectedFiles, setValidFiles]);
+  }, [selectedFiles, setValidFiles, props.profileImage]);
 
   const preventDefault = (e) => {
     e.preventDefault();

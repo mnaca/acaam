@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { connect, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { auth } from "../firebase";
 import { createSetUser } from "../actions/actions";
@@ -47,25 +47,35 @@ const StyledLink = styled(Link)`
 
 function ProfileHiddenMenu(props) {
   const opened = useSelector((state) => state.profileHiddenMenuOpened);
-  const user = useSelector((state) => state.user);
 
   return opened ? (
     <HiddenMenu>
-      {user ? (
-        <StyledLink
-          onClick={() =>
-            auth.signOut().then(() => createSetUser(null)).catch((error) => {
-              alert(error);
-            })
-          }
-          to="/"
-        >
-          Logout
-        </StyledLink>
+      {auth.currentUser ? (
+        <>
+          <StyledLink to={`/profile/${auth.currentUser.uid}`}>
+            Profile
+          </StyledLink>
+          <StyledLink
+            onClick={() =>
+              auth
+                .signOut()
+                .then(() => createSetUser(null))
+                .catch((error) => {
+                  alert(error);
+                })
+            }
+            to="/"
+          >
+            Logout
+          </StyledLink>
+        </>
       ) : (
-        <StyledLink to="/login">Sign in/Sign up</StyledLink>
+        <>
+          <StyledLink to="/login">Sign in</StyledLink>
+          <StyledLink to="/register">Register</StyledLink>
+        </>
       )}
-      <StyledLink to={user ? "/host" : "/login"}>Host your home</StyledLink>
+      <StyledLink to={auth.currentUser ? "/host" : "/login"}>Host your home</StyledLink>
     </HiddenMenu>
   ) : null;
 }
