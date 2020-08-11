@@ -45,7 +45,10 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [gender, setGender] = useState("");
   const [tel, setTel] = useState("+374");
-  const [profileImage, setProfileImage] = useState(profileDefaultImageMale);
+  const [profileImage, setProfileImage] = useState([
+    profileDefaultImageMale,
+    true,
+  ]);
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
 
@@ -138,7 +141,7 @@ export default function Register() {
               <img
                 width={"75%"}
                 src={
-                  profileImage[0] !== undefined
+                  profileImage[0] !== undefined && !profileImage[1]
                     ? URL.createObjectURL(profileImage[0])
                     : gender === "female"
                     ? profileDefaultImageFemale
@@ -195,7 +198,7 @@ export default function Register() {
                       lastName,
                       gender,
                       tel,
-                      id: data.user.uid
+                      id: data.user.uid,
                       // profileImage,
                     })
                     .then((doc) => {
@@ -208,7 +211,7 @@ export default function Register() {
                           gender,
                           tel,
                           profileImage,
-                          id: data.user.uid
+                          id: data.user.uid,
                         })
                       );
                     });

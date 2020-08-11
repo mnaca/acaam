@@ -51,7 +51,7 @@ function Profile(props) {
 
   return (
     <ProfileWrapper>
-      <h4>{userInfo ? userInfo.email : "Not Loginned"}</h4>
+      <h4>{userInfo ? userInfo.mail : "Not Loginned"}</h4>
       <Search />
       <Language />
       <ProfileMenu onClick={onHandleMenu}>

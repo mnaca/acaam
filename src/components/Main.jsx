@@ -14,7 +14,7 @@ import Footer from "./Footer";
 import { Switch, Route, Redirect } from "react-router-dom";
 import AllProposals from "./AllProposals";
 import Login from "./Login";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import HostHome from "./HostHome";
 import Register from "./Register";
 
@@ -52,7 +52,12 @@ function Main(props) {
   useEffect(
     function () {
       auth.onAuthStateChanged((user) => {
-        dispatch(createSetUser(user));
+        db.collection("users")
+          .doc(user.uid)
+          .get()
+          .then((doc) => {
+            dispatch(createSetUser(doc.data()));
+          });
       });
     },
     [dispatch]
