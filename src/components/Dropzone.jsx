@@ -12,17 +12,32 @@ function Dropzone(props) {
   const [unsupportedFiles, setUnsupportedFiles] = useState([]);
 
   useEffect(() => {
-    let filteredArr = selectedFiles.reduce((acc, current) => {
-      const x = acc.find((item) => item.name === current.name);
-      if (!x) {
-        return acc.concat([current]);
-      } else {
-        return acc;
-      }
-    }, []);
-    if (props.profileImage) filteredArr.length = 1;
-    setValidFiles([...filteredArr]);
-  }, [selectedFiles, setValidFiles, props.profileImage]);
+    if (props.images && props.images.length === 0) {
+      let filteredArr = selectedFiles.reduce((acc, current) => {
+        const x = acc.find((item) => item.name === current.name);
+        if (!x) {
+          return acc.concat([current]);
+        } else {
+          return acc;
+        }
+      }, []);
+      console.log(filteredArr, selectedFiles);
+      if (props.profileImage) filteredArr.length = 1;
+      setValidFiles([...filteredArr]);
+    } else {
+      let filteredArr = selectedFiles.reduce((acc, current) => {
+        const x = acc.find((item) => item.name === current.name);
+        if (!x) {
+          return acc.concat([current]);
+        } else {
+          return acc;
+        }
+      }, []);
+      console.log(filteredArr, selectedFiles);
+      if (props.profileImage) filteredArr.length = 1;
+      setValidFiles([...filteredArr]);
+    }
+  }, [selectedFiles, setValidFiles, props.profileImage, props.images]);
 
   const preventDefault = (e) => {
     e.preventDefault();

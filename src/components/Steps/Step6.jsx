@@ -6,11 +6,8 @@ import {
   BackStyledButton,
   NextStyledButton,
 } from "../HostHomeStep";
-import { useState } from "react";
 
 export default function Step6(props) {
-  const [amenities, setAmenities] = useState({});
-
   return (
     <HostHomeStepCmp>
       <HostHomeStepText>
@@ -39,10 +36,16 @@ export default function Step6(props) {
                     width: "200px",
                   }}
                   control={
-                    <Checkbox color="primary" style={{ color: "#364f6b" }} checked={amenities[label]} onChange={(e) => {
-                      amenities[label] = e.target.checked;
-                      setAmenities({...amenities});
-                    }} />
+                    <Checkbox
+                      color="primary"
+                      style={{ color: "#364f6b" }}
+                      value={props.amenities[label] ? props.amenities[label] : false}
+                      checked={props.amenities[label] ? props.amenities[label] : false}
+                      onChange={(e) => {
+                        props.amenities[label] = e.target.checked;
+                        props.setAmenities({ ...props.amenities });
+                      }}
+                    />
                   }
                   label={label}
                   key={label}
@@ -73,10 +76,7 @@ export default function Step6(props) {
             color="primary"
             onClick={() => {
               props.setStep(props.step + 1);
-              props.setOption(
-                ["amenities"],
-                [amenities]
-              );
+              props.setOption(["amenities"], [props.amenities]);
             }}
           >
             NEXT

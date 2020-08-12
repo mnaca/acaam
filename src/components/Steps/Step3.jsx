@@ -26,7 +26,7 @@ import {
                 variant="outlined"
                 color="primary"
                 onClick={() =>
-                  props.bathrooms >= 1 ? props.setBathrooms(props.bathrooms - 1) : null
+                  props.bathrooms >= 2 ? props.setBathrooms(props.bathrooms - 1) : null
                 }
               >
                 -

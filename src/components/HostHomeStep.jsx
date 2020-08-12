@@ -85,13 +85,19 @@ export const Bedroom = styled.div`
 export default function HostHomeStep(props) {
   let returnedJSX = null;
   const user = useSelector((state) => state.user);
-  const [house, setHouse] = useState("");
-  const [city, setCity] = useState("");
-  const [district, setDistrict] = useState("");
-  const [guests, setGuests] = useState("");
-  const [bathrooms, setBathrooms] = useState(0);
-  const [bedrooms, setBedrooms] = useState("");
-  const [bedroomsOptions, setBedroomsOptions] = useState([]);
+  const [house, setHouse] = useState("apartments");
+  const [city, setCity] = useState("yerevan");
+  const [district, setDistrict] = useState("arabkir");
+  const [guests, setGuests] = useState(1);
+  const [bathrooms, setBathrooms] = useState(1);
+  const [bedrooms, setBedrooms] = useState(1);
+  const [bedroomsOptions, setBedroomsOptions] = useState([1]);
+  const [price, setPrice] = useState(0);
+  const [currency, setCurrency] = useState("USD");
+  const [term, setTerm] = useState("daily");
+  const [images, setImages] = useState([]);
+  const [hidden, setHidden] = useState([]);
+  const [amenities, setAmenities] = useState({});
 
   if (props.step === 1) {
     returnedJSX = (
@@ -119,6 +125,12 @@ export default function HostHomeStep(props) {
         city={city}
         district={district}
         guests={guests}
+        price={price}
+        setPrice={setPrice}
+        currency={currency}
+        setCurrency={setCurrency}
+        term={term}
+        setTerm={setTerm}
       />
     );
   } else if (props.step === 3) {
@@ -158,6 +170,8 @@ export default function HostHomeStep(props) {
         step={props.step}
         setStep={props.setStep}
         setOption={props.setOption}
+        amenities={amenities}
+        setAmenities={setAmenities}
       />
     );
   } else if (props.step === 7) {
@@ -166,6 +180,10 @@ export default function HostHomeStep(props) {
         step={props.step}
         setStep={props.setStep}
         setOption={props.setOption}
+        images={images}
+        setImages={setImages}
+        hidden={hidden}
+        setHidden={setHidden}
       />
     );
   } else if (props.step === 8) {

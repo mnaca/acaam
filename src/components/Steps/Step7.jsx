@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   HostHomeStepCmp,
   HostHomeStepText,
@@ -63,8 +63,8 @@ const ImageControl = styled.li`
 
 export default function Step7(props) {
   const classes = useStyles();
-  const [images, setImages] = useState([]);
-  const [hidden, setHidden] = useState([]);
+
+  console.log(props.images);
 
   return (
     <HostHomeStepCmp>
@@ -74,8 +74,12 @@ export default function Step7(props) {
           Photos help guests imagine how it is
         </h3>
         <h4 style={{ marginBottom: 10 }}>STEP {props.step}</h4>
-        <Dropzone validFiles={images} setValidFiles={setImages} />
-        {images.length > 0 ? (
+        <Dropzone
+          validFiles={props.images}
+          setValidFiles={props.setImages}
+          images={props.images}
+        />
+        {props.images.length > 0 ? (
           <div
             style={{
               display: "grid",
@@ -84,21 +88,21 @@ export default function Step7(props) {
               margin: "0 auto",
             }}
           >
-            {images.map((item, index) => {
-              if (hidden[index] === undefined) hidden[index] = true;
+            {props.images.map((item, index) => {
+              if (props.hidden[index] === undefined) props.hidden[index] = true;
               return (
                 <HouseImages
                   onMouseLeave={() => {
-                    const hiddenCopy = hidden.map((item, hiddenIndex) => {
+                    const hiddenCopy = props.hidden.map((item, hiddenIndex) => {
                       if (index === hiddenIndex) return true;
                       return item;
                     });
-                    setHidden(hiddenCopy);
+                    props.setHidden(hiddenCopy);
                   }}
                   key={item.name}
                   index={index}
                 >
-                  <ImageBackground dnone={hidden[index]} />
+                  <ImageBackground dnone={props.hidden[index]} />
                   <img
                     style={{
                       width: "100%",
@@ -112,26 +116,42 @@ export default function Step7(props) {
                   />
                   <MoreVertIcon
                     onClick={() => {
-                      const hiddenCopy = hidden.map((item, hiddenIndex) => {
-                        if (index === hiddenIndex) return !item;
-                        return item;
-                      });
-                      setHidden(hiddenCopy);
+                      const hiddenCopy = props.hidden.map(
+                        (item, hiddenIndex) => {
+                          if (index === hiddenIndex) return !item;
+                          return item;
+                        }
+                      );
+                      props.setHidden(hiddenCopy);
                     }}
                     style={{ display: "none" }}
                     className="menu"
                   />
-                  <Controls dnone={hidden[index]}>
-                    <ImageControl onClick={() => {
-                      [images[0], images[index]] = [images[index], images[0]];
-                      [hidden[0], hidden[index]] = [hidden[index], hidden[0]];
-                      setImages([...images]);
-                    }}>Set as main image</ImageControl>
-                    <ImageControl onClick={() => {
-                      images.splice(index, 1);
-                      hidden.splice(index, 1);
-                      setImages([...images]);
-                    }}>Delete</ImageControl>
+                  <Controls dnone={props.hidden[index]}>
+                    <ImageControl
+                      onClick={() => {
+                        [props.images[0], props.images[index]] = [
+                          props.images[index],
+                          props.images[0],
+                        ];
+                        [props.hidden[0], props.hidden[index]] = [
+                          props.hidden[index],
+                          props.hidden[0],
+                        ];
+                        props.setImages([...props.images]);
+                      }}
+                    >
+                      Set as main image
+                    </ImageControl>
+                    <ImageControl
+                      onClick={() => {
+                        props.images.splice(index, 1);
+                        props.hidden.splice(index, 1);
+                        props.setImages([...props.images]);
+                      }}
+                    >
+                      Delete
+                    </ImageControl>
                   </Controls>
                 </HouseImages>
               );
@@ -161,8 +181,10 @@ export default function Step7(props) {
             color="primary"
             className={classes.button}
             onClick={() => {
-              props.setStep(props.step + 1);
-              props.setOption(["images"], [images]);
+              if (props.images.length > 0) {
+                props.setStep(props.step + 1);
+                props.setOption(["images"], [props.images]);
+              }
             }}
           >
             NEXT

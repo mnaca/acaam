@@ -6,12 +6,14 @@ import styled from "styled-components";
 import Language from "./Language";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { createToggleProfileHiddenMenu } from "../actions/actions";
+import profileDefaultImageMale from "../images/profileDefaultImageMale.svg";
 import Search from "./Search";
+import { auth } from "../firebase";
 
 const ProfileWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
-  align-items: center;
+  align-items: stretch;
   position: relative;
 `;
 
@@ -51,12 +53,12 @@ function Profile(props) {
 
   return (
     <ProfileWrapper>
-      <h4>{userInfo ? userInfo.mail : "Not Loginned"}</h4>
+      <h4 style={{display: "flex", alignItems: "center"}}>{userInfo ? userInfo.mail : "Not Loginned"}</h4>
       <Search />
       <Language />
       <ProfileMenu onClick={onHandleMenu}>
         <StyledMenuIcon />
-        <StyledUserIcon style={{fontSize: 30}} />
+        {!auth.currentUser ? <StyledUserIcon style={{fontSize: 30}} /> : <img style={{height: 30}} src={profileDefaultImageMale} alt="" /> }
         <ProfileHiddenMenu />
       </ProfileMenu>
     </ProfileWrapper>

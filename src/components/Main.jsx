@@ -52,12 +52,16 @@ function Main(props) {
   useEffect(
     function () {
       auth.onAuthStateChanged((user) => {
-        db.collection("users")
-          .doc(user.uid)
-          .get()
-          .then((doc) => {
-            dispatch(createSetUser(doc.data()));
-          });
+        if (user) {
+          db.collection("users")
+            .doc(user.uid)
+            .get()
+            .then((doc) => {
+              dispatch(createSetUser(doc.data()));
+            });
+        } else {
+          dispatch(createSetUser(null))
+        }
       });
     },
     [dispatch]

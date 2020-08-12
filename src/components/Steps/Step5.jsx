@@ -10,7 +10,13 @@ import {
 
 export default function Step5(props) {
   if (props.bedroomsOptions.length === 0) {
-    props.setBedroomsOptions(new Array(props.bedrooms).fill(0));
+    props.setBedroomsOptions(new Array(props.bedrooms).fill(1));
+  } else {
+    if (props.bedroomsOptions.length > props.bedrooms) {
+      props.setBedroomsOptions(props.bedroomsOptions.slice(0, props.bedrooms));
+    } else if (props.bedroomsOptions.length < props.bedrooms) {
+      props.setBedroomsOptions([...props.bedroomsOptions].concat(new Array(props.bedrooms - props.bedroomsOptions.length).fill(1)));
+    }
   }
   return (
     <HostHomeStepCmp>
@@ -31,7 +37,7 @@ export default function Step5(props) {
                     variant="outlined"
                     color="primary"
                     onClick={() => {
-                      if (props.bedroomsOptions[index] >= 1) {
+                      if (props.bedroomsOptions[index] >= 2) {
                         props.bedroomsOptions[index]--;
                         props.setBedroomsOptions([...props.bedroomsOptions]);
                       }

@@ -30,7 +30,7 @@ export default function HostHome(props) {
     <>
       <Progress step={step}></Progress>
       <HostHomeStep
-        step={7}
+        step={step}
         options={options}
         setOption={setOption}
         setStep={setStep}
