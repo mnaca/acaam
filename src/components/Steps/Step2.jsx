@@ -2,7 +2,8 @@ import React from "react";
 import {
   MenuItem,
   InputLabel,
-  FormControl,
+    TextField,
+    FormControl,
   FormHelperText,
   Select,
 } from "@material-ui/core";
@@ -47,31 +48,88 @@ export default function Step2(props) {
               marginBottom: 100,
             }}
           >
-            <BackStyledButton
-              variant="outlined"
-              color="primary"
-              onClick={() => {
-                props.setStep(props.step - 1);
-              }}
-            >
-              BACK
-            </BackStyledButton>
-            <NextStyledButton
-              variant="contained"
-              color="primary"
-              onClick={() => {
-                props.setStep(props.step + 1);
-                props.setOption(
-                  ["house"],
-                  [props.house]
-                );
-              }}
-            >
-              NEXT
-            </NextStyledButton>
+
           </div>
         </form>
+
+          <form style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gridColumnGap: "20px"}}>
+              <FormControl required >
+                  <TextField id="standard-basic" label="Price*" />
+                  {/*<Select*/}
+                  {/*    value={props.price}*/}
+                  {/*    onChange={(e) => props.setPrice(e.target.value)}*/}
+                  {/*    style={{ color: "#364f6b" }}*/}
+                  {/*>*/}
+                  {/*</Select>*/}
+                  <FormHelperText>Required</FormHelperText>
+              </FormControl>
+              <FormControl required >
+                  <InputLabel>Currency</InputLabel>
+                  <Select
+                      value={props.district}
+                      onChange={(e) => props.setDistrict(e.target.value)}
+                  >
+                      <MenuItem value="USD">USD($)</MenuItem>
+                      <MenuItem value="AMD">AMD(֏)</MenuItem>
+                      <MenuItem value="RUR">RUR(₽)</MenuItem>
+                  </Select>
+                  <FormHelperText>Required</FormHelperText>
+              </FormControl>
+              <FormControl required >
+                  <InputLabel>Term</InputLabel>
+
+                  <Select
+                      value={props.guests}
+                      onChange={(e) => props.setGuests(e.target.value)}
+                      style={{ color: "#364f6b" }}
+                  >
+                      <MenuItem value="Monthly">Monthly</MenuItem>
+                      <MenuItem value="Daily">Daily</MenuItem>
+                  </Select>
+                  <FormHelperText>Required</FormHelperText>
+              </FormControl>
+              <div
+                  style={{
+                      display: "flex",
+                      gridColumnStart: 1,
+                      gridColumnEnd: 4,
+                      justifyContent: "space-between",
+                      marginTop: 20,
+                      marginBottom: 100,
+                  }}
+              >
+                  <BackStyledButton
+                      variant="outlined"
+                      color="primary"
+                      onClick={() => {
+                          props.setStep(props.step - 1);
+                      }}
+                  >
+                      BACK
+                  </BackStyledButton>
+                  <NextStyledButton
+                      variant="contained"
+                      color="primary"
+                      onClick={() => {
+                          props.setStep(props.step + 1);
+                          props.setOption(
+                              ["city", "district", "guests"],
+                              [props.city, props.district, props.guests]
+                          );
+                      }}
+                  >
+                      NEXT
+                  </NextStyledButton>
+              </div>
+          </form>
       </HostHomeStepText>
     </HostHomeStepCmp>
+
+
+
+
   );
+
+
+
 }

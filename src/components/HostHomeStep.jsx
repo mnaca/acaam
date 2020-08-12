@@ -92,7 +92,7 @@ export default function HostHomeStep(props) {
   const [bathrooms, setBathrooms] = useState(0);
   const [bedrooms, setBedrooms] = useState("");
   const [bedroomsOptions, setBedroomsOptions] = useState([]);
-
+  const [price, setPrice] = useState(0)
   if (props.step === 1) {
     returnedJSX = (
       <Step1
@@ -119,6 +119,8 @@ export default function HostHomeStep(props) {
         city={city}
         district={district}
         guests={guests}
+        price = {price}
+        setPrice = {setPrice}
       />
     );
   } else if (props.step === 3) {
