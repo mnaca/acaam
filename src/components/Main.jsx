@@ -17,8 +17,7 @@ import Login from "./Login";
 import { auth, db } from "../firebase";
 import HostHome from "./HostHome";
 import Register from "./Register";
-
-// import Background from "./Background";
+import ProfilePage from "./ProfilePage";
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -42,12 +41,13 @@ const MainCmp = styled.div`
   min-height: 100vh;
 `;
 
-function Main(props) {
+function Main() {
+  const userInfo = useSelector((state) => state.userInfo);
+
   const [imageHeight, setImageHeight] = useState(
     (window.innerWidth * 700) / 1920 - 60
   );
   const dispatch = useDispatch();
-  const userInfo = useSelector((state) => state.userInfo);
 
   useEffect(
     function () {
@@ -118,8 +118,8 @@ function Main(props) {
         <Route path="/register">
           {!auth.currentUser ? <Register /> : <Redirect to="/" />}
         </Route>
-        <Route path="/profile">
-          <h1>{userInfo ? userInfo.email : null}</h1>
+        <Route path="/profile/:userId">
+          <ProfilePage id={userInfo ? userInfo.id : null} />
         </Route>
         <Route exact path="/">
           <BannerWrapper imageHeight={imageHeight}>

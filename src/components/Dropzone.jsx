@@ -25,19 +25,26 @@ function Dropzone(props) {
       if (props.profileImage) filteredArr.length = 1;
       setValidFiles([...filteredArr]);
     } else {
-      let filteredArr = selectedFiles.reduce((acc, current) => {
-        const x = acc.find((item) => item.name === current.name);
-        if (!x) {
-          return acc.concat([current]);
-        } else {
-          return acc;
-        }
-      }, []);
-      console.log(filteredArr, selectedFiles);
-      if (props.profileImage) filteredArr.length = 1;
-      setValidFiles([...filteredArr]);
+      if (selectedFiles.length !== 0) {
+        let filteredArr = selectedFiles.reduce((acc, current) => {
+          const x = acc.find((item) => item.name === current.name);
+          if (!x) {
+            return acc.concat([current]);
+          } else {
+            return acc;
+          }
+        }, []);
+        filteredArr.length = 1;
+        setValidFiles([...filteredArr]);
+      }
     }
-  }, [selectedFiles, setValidFiles, props.profileImage, props.images]);
+  }, [
+    selectedFiles,
+    setValidFiles,
+    props.profileImage,
+    props.images,
+    props.defaultImage,
+  ]);
 
   const preventDefault = (e) => {
     e.preventDefault();
@@ -93,6 +100,7 @@ function Dropzone(props) {
       "image/png",
       "image/gif",
       "image/x-icon",
+      "image/webp"
     ];
     if (validTypes.indexOf(file.type) === -1) {
       return false;

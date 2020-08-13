@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ProfileHiddenMenu from "./ProfileHiddenMenu";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -6,9 +6,8 @@ import styled from "styled-components";
 import Language from "./Language";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { createToggleProfileHiddenMenu } from "../actions/actions";
-import profileDefaultImageMale from "../images/profileDefaultImageMale.svg";
 import Search from "./Search";
-import { auth } from "../firebase";
+import { auth, storage, db } from "../firebase";
 
 const ProfileWrapper = styled.div`
   display: flex;
@@ -42,23 +41,44 @@ const StyledUserIcon = styled(AccountCircleIcon)`
 `;
 
 function Profile(props) {
+  const [profileImage, setProfileImage] = useState();
+  const userInfo = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (auth.currentUser && userInfo) {
+      db.collection("users")
+        .doc(auth.currentUser.uid)
+        .get()
+        .then((user) => {
+          const storageRef = storage.ref();
+          const profileImagesRef = storageRef.child(
+            "profile-images/" + userInfo.profileImage
+          );
+          profileImagesRef.getDownloadURL().then((url) => setProfileImage(url));
+        });
+    }
+  }, [userInfo]);
 
   const onHandleMenu = (event) => {
     event.stopPropagation();
     dispatch(createToggleProfileHiddenMenu());
   };
-  
-  const userInfo = useSelector((state) => state.userInfo)
 
   return (
     <ProfileWrapper>
-      <h4 style={{display: "flex", alignItems: "center"}}>{userInfo ? userInfo.mail : "Not Loginned"}</h4>
+      <h4 style={{ display: "flex", alignItems: "center" }}>
+        {userInfo ? userInfo.mail : "Not Loginned"}
+      </h4>
       <Search />
       <Language />
       <ProfileMenu onClick={onHandleMenu}>
         <StyledMenuIcon />
-        {!auth.currentUser ? <StyledUserIcon style={{fontSize: 30}} /> : <img style={{height: 30}} src={profileDefaultImageMale} alt="" /> }
+        {!auth.currentUser ? (
+          <StyledUserIcon style={{ fontSize: 30 }} />
+        ) : (
+          <div style={{height: 30, width: 30}}><img style={{ height: 30, maxWidth: "100%", objectFit: "cover" }} src={profileImage} alt="" /></div>
+        )}
         <ProfileHiddenMenu />
       </ProfileMenu>
     </ProfileWrapper>

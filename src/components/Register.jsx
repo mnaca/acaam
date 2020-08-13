@@ -16,7 +16,7 @@ import profileDefaultImageMale from "../images/profileDefaultImageMale.svg";
 import profileDefaultImageFemale from "../images/profileDefaultImageFemale.svg";
 import { createSetUser } from "../actions/actions";
 import { useDispatch } from "react-redux";
-import { auth, db } from "../firebase";
+import { auth, db, storage } from "../firebase";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -40,16 +40,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Register() {
   const classes = useStyles();
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [gender, setGender] = useState("");
+  const [firstName, setFirstName] = useState(null);
+  const [lastName, setLastName] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [gender, setGender] = useState("male");
   const [tel, setTel] = useState("+374");
   const [profileImage, setProfileImage] = useState([
     profileDefaultImageMale,
     true,
   ]);
   const [password, setPassword] = useState("");
+  const storageRef = storage.ref();
   const dispatch = useDispatch();
 
   return (
@@ -70,6 +71,8 @@ export default function Register() {
                 name="firstName"
                 variant="outlined"
                 required
+                error={firstName === ""}
+                onBlur={() => (firstName === null ? setFirstName("") : null)}
                 fullWidth
                 id="firstName"
                 label="First Name"
@@ -82,6 +85,8 @@ export default function Register() {
               <TextField
                 variant="outlined"
                 required
+                error={lastName === ""}
+                onBlur={() => (lastName === null ? setLastName("") : null)}
                 fullWidth
                 id="lastName"
                 label="Last Name"
@@ -120,6 +125,8 @@ export default function Register() {
                 label="Phone Number"
                 name="phoneNumber"
                 type="tel"
+                error={tel.length && tel.length < 12}
+                onBlur={() => (tel === null ? setTel("") : null)}
                 fullWidth
                 size="small"
                 value={tel}
@@ -137,7 +144,11 @@ export default function Register() {
               />
             </Grid>
             <Grid item xs={12} style={{ textAlign: "center" }}>
-              <Dropzone setValidFiles={setProfileImage} profileImage />
+              <Dropzone
+                setValidFiles={setProfileImage}
+                profileImage
+                defaultImage={profileImage[1]}
+              />
               <img
                 width={"75%"}
                 src={
@@ -155,6 +166,8 @@ export default function Register() {
                 variant="outlined"
                 required
                 fullWidth
+                error={email === ""}
+                onBlur={() => (email === null ? setEmail("") : null)}
                 id="email"
                 label="Email Address"
                 name="email"
@@ -168,6 +181,8 @@ export default function Register() {
                 variant="outlined"
                 required
                 fullWidth
+                error={password === ""}
+                onBlur={() => (password === null ? setPassword("") : null)}
                 name="password"
                 label="Password"
                 type="password"
@@ -185,6 +200,15 @@ export default function Register() {
             className={classes.submit}
             style={{ backgroundColor: "#364f6b" }}
             onClick={() => {
+              if (
+                profileImage[0].invalid ||
+                !firstName ||
+                !lastName ||
+                !email ||
+                !password ||
+                tel.length !== 12
+              )
+                return false;
               auth
                 .createUserWithEmailAndPassword(email, password)
                 .then((data) => {
@@ -199,21 +223,31 @@ export default function Register() {
                       gender,
                       tel,
                       id: data.user.uid,
-                      // profileImage,
+                      profileImage: profileImage[1]
+                        ? gender === "male"
+                          ? "profileDefaultImageMale.svg"
+                          : "profileDefaultImageFemale.svg"
+                        : profileImage[0].name,
                     })
                     .then((doc) => {
-                      dispatch(
-                        createSetUser({
-                          email,
-                          password,
-                          firstName,
-                          lastName,
-                          gender,
-                          tel,
-                          profileImage,
-                          id: data.user.uid,
-                        })
-                      );
+                      storageRef
+                        .child("profile-images/" + profileImage[0].name)
+                        .put(profileImage[0])
+                        .then(function (snapshot) {
+                          console.log("Uploaded a blob or file!");
+                          dispatch(
+                            createSetUser({
+                              mail: email,
+                              password,
+                              firstName,
+                              lastName,
+                              gender,
+                              tel,
+                              profileImage: profileImage[0].name,
+                              id: data.user.uid,
+                            })
+                          );
+                        });
                     });
                 })
                 .catch((error) => {

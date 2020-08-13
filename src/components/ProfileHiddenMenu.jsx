@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { auth } from "../firebase";
 import { createSetUser } from "../actions/actions";
@@ -47,6 +47,7 @@ const StyledLink = styled(Link)`
 
 function ProfileHiddenMenu(props) {
   const opened = useSelector((state) => state.profileHiddenMenuOpened);
+  const dispatch = useDispatch();
 
   return opened ? (
     <HiddenMenu>
@@ -59,7 +60,7 @@ function ProfileHiddenMenu(props) {
             onClick={() =>
               auth
                 .signOut()
-                .then(() => createSetUser(null))
+                .then(() => dispatch(createSetUser(null)))
                 .catch((error) => {
                   alert(error);
                 })
