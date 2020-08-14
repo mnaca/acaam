@@ -21,8 +21,6 @@ function Dropzone(props) {
           return acc;
         }
       }, []);
-      console.log(filteredArr, selectedFiles);
-      if (props.profileImage) filteredArr.length = 1;
       setValidFiles([...filteredArr]);
     } else {
       if (selectedFiles.length !== 0) {
@@ -34,7 +32,9 @@ function Dropzone(props) {
             return acc;
           }
         }, []);
-        filteredArr.length = 1;
+        if (props.profileImage) {
+          filteredArr.length = 1;
+        }
         setValidFiles([...filteredArr]);
       }
     }
@@ -42,7 +42,6 @@ function Dropzone(props) {
     selectedFiles,
     setValidFiles,
     props.profileImage,
-    props.images,
     props.defaultImage,
   ]);
 
@@ -100,7 +99,7 @@ function Dropzone(props) {
       "image/png",
       "image/gif",
       "image/x-icon",
-      "image/webp"
+      "image/webp",
     ];
     if (validTypes.indexOf(file.type) === -1) {
       return false;
