@@ -9,7 +9,7 @@ import sharedRoomsBanner from "../images/shared-rooms-banner.jpg";
 import Profile from "./Profile";
 import Categories from "./Categories";
 import { connect, useDispatch, useSelector } from "react-redux";
-import { createCloseAllMenu, createSetUser } from "../actions/actions";
+import { createCloseAllMenu, createSetUser, createLoadAllHomes } from "../actions/actions";
 import Footer from "./Footer";
 import { Switch, Route, Redirect } from "react-router-dom";
 import AllProposals from "./AllProposals";
@@ -51,6 +51,29 @@ function Main() {
 
   useEffect(
     function () {
+      // JSON.parse(temp1.data().homes[0])
+
+      db.collection("offers")
+        .doc("apartments")
+        .get()
+        .then((doc) => {
+          const apartments = doc.data().homes;
+          db.collection("offers")
+            .doc("vacationRentals")
+            .get()
+            .then((doc) => {
+              const vacationRentals = doc.data().homes;
+              db.collection("offers")
+                .doc("sharedRooms")
+                .get()
+                .then((doc) => {
+                  const sharedRooms = doc.data().homes;
+                  console.log(apartments, vacationRentals, sharedRooms);
+                  dispatch(createLoadAllHomes(apartments, vacationRentals, sharedRooms));
+                });
+            });
+        });
+
       auth.onAuthStateChanged((user) => {
         if (user) {
           db.collection("users")
@@ -60,7 +83,7 @@ function Main() {
               dispatch(createSetUser(doc.data()));
             });
         } else {
-          dispatch(createSetUser(null))
+          dispatch(createSetUser(null));
         }
       });
     },

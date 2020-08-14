@@ -12,7 +12,7 @@ const Progress = styled.div`
     left: 0;
     top: 0;
     height: 100%;
-    width: ${(props) => `${(props.step / 10) * 100}%`};
+    width: ${(props) => `${(props.step / 9) * 100}%`};
     background-color: #364f6b;
   }
 `;

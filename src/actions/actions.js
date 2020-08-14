@@ -3,6 +3,7 @@ export const TOGGLE_PROFILE_HIDDEN_MENU = "TOGGLE_PROFILE_HIDDEN_MENU";
 export const TOGGLE_LANGUAGE_HIDDEN_MENU = "TOGGLE_LANGUAGE_HIDDEN_MENU";
 export const SET_USER = "SET_USER";
 export const HOST_HOME = "HOST_HOME";
+export const LOAD_ALL_HOMES = "LOAD_ALL_HOMES";
 
 export const createCloseAllMenu = () => {
   return {
@@ -26,6 +27,15 @@ export const createSetUser = (userInfo) => {
   return {
     type: SET_USER,
     userInfo
+  }
+}
+
+export const createLoadAllHomes = (apartments, vacationRentals, sharedRooms) => {
+  return {
+    type: LOAD_ALL_HOMES,
+    apartments,
+    vacationRentals,
+    sharedRooms
   }
 }
 

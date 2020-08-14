@@ -200,6 +200,7 @@ export default function HostHomeStep(props) {
         step={props.step}
         setStep={props.setStep}
         options={props.options}
+        house={house}
       />
     );
   }

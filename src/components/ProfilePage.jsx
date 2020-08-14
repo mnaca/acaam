@@ -26,6 +26,7 @@ const NameDiv = styled.div`
   font-size: 25px;
 `;
 const ProfilInfo = styled.div`
+  flex: 1;
   margin-left: 50px;
   color: #364f6b;
 `;
@@ -43,6 +44,25 @@ const StyledTextArea = styled.textarea`
   padding: 10px;
   color: #364f6b;
   font-size: 16px;
+`;
+
+const Info = styled.div`
+  max-width: 200px;
+  white-space: nowrap;
+  overflow-x: auto;
+  padding: 6px;
+  &::-webkit-scrollbar {
+    height: 4px;
+  }
+   
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+   
+  &::-webkit-scrollbar-thumb {
+    background-color: #364f6b;
+    outline: 1px solid slategrey;
+  }
 `;
 
 export default function ProfilePage(props) {
@@ -134,13 +154,12 @@ export default function ProfilePage(props) {
                 />
               </>
             ) : null}
-            <div>
+            <Info>
               <b>Email:</b> {user.mail}
-            </div>
-            <div>
-              <b>Tel:</b>
-              {user.tel}{" "}
-            </div>
+            </Info>
+            <Info>
+              <b>Tel:</b> {user.tel}
+            </Info>
           </ImgStyled>
           <ProfilInfo>
             <NameDiv>Hi I'm {user.firstName + " " + user.lastName}</NameDiv>
@@ -192,11 +211,16 @@ export default function ProfilePage(props) {
                   CANCEL
                 </Button>
               </>
-            ) : (
-              <Button style={{marginLeft: "auto", display: "block"}} variant="outlined" color="primary" onClick={() => setEditModeDescription(true)}>
+            ) : myPage ? (
+              <Button
+                style={{ marginLeft: "auto", display: "block" }}
+                variant="outlined"
+                color="primary"
+                onClick={() => setEditModeDescription(true)}
+              >
                 Edit
               </Button>
-            )}
+            ) : null}
           </ProfilInfo>
         </ProfilePageCmp>
       ) : null}

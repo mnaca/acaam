@@ -120,7 +120,7 @@ export default function Step2(props) {
               onClick={() => {
                 props.setStep(props.step + 1);
                 let price = props.price;
-                if (props.term === "daily") price /= 30;
+                if (props.term !== "daily") price /= 30;
                 if (props.currency === "AMD") price /= 483;
                 if (props.currency === "RUR") price /= 7.52; 
                 props.setOption(

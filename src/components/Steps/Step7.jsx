@@ -64,8 +64,6 @@ const ImageControl = styled.li`
 export default function Step7(props) {
   const classes = useStyles();
 
-  console.log(props.images);
-
   return (
     <HostHomeStepCmp>
       <HostHomeStepText>

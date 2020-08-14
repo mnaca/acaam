@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { storage } from "firebase";
 
 const ProposalCmp = styled.div`
   display: flex;
@@ -18,7 +19,12 @@ const StyledImg = styled.img`
 
 export default function Proposal(props) {
   const { home } = props;
-  console.log(home.images)
+  home.images = JSON.parse(home.images);
+  // const storageRef = storage.ref();
+  // const profileImagesRef = storageRef.child(
+  //   "profile-images/" + user.data().profileImage
+  // );
+  // profileImagesRef.getDownloadURL().then((url) => setProfileImage(url));
 
   return (
     <ProposalCmp>
