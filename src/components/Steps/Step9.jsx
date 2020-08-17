@@ -71,7 +71,7 @@ export default function Step9(props) {
                     JSON.stringify(options)
                   ),
                 });
-              dispatch(createHostHome(props.options));
+              dispatch(createHostHome(options));
             }}
           >
             FINISH
