@@ -39,7 +39,7 @@ export default function reducer(state = initialState, action) {
         userInfo: action.userInfo
       }
     case HOST_HOME:
-      state[action.home.house].push(action.home)
+      state[action.home.house].push(JSON.stringify(action.home))
       return {
         ...state
       }

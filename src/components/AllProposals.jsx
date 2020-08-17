@@ -15,6 +15,7 @@ function AllProposals(props) {
   const apartments = useSelector((state) => state.apartments);
   const vacationRentals = useSelector((state) => state.vacationRentals);
   const sharedRooms = useSelector((state) => state.sharedRooms);
+  console.log(apartments, vacationRentals, sharedRooms);
 
   return (
     <AllProposalsCmp>
