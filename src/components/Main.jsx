@@ -68,7 +68,6 @@ function Main() {
                 .get()
                 .then((doc) => {
                   const sharedRooms = doc.data().homes;
-                  console.log(apartments, vacationRentals, sharedRooms);
                   dispatch(createLoadAllHomes(apartments, vacationRentals, sharedRooms));
                 });
             });

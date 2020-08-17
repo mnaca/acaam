@@ -20,14 +20,14 @@ function AllProposals(props) {
     <AllProposalsCmp>
       {props.type === "apartments"
         ? apartments.map((home) => {
-            return <Proposal home={JSON.parse(home)} key={home.id} />;
+            return <Proposal home={home} key={JSON.parse(home).price} />;
           })
         : props.type === "vacationRentals"
         ? vacationRentals.map((home) => {
-            return <Proposal home={home} key={home.id} />;
+            return <Proposal home={home} key={JSON.parse(home).price} />;
           })
         : sharedRooms.map((home) => {
-            return <Proposal home={home} key={home.id} />;
+            return <Proposal home={home} key={JSON.parse(home).price} />;
           })}
     </AllProposalsCmp>
   );

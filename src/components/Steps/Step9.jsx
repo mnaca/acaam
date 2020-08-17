@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createHostHome } from "../../actions/actions";
 import { db } from "../../firebase";
 import firebase from "firebase";
+import uniqid from "uniqid";
 
 export default function Step9(props) {
   const classes = useStyles();
@@ -47,9 +48,8 @@ export default function Step9(props) {
             color="primary"
             className={classes.button}
             onClick={() => {
-              dispatch(createHostHome(props.options));
-              console.log(props.options);
               const options = { ...props.options };
+              options.id = uniqid();
               options["bedrooms-options"] = JSON.stringify(
                 options["bedrooms-options"]
               );
@@ -71,6 +71,7 @@ export default function Step9(props) {
                     JSON.stringify(options)
                   ),
                 });
+              dispatch(createHostHome(props.options));
             }}
           >
             FINISH

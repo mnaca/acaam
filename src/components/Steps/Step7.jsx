@@ -9,6 +9,7 @@ import {
 import styled from "styled-components";
 import Dropzone from "../Dropzone.jsx";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { storage } from "../../firebase";
 
 const HouseImages = styled.div`
   position: relative;
@@ -180,8 +181,18 @@ export default function Step7(props) {
             className={classes.button}
             onClick={() => {
               if (props.images.length > 0) {
+                const storageRef = storage.ref();
                 props.setStep(props.step + 1);
                 props.setOption(["images"], [props.images]);
+
+                props.images.forEach((item) => {
+                  storageRef
+                    .child("house-images/" + item.name)
+                    .put(item)
+                    .then(function (snapshot) {
+                      console.log("Uploaded a blob or file!");
+                    });
+                });
               }
             }}
           >

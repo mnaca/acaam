@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { storage } from "firebase";
+import { storage } from "../firebase";
 
 const ProposalCmp = styled.div`
   display: flex;
@@ -19,27 +19,31 @@ const StyledImg = styled.img`
 
 export default function Proposal(props) {
   const { home } = props;
-  home.images = JSON.parse(home.images);
-  // const storageRef = storage.ref();
-  // const profileImagesRef = storageRef.child(
-  //   "profile-images/" + user.data().profileImage
-  // );
-  // profileImagesRef.getDownloadURL().then((url) => setProfileImage(url));
+  const [mainImage, setMainImage] = useState(null);
+  let homeCopy = {...JSON.parse(home)};
+  homeCopy.images = JSON.parse(homeCopy.images);
+  homeCopy.owner = JSON.parse(homeCopy.owner);
+  homeCopy['bedrooms-options'] = JSON.parse(homeCopy['bedrooms-options']);
+  const storageRef = storage.ref();
+  const houseImagesRef = storageRef.child(
+    "house-images/" + homeCopy.images[0]
+  );
+  houseImagesRef.getDownloadURL().then((url) => setMainImage(url));
 
   return (
     <ProposalCmp>
       <div style={{ flex: 1 }}>
-        <StyledImg src={URL.createObjectURL(home.images[0])} alt="Picture" />
+        <StyledImg src={mainImage} alt="Picture" />
       </div>
       <div style={{ flex: 2, marginLeft: "15px" }}>
         <h4>
-          {home.city}, {home.district}
+          {homeCopy.city}, {homeCopy.district}
         </h4>
-        <p>{home.title}</p>
-        {Object.entries(home.amenities).map(
+        <p>{homeCopy.title}</p>
+        {Object.entries(homeCopy.amenities).map(
           (option) => `${option[0]}: ${option[1]}, `
         )}
-        <p>{home.price}</p>
+        <p>{homeCopy.price}</p>
       </div>
     </ProposalCmp>
   );

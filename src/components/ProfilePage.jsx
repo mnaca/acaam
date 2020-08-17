@@ -174,7 +174,7 @@ export default function ProfilePage(props) {
                 style={{ margin: "20px 0" }}
                 onClick={() => setEditModeDescription(true)}
               >
-                {selfDescription}
+                {selfDescription || "No information"}
               </p>
             )}
             {myPage && editModeDescription ? (
