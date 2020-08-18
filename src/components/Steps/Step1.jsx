@@ -23,7 +23,7 @@ import {
               travelling site. Let's get started
             </h3>
             <h4 style={{ marginTop: 10 }}>STEP {props.step}</h4>
-            <h2 style={{ marginTop: 10 }}>What kind of place do you have?</h2>
+            <h2 style={{ marginTop: 12 }}>What kind of place do you have?</h2>
             <form style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gridColumnGap: "20px"}}>
               <FormControl required >
                 <InputLabel>City</InputLabel>
