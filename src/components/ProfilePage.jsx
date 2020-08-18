@@ -9,59 +9,59 @@ import { createSetUser } from "../actions/actions";
 const ProfilePageCmp = styled.div`
   display: flex;
   align-items: flex-start;
-  padding: 20px;
-  max-width: 800px;
+  padding: 1.04vw;
+  max-width: 41.7vw;
   margin: 0 auto;
 `;
 const ImgStyled = styled.div`
-  flex: 0 0 200px;
-  margin-top: 20px;
+  flex: 0 0 10.41vw;
+  margin-top: 1.04vw;
   color: #364f6b;
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px 1px rgba(93, 120, 148, 1);
+  padding: 0.52vw;
+  border-radius: 0.26vw;
+  box-shadow: 0vw 0vw 0.52vw 0.052vw rgba(93, 120, 148, 1);
 `;
 const NameDiv = styled.div`
   font-weight: bold;
-  font-size: 25px;
+  font-size: 1.3vw;
 `;
 const ProfilInfo = styled.div`
   flex: 1;
-  margin-left: 50px;
+  margin-left: 2.604vw;
   color: #364f6b;
 `;
 
 const StyledTextArea = styled.textarea`
-  border-radius: 5px;
-  margin-top: 15px;
+  border-radius: 0.2604vw;
+  margin-top: 0.781vw;
   border-color: #364f6b;
   width: 100%;
-  max-width: 600px;
-  min-width: 100px;
-  min-height: 250px;
-  max-height: 600px;
+  max-width: 31.25vw;
+  min-width: 5.128vw;
+  min-height: 13.02vw;
+  max-height: 31.25vw;
   resize: vertical;
-  padding: 10px;
+  padding: 0.52vw;
   color: #364f6b;
-  font-size: 16px;
+  font-size: 0.9vw;
 `;
 
 const Info = styled.div`
-  max-width: 200px;
+  max-width: 10.416vw;
   white-space: nowrap;
   overflow-x: auto;
-  padding: 6px;
+  padding: 0.3125vw;
   &::-webkit-scrollbar {
-    height: 4px;
+    height: 0.21vw;
   }
    
   &::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 0.3125vw rgba(0, 0, 0, 0.3);
   }
    
   &::-webkit-scrollbar-thumb {
     background-color: #364f6b;
-    outline: 1px solid slategrey;
+    outline: 0.052vw solid slategrey;
   }
 `;
 
@@ -104,7 +104,7 @@ export default function ProfilePage(props) {
       {user ? (
         <ProfilePageCmp>
           <ImgStyled>
-            <div style={{ height: 200 }}>
+            <div style={{ height: "10.416vw" }}>
               <img
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 src={profileImage}
@@ -122,8 +122,8 @@ export default function ProfilePage(props) {
                     padding: "6px 13px",
                     backgroundColor: "#364f6b",
                     color: "white",
-                    borderRadius: "4px",
-                    margin: "12px 5px",
+                    borderRadius: "0.2083vw",
+                    margin: "0.625vw 0.2604vw",
                   }}
                 >
                   Update the photo
@@ -182,7 +182,7 @@ export default function ProfilePage(props) {
                 <Button
                   variant="contained"
                   color="primary"
-                  style={{ backgroundColor: "#364f6b", marginRight: 10 }}
+                  style={{ backgroundColor: "#364f6b", marginRight: "0.52vw" }}
                   onClick={() => {
                     if (userInfo.selfDescription !== selfDescription) {
                       setEditModeDescription(false);

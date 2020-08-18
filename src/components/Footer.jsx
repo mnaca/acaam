@@ -13,16 +13,16 @@ const FooterCmp = styled.footer`
   justify-content: space-between;
   background-color: #f7f7f7;
   // margin-top: 70px;
-  padding: 20px 50px;
+  padding: 1.04vw 2.6vw;
   color: #364f6b;
-  box-shadow: 0px -2px 10px 1px rgba(93, 120, 148, 0.6);
-  font-size: 17px;
+  box-shadow: 0vw -1.04vw 0.521vw 0.521vw rgba(93, 120, 148, 0.6);
+  font-size: 0.9vw;
 `;
 
 const Link = styled.a`
   display: inline-block;
-  margin-left: 5px;
-  margin-right: 5px;
+  margin-left: 0.26vw;
+  margin-right: 0.26vw;
 `;
 
 export default function Footer(props) {
@@ -35,12 +35,12 @@ export default function Footer(props) {
       </div>
       <div>
         <FacebookIcon
-          style={{ marginRight: "10px", cursor: "pointer", fontSize: 30 }}
+          style={{ marginRight: "0.52vw", cursor: "pointer", fontSize: "1.5625vw" }}
         />
         <TwitterIcon
-          style={{ marginRight: "10px", cursor: "pointer", fontSize: 30 }}
+          style={{ marginRight: "0.52vw", cursor: "pointer", fontSize: "1.5625vw" }}
         />
-        <InstagramIcon style={{ cursor: "pointer", fontSize: 30 }} />
+        <InstagramIcon style={{ cursor: "pointer", fontSize: "1.5625vw" }} />
       </div>
     </FooterCmp>
   );

@@ -8,19 +8,20 @@ import { Link } from "react-router-dom";
 const CategoriesCmp = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 40px;
-  padding: 0 50px 120px 50px;
+  margin-top: 2.083vw;
+  padding: 0 2.604vw 6.25vw 2.604vw;
+  font-size: 0.9vw;
 `;
 
 const StyledLink = styled(Link)`
   display: block;
   cursor: pointer;
   color: #364f6b;
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px 1px rgba(93, 120, 148, 1);
+  padding: 0.52vw;
+  border-radius: 0.2604vw;
+  box-shadow: 0vw 0vw 0.52vw 0.052vw rgba(93, 120, 148, 1);
   flex: 1;
-  margin-right: ${(props) => (props.marginright ? props.marginright : "50px")};
+  margin-right: ${(props) => (props.marginright ? props.marginright : "2.604vw")};
 `;
 
 export default function Categories(props) {
