@@ -15,7 +15,7 @@ import Step9 from "./Steps/Step9";
 export const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120,
+    minWidth: "6.25vw",
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -28,8 +28,8 @@ export const useStyles = makeStyles((theme) => ({
   },
 }));
 export const HostHomeStepCmp = styled.div`
-  padding: 0 100px;
-  margin-top: 50px;
+  padding: 0 5.208vw;
+  margin-top: 2.604;
   display: flex;
   justify-content: center;
 `;
@@ -38,28 +38,28 @@ export const HostHomeStepText = styled.div`
   flex: 1;
   text-align: center;
   color: #364f6b;
-  max-width: 800px;
+  max-width: 41.667vw;
 `;
 
 export const StyledButton = styled(Button)`
-  width: 125px;
+  width: 6.5104vw;
   color: #364f6b !important;
 `;
 
 export const NextStyledButton = styled(Button)`
   background-color: #364f6b !important;
-  width: 125px;
+  width: 6.5104vw;
 `;
 
 export const BackStyledButton = styled(StyledButton)`
-  border: 1px solid #364f6b !important;
-  margin-right: 15px !important;
+  border: 0.052vw solid #364f6b !important;
+  margin-right: 0.78125vw !important;
 `;
 
 export const PlusMinusButton = styled(Button)`
   color: #364f6b !important;
-  border: 1px solid #364f6b !important;
-  padding: 14px !important;
+  border: 0.052vw solid #364f6b !important;
+  padding: 0.78125vw !important;
   line-height: 0.5em !important;
   min-width: 0 !important;
   border-radius: 50% !important;
@@ -67,7 +67,7 @@ export const PlusMinusButton = styled(Button)`
 
 export const Bedroom = styled.div`
   position: relative;
-  padding: 20px;
+  padding: 1.04vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -77,7 +77,7 @@ export const Bedroom = styled.div`
     width: 40%;
     margin: 0 auto;
     bottom: 0;
-    height: 1px;
+    height: 0.052vw;
     background-color: #364f6b;
   }
 `;

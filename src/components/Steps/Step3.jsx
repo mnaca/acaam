@@ -13,13 +13,13 @@ import {
         <HostHomeStepCmp>
           <HostHomeStepText>
             <h2>How many bathrooms do you want?</h2>
-            <h4 style={{ marginTop: 10 }}>STEP {props.step}</h4>
+            <h4 style={{ marginTop: "0.52vw" }}>STEP {props.step}</h4>
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                margin: "20px 0",
+                margin: "1.04vw 0",
               }}
             >
               <PlusMinusButton
@@ -34,7 +34,7 @@ import {
               <div
                 style={{
                   display: "inline-block",
-                  margin: "0 70px",
+                  margin: "0 3.646vw",
                   color: "#364f6b",
                 }}
               >
@@ -50,7 +50,7 @@ import {
                 +
               </PlusMinusButton>
             </div>
-            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 100, }}>
+            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "5.208vw", }}>
               <BackStyledButton
                 variant="outlined"
                 color="primary"

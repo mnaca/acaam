@@ -29,7 +29,7 @@ export default function Step9(props) {
             display: "flex",
             justifyContent: "space-between",
             width: "80%",
-            margin: "15px auto 100px auto",
+            margin: "0.78125vw auto 5.208vw auto",
           }}
         >
           <BackStyledButton

@@ -17,15 +17,15 @@ export default function Step4(props) {
   return (
     <HostHomeStepCmp>
       <HostHomeStepText>
-        <h2 style={{ marginTop: 10 }}>
+        <h2 style={{ marginTop:"0.52vw" }}>
           How many guests can your place accommodate?
         </h2>
-        <h4 style={{ marginTop: 10 }}>STEP {props.step}</h4>
-        <h3 style={{ marginTop: 10 }}>
+        <h4 style={{ marginTop: "0.52vw" }}>STEP {props.step}</h4>
+        <h3 style={{ marginTop: "0.52vw" }}>
           Check that you have enough beds to accommodate all your guests
           comfortably.
         </h3>
-        <div style={{ marginTop: 10 }}>
+        <div style={{ marginTop: "0.52vw" }}>
           <h4>How many bedrooms can guests use?</h4>
           <FormControl style={{ minWidth: "100%" }} required>
             <InputLabel>Bedrooms</InputLabel>
@@ -50,7 +50,7 @@ export default function Step4(props) {
           style={{
             display: "flex",
             justifyContent: "space-between",
-            marginBottom: 100,
+            marginBottom: "5.208vw",
           }}
         >
           <BackStyledButton

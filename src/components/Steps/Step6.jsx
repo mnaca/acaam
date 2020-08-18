@@ -11,9 +11,9 @@ export default function Step6(props) {
   return (
     <HostHomeStepCmp>
       <HostHomeStepText>
-        <div style={{ marginBottom: 15 }}>
+        <div style={{ marginBottom: "0.78125vw" }}>
           <FormGroup>
-            <h2 style={{ color: "#364F6B", marginBottom: 15 }}>
+            <h2 style={{ color: "#364F6B", marginBottom: "0.78125vw" }}>
               Please choose the amenities
             </h2>
             <h4 style={{ marginBottom: 15 }}>STEP {props.step}</h4>
@@ -32,7 +32,7 @@ export default function Step6(props) {
                   style={{
                     margin: "0px auto 0 auto",
                     color: "#364f6b",
-                    width: "200px",
+                    width: "10.416vw",
                   }}
                   control={
                     <Checkbox
@@ -58,7 +58,7 @@ export default function Step6(props) {
             display: "flex",
             justifyContent: "space-between",
             width: "60%",
-            margin: "15px auto 100px auto",
+            margin: "0.78125vw auto 5.208vw auto",
           }}
         >
           <BackStyledButton

@@ -16,11 +16,11 @@ const HouseImages = styled.div`
   grid-column-start: ${(props) => (props.index === 0 ? 1 : null)};
   grid-column-end: ${(props) => (props.index === 0 ? 4 : null)};
   height: ${(props) => (props.index === 0 ? "37.5vw" : "12.5vw")};
-  margin: 5px;
-  margin-bottom: ${(props) => (props.index === 0 ? "10px" : null)};
-  box-shadow: 0px 0px 10px 1px rgba(93, 120, 148, 1);
-  padding: 5px;
-  border-radius: ${(props) => (props.index === 0 ? "10px" : "6px")};
+  margin: 0.2604vw;
+  margin-bottom: ${(props) => (props.index === 0 ? "0.52vw" : null)};
+  box-shadow: 0vw 0vw 0.52vw 0.052vw rgba(93, 120, 148, 1);
+  padding: 0.2604vw;
+  border-radius: ${(props) => (props.index === 0 ? "0.52vw" : "0.3125vw")};
 
   &:hover .menu {
     display: inline-block !important;
@@ -34,11 +34,11 @@ const HouseImages = styled.div`
 const Controls = styled.ul`
   position: absolute;
   background-color: white;
-  border: 1px solid #364f6b;
-  border-radius: 4px;
+  border: 0.052vw solid #364f6b;
+  border-radius: 0.208vw;
   z-index: 1;
-  top: 10px;
-  right: 30px;
+  top: 0.52vw;
+  right: 1.5625vw;
   list-style-type: none;
   display: ${(props) => (props.dnone ? "none" : "block")};
 `;
@@ -56,7 +56,7 @@ const ImageBackground = styled.div`
 const ImageControl = styled.li`
   cursor: pointer;
   color: #364f6b;
-  padding: 5px;
+  padding: 0.2604vw;
   &:hover {
     background-color: rgba(54, 79, 107, 0.2);
   }
@@ -68,11 +68,11 @@ export default function Step7(props) {
   return (
     <HostHomeStepCmp>
       <HostHomeStepText>
-        <h2 style={{ marginBottom: 10 }}>Add a photo to your ad</h2>
-        <h3 style={{ marginBottom: 10 }}>
+        <h2 style={{ marginBottom: "0.52vw" }}>Add a photo to your ad</h2>
+        <h3 style={{ marginBottom: "0.52vw" }}>
           Photos help guests imagine how it is
         </h3>
-        <h4 style={{ marginBottom: 10 }}>STEP {props.step}</h4>
+        <h4 style={{ marginBottom: "0.52vw" }}>STEP {props.step}</h4>
         <Dropzone
           validFiles={props.images}
           setValidFiles={props.setImages}
@@ -83,7 +83,7 @@ export default function Step7(props) {
             style={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr 1fr",
-              maxWidth: 900,
+              maxWidth: "46.875vw",
               margin: "0 auto",
             }}
           >
@@ -107,7 +107,7 @@ export default function Step7(props) {
                       width: "100%",
                       height: "100%",
                       objectFit: "cover",
-                      borderRadius: "5px",
+                      borderRadius: "0.2604vw",
                     }}
                     src={URL.createObjectURL(item)}
                     alt=""
@@ -162,7 +162,7 @@ export default function Step7(props) {
             display: "flex",
             justifyContent: "space-between",
             width: "80%",
-            margin: "15px auto 100px auto",
+            margin: "0.78125vw auto 5.208vw auto",
           }}
         >
           <BackStyledButton

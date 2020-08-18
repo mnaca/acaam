@@ -9,25 +9,25 @@ const ProposalCmp = styled.div`
   box-sizing: border-box;
   position: relative;
   display: flex;
-  padding: 10px 20px;
-  box-shadow: 0px 0px 10px 1px rgba(93, 120, 148, 1);
+  padding: 0.52vw 1.04vw;
+  box-shadow: 0vw 0vw 0.52vw 0.052vw rgba(93, 120, 148, 1);
   cursor: pointer;
   color: #364f6b;
-  border-radius: 5px;
-  margin-top: 15px;
+  border-radius: 0.2604vw;
+  margin-top: 0.78125vw;
 `;
 
 const StyledImg = styled.img`
   width: 100%;
-  border-radius: 5px;
+  border-radius: 0.2604vw;
   height: 100%;
   object-fit: cover;
 `;
 
 const Price = styled.p`
   position: absolute;
-  right: 10px;
-  bottom: 10px;
+  right: 0.52vw;
+  bottom: 0.52vw;
   font-weight: bold;
   font-size: 1.4vw;
 `;
@@ -76,7 +76,7 @@ export default function Proposal(props) {
           >
             {Object.entries(home.amenities).map((option) => (
               <Amenities>
-                <CheckIcon style={{ marginRight: 5, fontSize: "1.2vw"}} />{option[0]}
+                <CheckIcon style={{ marginRight: "0.2604vw", fontSize: "1.2vw"}} />{option[0]}
               </Amenities>
             ))}
           </ul>

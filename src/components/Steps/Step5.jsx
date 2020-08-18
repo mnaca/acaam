@@ -22,16 +22,16 @@ export default function Step5(props) {
     <HostHomeStepCmp>
       <HostHomeStepText>
         <h2>Sleeping arrangements</h2>
-        <h4 style={{ marginTop: "15px" }}>STEP {props.step}</h4>
-        <h3 style={{ marginTop: "10px" }}>
+        <h4 style={{ marginTop: "0.78125vw" }}>STEP {props.step}</h4>
+        <h3 style={{ marginTop: "0.52vw" }}>
           Sharing the types of beds in each room can help people understand the
           sleeping arrangements.
         </h3>
-        <div style={{ marginTop: "20px" }}>
+        <div style={{ marginTop: "1.04vw" }}>
           {new Array(props.bedrooms).fill(null).map((item, index) => {
             return (
               <Bedroom style={{}} key={index}>
-                <h4 style={{ marginRight: 20 }}>Bedroom {index + 1}</h4>
+                <h4 style={{ marginRight: "1.04vw" }}>Bedroom {index + 1}</h4>
                 <div>
                   <PlusMinusButton
                     variant="outlined"
@@ -45,7 +45,7 @@ export default function Step5(props) {
                   >
                     -
                   </PlusMinusButton>
-                  <div style={{ margin: "0 15px", display: "inline-block" }}>
+                  <div style={{ margin: "0 0.78125vw", display: "inline-block" }}>
                     {props.bedroomsOptions[index]} beds
                   </div>
                   <PlusMinusButton
@@ -67,8 +67,8 @@ export default function Step5(props) {
           style={{
             display: "flex",
             justifyContent: "space-between",
-            marginTop: 25,
-            marginBottom: 100,
+            marginTop: "1.302vw",
+            marginBottom: "5.208vw",
           }}
         >
           <BackStyledButton

@@ -16,11 +16,11 @@ export default function Step8(props) {
     <HostHomeStepCmp>
       <HostHomeStepText>
         <h2>Describe your place to guests.</h2>
-        <h4 style={{ marginTop: "15px" }}>STEP {props.step}</h4>
+        <h4 style={{ marginTop: "0.78125vw" }}>STEP {props.step}</h4>
         <h3
           style={{
             margin: "0 auto",
-            marginTop: "10px",
+            marginTop: "0.52vw",
             maxWidth: 600,
           }}
         >
@@ -33,25 +33,25 @@ export default function Step8(props) {
           onChange={(e) => setDescription(e.target.value)}
           maxLength={410}
           style={{
-            borderRadius: "5px",
-            marginTop: 15,
+            borderRadius: "0.2604vw",
+            marginTop: "0.78125vw",
             borderColor: "#364f6b",
             width: "100%",
-            maxWidth: 600,
-            minHeight: 200,
-            maxHeight: 600,
+            maxWidth: "31.25vw",
+            minHeight: "10.416vw",
+            maxHeight: "31.25vw",
             resize: "vertical",
-            padding: "10px",
+            padding: "0.52vw",
             color: "#364f6b",
-            fontSize: 16,
+            fontSize:" 0.9vw",
           }}
           placeholder="Write the description..."
         ></textarea>
         <h3
           style={{
             margin: "0 auto",
-            marginTop: "10px",
-            maxWidth: 600,
+            marginTop: "0.52vw",
+            maxWidth: "31.25vw",
           }}
         >
           Write the title of your place.
@@ -60,16 +60,16 @@ export default function Step8(props) {
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          maxLength={45}
+          maxLength={100}
           style={{
-            borderRadius: "5px",
-            marginTop: 15,
+            borderRadius: "0.2604vw",
+            marginTop: "0.78125",
             borderColor: "#364f6b",
             width: "100%",
-            maxWidth: 600,
-            padding: "10px",
+            maxWidth: "31.25vw",
+            padding: "0.52vw",
             color: "#364f6b",
-            fontSize: 16,
+            fontSize:" 0.9vw",
           }}
           placeholder="Write the title..."
         ></input>

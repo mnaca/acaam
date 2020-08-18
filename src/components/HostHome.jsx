@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const Progress = styled.div`
   position: relative;
-  height: 5px;
+  height: 0.2604vw;
   background-color: rgba(54, 79, 107, 0.3);
   &::after {
     content: "";
