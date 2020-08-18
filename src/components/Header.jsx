@@ -13,14 +13,14 @@ const HeaderCmp = styled.header`
 
 const Logo = styled.div`
   cursor: pointer;
-  margin-top: 7.5px;
+  margin-top: 0.39vw;
 `;
 
 const LogoText = styled.span`
   position: relative;
   bottom: 1px;
   font-family: "Pacifico", cursive;
-  font-size: 35px;
+  font-size: 1.823vw;
   line-height: 0;
   color: #364f6b;
 `;
@@ -30,7 +30,7 @@ export default function Header(props) {
     <HeaderCmp>
       <Link to="/" style={{ textDecoration: "none" }}>
         <Logo>
-          <img src={logo} alt="Logo" width={70} />
+          <img src={logo} alt="Logo" style={{width: "3.646vw"}} />
           <LogoText>NACA</LogoText>
         </Logo>
       </Link>

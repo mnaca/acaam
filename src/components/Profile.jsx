@@ -12,27 +12,27 @@ import { auth, storage, db } from "../firebase";
 const ProfileWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
-  align-items: stretch;
+  align-items: center;
   position: relative;
 `;
 
 const ProfileMenu = styled.div`
   position: relative;
   display: inline-flex;
-  padding: 7px 12px;
+  padding: 0.365vw 0.625vw;
   align-items: center;
   cursor: pointer;
   background-color: white;
-  border: 2px solid #364f6b;
+  border: 0.104vw solid #364f6b;
   border-radius: 10%;
-  margin-left: 10px;
+  margin-left: 0.52vw;
   &:hover {
     background-color: rgba(54, 79, 107, 0.1);
   }
 `;
 
 const StyledMenuIcon = styled(MenuIcon)`
-  margin-right: 10px;
+  margin-right: 0.52vw;
   color: #364f6b;
 `;
 
@@ -67,17 +67,26 @@ function Profile(props) {
 
   return (
     <ProfileWrapper>
-      <h4 style={{ display: "flex", alignItems: "center" }}>
-        {userInfo ? userInfo.mail : "Not Loginned"}
-      </h4>
       <Search />
       <Language />
       <ProfileMenu onClick={onHandleMenu}>
-        <StyledMenuIcon />
+        <StyledMenuIcon style={{ width: "1.5625vw", height: "2.31vw" }} />
         {!auth.currentUser ? (
-          <StyledUserIcon style={{ fontSize: 30 }} />
+          <StyledUserIcon style={{ fontSize: "1.5625vw" }} />
         ) : (
-          <div style={{height: 30, width: 30}}><img style={{ height: 30, maxWidth: "100%", objectFit: "cover" }} src={profileImage} alt="" /></div>
+          <div
+            style={{ display: "flex", height: "1.5625vw", width: "1.5625vw" }}
+          >
+            <img
+              style={{
+                height: "1.5625vw",
+                maxWidth: "100%",
+                objectFit: "cover",
+              }}
+              src={profileImage}
+              alt=""
+            />
+          </div>
         )}
         <ProfileHiddenMenu />
       </ProfileMenu>

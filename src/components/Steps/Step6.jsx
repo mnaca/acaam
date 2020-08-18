@@ -18,7 +18,6 @@ export default function Step6(props) {
             </h2>
             <h4 style={{ marginBottom: 15 }}>STEP {props.step}</h4>
             {[
-              "Essentials",
               "WiFi",
               "TV",
               "Heat",

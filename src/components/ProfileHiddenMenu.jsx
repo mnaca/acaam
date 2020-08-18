@@ -9,21 +9,21 @@ export const HiddenMenu = styled.ul`
   position: absolute;
   z-index: 1;
   right: 0;
-  top: 50px;
+  bottom: -7.05vw;
   list-style-type: none;
   background-color: white;
   margin: 0;
   padding-left: 0;
-  width: 150px;
-  margin-top: 10px;
+  width: 7.81vw;
+  margin-top: 0.52vw;
   border-radius: 4.5%;
   overflow: hidden;
-  border: 2px solid #364f6b;
+  border: 0.104vw solid #364f6b;
 `;
 
 export const HiddenMenuItem = styled.li`
   cursor: pointer;
-  padding: 9px 0;
+  padding: 0.46875vw 0;
   transition: 0.3s;
   text-align: center;
   background-color: white;
@@ -35,7 +35,8 @@ export const HiddenMenuItem = styled.li`
 const StyledLink = styled(Link)`
   display: block;
   cursor: pointer;
-  padding: 9px 0;
+  font-size: 0.9vw;
+  padding: 0.46875vw 0;
   transition: 0.3s;
   text-align: center;
   text-decoration: none;

@@ -31,6 +31,7 @@ export default function Step8(props) {
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          maxLength={410}
           style={{
             borderRadius: "5px",
             marginTop: 15,
@@ -59,6 +60,7 @@ export default function Step8(props) {
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          maxLength={45}
           style={{
             borderRadius: "5px",
             marginTop: 15,

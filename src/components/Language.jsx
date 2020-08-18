@@ -10,18 +10,17 @@ const LanguageCmp = styled.div`
   background-color: white;
   display: flex;
   align-items: center;
-  padding: 10px 11px;
+  padding: 0.521vw;
   border-radius: 13%;
   cursor: pointer;
-  border: 2px solid #364f6b;
-  margin-left: 10px;
+  border: 0.104vw solid #364f6b;
+  margin-left: 0.521vw;
   &:hover {
     background-color: rgba(54, 79, 107, 0.1);
   }
 `;
 
 const StyledLanguageIcon = styled(LanguageIcon)`
-  transform: scale(1.25);
   color: #364f6b;
 `;
 
@@ -35,7 +34,7 @@ function Language(props) {
 
   return (
     <LanguageCmp onClick={onHandleMenu}>
-      <StyledLanguageIcon />
+      <StyledLanguageIcon style={{width: "2vw", height: "2vw"}} />
       <LanguageHiddenMenu />
     </LanguageCmp>
   );

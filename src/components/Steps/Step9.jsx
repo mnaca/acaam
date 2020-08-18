@@ -10,7 +10,6 @@ import finish from "../../images/finish-removebg-preview.png";
 import { useDispatch, useSelector } from "react-redux";
 import { createHostHome } from "../../actions/actions";
 import { db } from "../../firebase";
-import firebase from "firebase";
 import uniqid from "uniqid";
 
 export default function Step9(props) {
@@ -49,29 +48,27 @@ export default function Step9(props) {
             className={classes.button}
             onClick={() => {
               const options = { ...props.options };
-              options.id = uniqid();
-              options["bedrooms-options"] = JSON.stringify(
-                options["bedrooms-options"]
-              );
-              options.images = JSON.stringify(
-                options.images.map((item) => item.name)
-              );
-              options.owner = JSON.stringify(userInfo);
+              options.images = options.images.map(item => item.name);
+              console.log(options);
+              const id = uniqid();
               db.collection("users")
                 .doc(userInfo.id)
-                .update({
-                  [props.house]: firebase.firestore.FieldValue.arrayUnion(
-                    JSON.stringify(options)
-                  ),
-                });
-              db.collection("offers")
-                .doc(props.house)
-                .update({
-                  ["homes"]: firebase.firestore.FieldValue.arrayUnion(
-                    JSON.stringify(options)
-                  ),
-                });
-              dispatch(createHostHome(options));
+                .collection(props.house)
+                .doc(id)
+                .set({id, ...options})
+                .then(() => {
+                  console.log("Success")
+                  db.collection("offers")
+                    .doc(props.house)
+                    .collection("homes")
+                    .doc(id)
+                    .set({id, ...options})
+                    .then(() => {
+                      console.log("Success")
+                      dispatch(createHostHome(options));
+                    })
+                })
+                
             }}
           >
             FINISH

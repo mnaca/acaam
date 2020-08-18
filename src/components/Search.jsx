@@ -7,8 +7,8 @@ const SearchCmp = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  border: 2px solid #364f6b;
-  padding: ${props => props.paddingLeft ? '5px 20px 5px' : 0};
+  border: 0.104vw solid #364f6b;
+  padding: ${props => props.paddingLeft ? '0.26vw 1.041vw 0.26vw' : 0};
   border-radius: ${(props) => props.borderRadius};
   &:hover {
     background-color: ${props => !props.opened ? 'rgba(54, 79, 107, 0.1)' : null};
@@ -18,9 +18,11 @@ const SearchCmp = styled.div`
 const SearchItem = styled.div`
   cursor: pointer;
   color: #364f6b;
-  padding: 0 25px;
-  border-right: ${props => !props.last ? '1px solid #364f6b' : null};
-  border-radius: ${props => props.first ? '40px 0 0 40px' : props.last ? '0 40px 40px 0' : '0'};
+  padding: 0 1.302vw;
+  height: 3vw;
+  border-right: ${props => !props.last ? '0.052vw solid #364f6b' : null};
+  border-radius: ${props => props.first ? '2.083vw 0 0 2.083vw' : props.last ? '0 2.083vw 2.083vw 0' : '0'};
+  font-size: 0.9vw;
   &:hover {
     background-color: rgba(54,79,107,0.1);
   }
@@ -30,10 +32,23 @@ const SearchLogo = styled.div`
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  padding: 4.5px 5px;
+  padding: 0.6vw;
   cursor: pointer;
   height: 100%;
   color: #364f6b;
+`;
+
+const StyledInput = styled.input`
+  font-size: 0.9vw;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  border-bottom: 0.052vw solid transparent;
+  margin-top: ${props => props.date ? 0 : "0.5625vw"};
+
+  &:focus, &:hover {
+    border-bottom: 0.052vw solid #364f6b;
+  }
 `;
 
 export default function Search(props) {
@@ -43,7 +58,7 @@ export default function Search(props) {
   const onHandleSearch = () => {
     setOpened(!opened);
     if (borderRadius === "50%") {
-      setBorderRadius("40px");
+      setBorderRadius("2.083vw");
     } else {
       setBorderRadius("50%");
     }
@@ -55,24 +70,24 @@ export default function Search(props) {
         <>
           <SearchItem first>
             <div style={{fontWeight: "bold"}}>Location</div>
-            <Input placeholder="Where are you going?" />
+            <StyledInput placeholder="Where are you going?" />
           </SearchItem>
           <SearchItem>
             <div style={{fontWeight: "bold"}}>Check in</div>
-            <Input placeholder="Add dates" type="date" />
+            <StyledInput date placeholder="Add dates" type="date" />
           </SearchItem>
           <SearchItem>
             <div style={{fontWeight: "bold"}}>Check out</div>
-            <Input placeholder="Add guests" type="date" />
+            <StyledInput date placeholder="Add dates" type="date" />
           </SearchItem>
           <SearchItem last>
             <div style={{fontWeight: "bold"}}>Guests</div>
-            <Input placeholder="Add guests" />
+            <StyledInput placeholder="Add guests" />
           </SearchItem>
         </>
       ) : null}
       <SearchLogo onClick={onHandleSearch}>
-        <SearchRoundedIcon style={{ fontSize: "35px" }} />
+        <SearchRoundedIcon style={{ fontSize: "1.823vw" }} />
       </SearchLogo>
     </SearchCmp>
   );

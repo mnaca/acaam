@@ -39,16 +39,16 @@ export default function reducer(state = initialState, action) {
         userInfo: action.userInfo
       }
     case HOST_HOME:
-      state[action.home.house].push(JSON.stringify(action.home))
+      state[action.home.house].push(action.home)
       return {
         ...state
       }
     case LOAD_ALL_HOMES:
       return {
         ...state,
-        apartments: action.apartments,
-        vacationRentals: action.vacationRentals,
-        sharedRooms: action.sharedRooms
+        apartments: action.apartments ? action.apartments : [],
+        vacationRentals: action.vacationRentals ? action.vacationRentals : [],
+        sharedRooms: action.sharedRooms ? action.sharedRooms : []
       }
     default:
       return newState;

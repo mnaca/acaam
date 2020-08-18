@@ -9,7 +9,11 @@ import sharedRoomsBanner from "../images/shared-rooms-banner.jpg";
 import Profile from "./Profile";
 import Categories from "./Categories";
 import { connect, useDispatch, useSelector } from "react-redux";
-import { createCloseAllMenu, createSetUser, createLoadAllHomes } from "../actions/actions";
+import {
+  createCloseAllMenu,
+  createSetUser,
+  createLoadAllHomes,
+} from "../actions/actions";
 import Footer from "./Footer";
 import { Switch, Route, Redirect } from "react-router-dom";
 import AllProposals from "./AllProposals";
@@ -18,12 +22,13 @@ import { auth, db } from "../firebase";
 import HostHome from "./HostHome";
 import Register from "./Register";
 import ProfilePage from "./ProfilePage";
+import Home from "./Home";
 
 const HeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 1.42vw;
 `;
 
 const BannerWrapper = styled.div`
@@ -32,7 +37,7 @@ const BannerWrapper = styled.div`
   background-repeat: no-repeat;
   background-size: 100%;
   height: ${(props) => props.imageHeight}px;
-  padding: 30px 30px;
+  padding: 1.5625vw;
   transition: 1s;
 `;
 
@@ -55,20 +60,25 @@ function Main() {
 
       db.collection("offers")
         .doc("apartments")
+        .collection("homes")
         .get()
-        .then((doc) => {
-          const apartments = doc.data().homes;
+        .then((docs) => {
+          const apartments = docs.docs.map((doc) => doc.data());
           db.collection("offers")
             .doc("vacationRentals")
+            .collection("homes")
             .get()
-            .then((doc) => {
-              const vacationRentals = doc.data().homes;
+            .then((docs) => {
+              const vacationRentals = docs.docs.map((doc) => doc.data());
               db.collection("offers")
                 .doc("sharedRooms")
+                .collection("homes")
                 .get()
-                .then((doc) => {
-                  const sharedRooms = doc.data().homes;
-                  dispatch(createLoadAllHomes(apartments, vacationRentals, sharedRooms));
+                .then((docs) => {
+                  const sharedRooms = docs.docs.map((doc) => doc.data());
+                  dispatch(
+                    createLoadAllHomes(apartments, vacationRentals, sharedRooms)
+                  );
                 });
             });
         });
@@ -110,26 +120,35 @@ function Main() {
         <Profile />
       </HeaderWrapper>
       <Switch>
-        <Route path="/apartments">
+        <Route exact path="/apartments">
           <BannerWrapper
             imageHeight={imageHeight}
             url={apartmentsBanner}
           ></BannerWrapper>
           <AllProposals type="apartments" />
         </Route>
-        <Route path="/rentals">
+        <Route path="/apartments/:homeId">
+          <Home type="apartments" />
+        </Route>
+        <Route exact path="/rentals">
           <BannerWrapper
             imageHeight={imageHeight}
             url={vacationRentalsBanner}
           ></BannerWrapper>
-          <AllProposals type="vacationRentals" />
+          <AllProposals type="rentals" />
         </Route>
-        <Route path="/rooms">
+        <Route path="/rentals/:homeId">
+          <Home type="vacationRentals" />
+        </Route>
+        <Route exact path="/rooms">
           <BannerWrapper
             imageHeight={imageHeight}
             url={sharedRoomsBanner}
           ></BannerWrapper>
-          <AllProposals type="sharedRooms" />
+          <AllProposals type="rooms" />
+        </Route>
+        <Route path="/rooms/:homeId">
+          <Home type="sharedRooms" />
         </Route>
         <Route path="/host">
           {auth.currentUser ? <HostHome /> : <Redirect to="/" />}

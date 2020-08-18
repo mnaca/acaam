@@ -4,31 +4,29 @@ import Proposal from "./Proposal";
 import styled from "styled-components";
 
 const AllProposalsCmp = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding: 0 100px 150px 100px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 5vw 8vw 5vw;
   margin-top: 50px;
-  grid-gap: 20px 20px;
 `;
 
 function AllProposals(props) {
   const apartments = useSelector((state) => state.apartments);
   const vacationRentals = useSelector((state) => state.vacationRentals);
   const sharedRooms = useSelector((state) => state.sharedRooms);
-  console.log(apartments, vacationRentals, sharedRooms);
 
   return (
     <AllProposalsCmp>
       {props.type === "apartments"
         ? apartments.map((home) => {
-            return <Proposal home={home} key={JSON.parse(home).price} />;
+            return <Proposal home={home} key={home.price} type={props.type} />;
           })
-        : props.type === "vacationRentals"
+        : props.type === "rentals"
         ? vacationRentals.map((home) => {
-            return <Proposal home={home} key={JSON.parse(home).price} />;
+            return <Proposal home={home} key={home.price} type={props.type} />;
           })
         : sharedRooms.map((home) => {
-            return <Proposal home={home} key={JSON.parse(home).price} />;
+            return <Proposal home={home} key={home.price} type={props.type} />;
           })}
     </AllProposalsCmp>
   );

@@ -7,8 +7,8 @@ import arm from "../images/arm.png";
 import eng from "../images/eng.png";
 
 const LanguageHiddenMenuCmp = styled(HiddenMenu)`
-  color:#364f6b;
-  width: 100px;
+  color: #364f6b;
+  width: 5.21vw;
   left: 0;
 `;
 
@@ -19,9 +19,10 @@ const LanguageHiddenMenuItem = styled(HiddenMenuItem)`
       : props.language === "eng"
       ? `url(${eng})`
       : `url(${arm})`};
-  background-position: 10px center;
+  background-position: 0.521vw center;
   background-repeat: no-repeat;
-  background-size: 20px;
+  background-size: 1.042vw;
+  font-size: 0.9vw;
 `;
 
 function LanguageHiddenMenu(props) {
