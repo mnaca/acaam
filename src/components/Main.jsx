@@ -36,7 +36,7 @@ const BannerWrapper = styled.div`
     props.url ? `url(${props.url})` : `url(${background})`};
   background-repeat: no-repeat;
   background-size: 100%;
-  height: ${(props) => props.imageHeight}px;
+  height: 33vw;
   padding: 1.5625vw;
   transition: 1s;
 `;
@@ -49,9 +49,6 @@ const MainCmp = styled.div`
 function Main() {
   const userInfo = useSelector((state) => state.userInfo);
 
-  const [imageHeight, setImageHeight] = useState(
-    (window.innerWidth * 700) / 1920 - 60
-  );
   const dispatch = useDispatch();
 
   useEffect(
@@ -104,13 +101,8 @@ function Main() {
       dispatch(createCloseAllMenu());
     };
 
-    window.onresize = () => {
-      setImageHeight((window.innerWidth * 700) / 1920 - 60);
-    };
-
     return () => {
       window.onclick = null;
-      window.onresize = null;
     };
   }, [dispatch]);
   return (
@@ -122,7 +114,6 @@ function Main() {
       <Switch>
         <Route exact path="/apartments">
           <BannerWrapper
-            imageHeight={imageHeight}
             url={apartmentsBanner}
           ></BannerWrapper>
           <AllProposals type="apartments" />
@@ -132,7 +123,6 @@ function Main() {
         </Route>
         <Route exact path="/rentals">
           <BannerWrapper
-            imageHeight={imageHeight}
             url={vacationRentalsBanner}
           ></BannerWrapper>
           <AllProposals type="rentals" />
@@ -142,7 +132,6 @@ function Main() {
         </Route>
         <Route exact path="/rooms">
           <BannerWrapper
-            imageHeight={imageHeight}
             url={sharedRoomsBanner}
           ></BannerWrapper>
           <AllProposals type="rooms" />
@@ -163,7 +152,7 @@ function Main() {
           <ProfilePage id={userInfo ? userInfo.id : null} />
         </Route>
         <Route exact path="/">
-          <BannerWrapper imageHeight={imageHeight}>
+          <BannerWrapper>
             <Banner />
           </BannerWrapper>
           <Categories />

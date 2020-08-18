@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { Button } from "@material-ui/core";
 import { createSetUser } from "../actions/actions";
+import { StyledButton } from "./HostHomeStep";
 
 const ProfilePageCmp = styled.div`
   display: flex;
@@ -12,6 +13,7 @@ const ProfilePageCmp = styled.div`
   padding: 1.04vw;
   max-width: 41.7vw;
   margin: 0 auto;
+  font-size: 0.9vw;
 `;
 const ImgStyled = styled.div`
   flex: 0 0 10.41vw;
@@ -54,11 +56,11 @@ const Info = styled.div`
   &::-webkit-scrollbar {
     height: 0.21vw;
   }
-   
+
   &::-webkit-scrollbar-track {
     box-shadow: inset 0 0 0.3125vw rgba(0, 0, 0, 0.3);
   }
-   
+
   &::-webkit-scrollbar-thumb {
     background-color: #364f6b;
     outline: 0.052vw solid slategrey;
@@ -119,7 +121,7 @@ export default function ProfilePage(props) {
                     cursor: "pointer",
                     display: "block",
                     textAlign: "center",
-                    padding: "6px 13px",
+                    padding: "0.3125vw 0.677vw",
                     backgroundColor: "#364f6b",
                     color: "white",
                     borderRadius: "0.2083vw",
@@ -171,7 +173,7 @@ export default function ProfilePage(props) {
               ></StyledTextArea>
             ) : (
               <p
-                style={{ margin: "20px 0" }}
+                style={{ margin: "1.042vw 0" }}
                 onClick={() => setEditModeDescription(true)}
               >
                 {selfDescription || "No information"}
@@ -179,10 +181,10 @@ export default function ProfilePage(props) {
             )}
             {myPage && editModeDescription ? (
               <>
-                <Button
+                <StyledButton
                   variant="contained"
                   color="primary"
-                  style={{ backgroundColor: "#364f6b", marginRight: "0.52vw" }}
+                  style={{ backgroundColor: "#364f6b", marginRight: "0.52vw", color: "white" }}
                   onClick={() => {
                     if (userInfo.selfDescription !== selfDescription) {
                       setEditModeDescription(false);
@@ -199,27 +201,32 @@ export default function ProfilePage(props) {
                   }}
                 >
                   Submit the changes
-                </Button>
-                <Button
+                </StyledButton>
+                <StyledButton
                   variant="contained"
                   color="secondary"
                   onClick={() => {
                     setEditModeDescription(false);
                     setSelfDescription(userInfo.selfDescription);
                   }}
+                  style={{color: "white"}}
                 >
                   CANCEL
-                </Button>
+                </StyledButton>
               </>
             ) : myPage ? (
-              <Button
-                style={{ marginLeft: "auto", display: "block" }}
+              <StyledButton
+                style={{
+                  marginLeft: "auto",
+                  display: "block",
+                  borderWidth: "0.052vw",
+                }}
                 variant="outlined"
                 color="primary"
                 onClick={() => setEditModeDescription(true)}
               >
                 Edit
-              </Button>
+              </StyledButton>
             ) : null}
           </ProfilInfo>
         </ProfilePageCmp>

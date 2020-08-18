@@ -7,7 +7,7 @@ const AllProposalsCmp = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 5vw 8vw 5vw;
-  margin-top: 50px;
+  margin-top: 2.604vw;
 `;
 
 function AllProposals(props) {

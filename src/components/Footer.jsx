@@ -12,10 +12,9 @@ const FooterCmp = styled.footer`
   display: flex;
   justify-content: space-between;
   background-color: #f7f7f7;
-  // margin-top: 70px;
   padding: 1.04vw 2.6vw;
   color: #364f6b;
-  box-shadow: 0vw -1.04vw 0.521vw 0.521vw rgba(93, 120, 148, 0.6);
+  box-shadow: 0px -0.102vw 0.51vw 0.051vw rgba(93, 120, 148, 0.6);
   font-size: 0.9vw;
 `;
 

@@ -60,17 +60,17 @@ export default function Proposal(props) {
         <ImageWrapper>
           <StyledImg src={mainImage} alt="Picture" />
         </ImageWrapper>
-        <div style={{ marginLeft: 20 }}>
-          <h4 style={{ marginBottom: 10, fontSize: "1vw" }}>
+        <div style={{ marginLeft: "1.04vw" }}>
+          <h4 style={{ marginBottom: "0.52vw", fontSize: "1vw" }}>
             {jsUcfirst(home.city)}, {jsUcfirst(home.district)}
           </h4>
-          <p style={{ marginBottom: 5, fontSize: "1vw" }}>{home.title}</p>
+          <p style={{ marginBottom: "0.26vw", fontSize: "1vw" }}>{home.title}</p>
           <ul
             style={{
               listStyleType: "none",
-              marginTop: 8,
+              marginTop: "0.42vw",
               display: "grid",
-              gridColumnGap: 5,
+              gridColumnGap: "0.26vw",
               gridTemplateColumns: "1fr 1fr",
             }}
           >

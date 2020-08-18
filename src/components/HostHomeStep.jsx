@@ -39,24 +39,32 @@ export const HostHomeStepText = styled.div`
   text-align: center;
   color: #364f6b;
   max-width: 41.667vw;
+  font-size: 0.9vw;
 `;
 
 export const StyledButton = styled(Button)`
-  width: 6.5104vw;
-  color: #364f6b !important;
+  padding: 0.2vw 2vw !important;
+  min-width: 0px !important;
+  font-size: 0.9vw !important;
+  border-radius: 0.156vw !important;
 `;
 
 export const NextStyledButton = styled(Button)`
+  font-size: 0.9vw !important;
   background-color: #364f6b !important;
-  width: 6.5104vw;
+  padding: 0.2vw 2vw !important;
+  min-width: 0px !important;
+  border-radius: 0.156vw !important;
 `;
 
 export const BackStyledButton = styled(StyledButton)`
+  color: #364f6b !important;
   border: 0.052vw solid #364f6b !important;
   margin-right: 0.78125vw !important;
 `;
 
 export const PlusMinusButton = styled(Button)`
+  font-size: 0.9vw !important;
   color: #364f6b !important;
   border: 0.052vw solid #364f6b !important;
   padding: 0.78125vw !important;

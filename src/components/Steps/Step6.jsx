@@ -32,7 +32,7 @@ export default function Step6(props) {
                   style={{
                     margin: "0px auto 0 auto",
                     color: "#364f6b",
-                    width: "10.416vw",
+                    width: "200px"
                   }}
                   control={
                     <Checkbox
