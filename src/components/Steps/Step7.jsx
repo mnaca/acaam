@@ -123,7 +123,7 @@ export default function Step7(props) {
                       );
                       props.setHidden(hiddenCopy);
                     }}
-                    style={{ display: "none" }}
+                    style={{ display: "none", width: "2vw", height: "4vw", right: 0, top: 0 }}
                     className="menu"
                   />
                   <Controls dnone={props.hidden[index]}>
@@ -161,7 +161,7 @@ export default function Step7(props) {
           style={{
             display: "flex",
             justifyContent: "space-between",
-            width: "80%",
+            width: "100%",
             margin: "0.78125vw auto 5.208vw auto",
           }}
         >

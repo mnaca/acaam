@@ -1,12 +1,5 @@
 import React from "react";
 import {
-  MenuItem,
-  InputLabel,
-  FormControl,
-  FormHelperText,
-  Select,
-} from "@material-ui/core";
-import {
   HostHomeStepCmp,
   HostHomeStepText,
   BackStyledButton,
@@ -25,12 +18,10 @@ export default function Step4(props) {
           Check that you have enough beds to accommodate all your guests
           comfortably.
         </h3>
-        <div style={{ marginTop: "0.52vw" }}>
+        <div style={{ marginTop: "1.04vw" }}>
           <h4>How many bedrooms can guests use?</h4>
-          <FormControl style={{ minWidth: "100%" }} required>
-            <InputLabel>Bedrooms</InputLabel>
-            <Select
-              style={{ width: "100%", color: "#364f6b" }}
+          <select
+              style={{ width: "100%", color: "#364f6b", marginTop: "2vw" }}
               value={props.bedrooms}
               onChange={(e) => props.setBedrooms(e.target.value)}
             >
@@ -38,19 +29,18 @@ export default function Step4(props) {
                 .fill(null)
                 .map((item, index) => index + 1)
                 .map((bedrooms) => (
-                  <MenuItem key={bedrooms} value={bedrooms}>
+                  <option key={bedrooms} value={bedrooms}>
                     {bedrooms} bedrooms
-                  </MenuItem>
+                  </option>
                 ))}
-            </Select>
-            <FormHelperText>Required</FormHelperText>
-          </FormControl>
+            </select>
         </div>
         <div
           style={{
             display: "flex",
             justifyContent: "space-between",
             marginBottom: "5.208vw",
+            marginTop: "1.8vw"
           }}
         >
           <BackStyledButton

@@ -3,7 +3,6 @@ import { useParams } from "react-router";
 import { db, auth, storage } from "../firebase";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { Button } from "@material-ui/core";
 import { createSetUser } from "../actions/actions";
 import { StyledButton } from "./HostHomeStep";
 

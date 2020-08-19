@@ -63,7 +63,7 @@ export default function Register() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form style={{ marginBottom: 100 }} className={classes.form} noValidate>
+        <form style={{ marginBottom: "5.2vw" }} className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField

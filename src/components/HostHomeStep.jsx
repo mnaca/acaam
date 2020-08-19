@@ -46,7 +46,7 @@ export const StyledButton = styled(Button)`
   padding: 0.2vw 2vw !important;
   min-width: 0px !important;
   font-size: 0.9vw !important;
-  border-radius: 0.156vw !important;
+  border-radius: 0.2vw !important;
 `;
 
 export const NextStyledButton = styled(Button)`
@@ -54,7 +54,7 @@ export const NextStyledButton = styled(Button)`
   background-color: #364f6b !important;
   padding: 0.2vw 2vw !important;
   min-width: 0px !important;
-  border-radius: 0.156vw !important;
+  border-radius: 0.2vw !important;
 `;
 
 export const BackStyledButton = styled(StyledButton)`
@@ -106,6 +106,8 @@ export default function HostHomeStep(props) {
   const [images, setImages] = useState([]);
   const [hidden, setHidden] = useState([]);
   const [amenities, setAmenities] = useState({});
+  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState("");
 
   if (props.step === 1) {
     returnedJSX = (
@@ -200,6 +202,10 @@ export default function HostHomeStep(props) {
         step={props.step}
         setStep={props.setStep}
         setOption={props.setOption}
+        description={description}
+        setDescription={setDescription}
+        title={title}
+        setTitle={setTitle}
       />
     );
   } else if (props.step === 9) {

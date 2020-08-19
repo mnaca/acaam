@@ -22,7 +22,7 @@ export default function Step9(props) {
       <HostHomeStepText>
         <h2>Finish your listing to start earning</h2>
         <div>
-          <img src={finish} alt="" />
+          <img src={finish} style={{width: "12.83vw", height: "10.03vw"}} alt="" />
         </div>
         <div
           style={{

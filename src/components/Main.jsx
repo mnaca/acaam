@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Header from "./Header";
 import Banner from "./Banner";
 import styled from "styled-components";
@@ -140,7 +140,8 @@ function Main() {
           <Home type="sharedRooms" />
         </Route>
         <Route path="/host">
-          {auth.currentUser ? <HostHome /> : <Redirect to="/" />}
+          {/* {auth.currentUser ? <HostHome /> : <Redirect to="/" />} */}
+          <HostHome />
         </Route>
         <Route path="/login">
           {!auth.currentUser ? <Login /> : <Redirect to="/" />}

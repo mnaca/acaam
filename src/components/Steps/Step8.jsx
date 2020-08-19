@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   HostHomeStepCmp,
   HostHomeStepText,
@@ -9,8 +9,6 @@ import {
 
 export default function Step8(props) {
   const classes = useStyles();
-  const [description, setDescription] = useState("");
-  const [title, setTitle] = useState("");
 
   return (
     <HostHomeStepCmp>
@@ -21,7 +19,7 @@ export default function Step8(props) {
           style={{
             margin: "0 auto",
             marginTop: "0.52vw",
-            maxWidth: 600,
+            maxWidth: "31.25vw",
           }}
         >
           Write a quick summary of your place. You can highlight what’s special
@@ -29,10 +27,11 @@ export default function Step8(props) {
           guests.
         </h3>
         <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          value={props.description}
+          onChange={(e) => props.setDescription(e.target.value)}
           maxLength={410}
           style={{
+            border: "0.104vw solid #364f6b",
             borderRadius: "0.2604vw",
             marginTop: "0.78125vw",
             borderColor: "#364f6b",
@@ -58,12 +57,13 @@ export default function Step8(props) {
         </h3>
         <input
           type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={props.title}
+          onChange={(e) => props.setTitle(e.target.value)}
           maxLength={100}
           style={{
+            border: "0.104vw solid #364f6b",
             borderRadius: "0.2604vw",
-            marginTop: "0.78125",
+            marginTop: "0.78125vw",
             borderColor: "#364f6b",
             width: "100%",
             maxWidth: "31.25vw",
@@ -77,8 +77,8 @@ export default function Step8(props) {
           style={{
             display: "flex",
             justifyContent: "space-between",
-            width: "80%",
-            margin: "15px auto 100px auto",
+            width: "100%",
+            margin: "0.78125vw auto 5.2vw auto",
           }}
         >
           <BackStyledButton
@@ -99,7 +99,7 @@ export default function Step8(props) {
               props.setStep(props.step + 1);
               props.setOption(
                 ["description", "title"],
-                [description, title]
+                [props.description, props.title]
               );
             }}
           >

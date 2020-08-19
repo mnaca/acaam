@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import SearchRoundedIcon from "@material-ui/icons/SearchRounded";
-import Input from '@material-ui/core/Input';
 
 const SearchCmp = styled.div`
   position: relative;
