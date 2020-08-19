@@ -12,6 +12,11 @@ import {
     BackStyledButton,
     NextStyledButton,
   } from "../HostHomeStep";
+import styled from "styled-components";
+
+  const StyledMenuItem=styled(MenuItem)`
+  font-size: 0.9vw
+  `;
 
 
   export default function Step1(props) {
@@ -26,7 +31,7 @@ import {
             <h2 style={{ marginTop: "0.52vw" }}>What kind of place do you have?</h2>
             <form style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gridColumnGap: "1.04vw"}}>
               <FormControl required >
-                <InputLabel>City</InputLabel>
+                <InputLabel style={{fontSize: "0.9vw"}}>City</InputLabel>
                 <Select
                   value={props.city}
                   onChange={(e) => props.setCity(e.target.value)}
@@ -34,23 +39,27 @@ import {
                 >
                   <MenuItem value="yerevan">Yerevan</MenuItem>
                 </Select>
-                <FormHelperText>Required</FormHelperText>
+                <FormHelperText style={{fontSize: "0.9vw"}}>Required</FormHelperText>
               </FormControl>
               <FormControl required >
-                <InputLabel>District</InputLabel>
+                <InputLabel style={{fontSize: "0.9vw"}}>District</InputLabel>
                 <Select
                   value={props.district}
                   onChange={(e) => props.setDistrict(e.target.value)}
                 >
-                  <MenuItem value="arabkir">Arabkir</MenuItem>
-                  <MenuItem value="bangladesh">Bangladesh</MenuItem>
-                  <MenuItem value="shengavit">Shengavit</MenuItem>
-                  <MenuItem value="ajapnyak">Ajapnyak</MenuItem>
+                  <StyledMenuItem value="arabkir"  >Arabkir</StyledMenuItem>
+                  <StyledMenuItem value="bangladesh" >HAT</StyledMenuItem>
+                  <StyledMenuItem value="shengavit" >Shengavit</StyledMenuItem>
+                  <StyledMenuItem value="ajapnyak" >Ajapnyak</StyledMenuItem>
+                  <StyledMenuItem value="Avan" >Avan</StyledMenuItem>
+                  <StyledMenuItem value="Nor Norq" >Nor Norq</StyledMenuItem>
+                  <StyledMenuItem value="Dzrvej" >Dzrvej</StyledMenuItem>
+                  <StyledMenuItem value="Qanaqer-Zeytun" >Qanaqer-Zeytun</StyledMenuItem>
                 </Select>
-                <FormHelperText>Required</FormHelperText>
+                <FormHelperText style={{fontSize: "0.9vw"}}>Required</FormHelperText>
               </FormControl>
               <FormControl required >
-                <InputLabel>Guests</InputLabel>
+                <InputLabel style={{fontSize: "0.9vw"}}>Guests</InputLabel>
                 <Select
                   value={props.guests}
                   onChange={(e) => props.setGuests(e.target.value)}
@@ -62,7 +71,7 @@ import {
                     </MenuItem>
                   ))}
                 </Select>
-                <FormHelperText>Required</FormHelperText>
+                <FormHelperText style={{fontSize: "0.9vw"}}>Required</FormHelperText>
               </FormControl>
               <div
                 style={{
@@ -72,6 +81,7 @@ import {
                   justifyContent: "space-between",
                   marginTop: "1.04vw",
                   marginBottom: "5.208vw",
+                  fontSize: "0.9vw"
                 }}
               >
                 <BackStyledButton

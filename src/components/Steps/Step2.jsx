@@ -19,7 +19,7 @@ export default function Step2(props) {
     <HostHomeStepCmp>
       <HostHomeStepText>
         <h2 style={{ color: "#364f6b" }}>Choose a property type</h2>
-        <h4 style={{ marginTop: 10 }}>STEP {props.step}</h4>
+        <h4 style={{ marginTop: "0.52vw" }}>STEP {props.step}</h4>
         <form
           style={{
             display: "flex",
@@ -28,7 +28,7 @@ export default function Step2(props) {
           }}
         >
           <FormControl required>
-            <InputLabel>Select one</InputLabel>
+            <InputLabel style={{fontSize: "0.9vw"}}>Select one</InputLabel>
             <Select
               value={props.house}
               onChange={(e) => props.setHouse(e.target.value)}
@@ -38,7 +38,7 @@ export default function Step2(props) {
               <MenuItem value="vacationRentals">Vacatiom Rentals</MenuItem>
               <MenuItem value="sharedRooms">Shared room</MenuItem>
             </Select>
-            <FormHelperText>Required</FormHelperText>
+            <FormHelperText style={{fontSize: "0.9vw"}}>Required</FormHelperText>
           </FormControl>
           <div
             style={{
@@ -57,8 +57,9 @@ export default function Step2(props) {
             gridColumnGap: "1.04vw",
           }}
         >
-          <FormControl required>
+          <FormControl required >
             <TextField
+            style={{fontSize: "0.9vw"}}
               id="standard-basic"
               value={props.price}
               onChange={(e) => {
@@ -69,10 +70,10 @@ export default function Step2(props) {
               }}
               label="Price*"
             />
-            <FormHelperText>Required</FormHelperText>
+            <FormHelperText style={{fontSize: "0.9vw"}}>Required</FormHelperText>
           </FormControl>
           <FormControl required>
-            <InputLabel>Currency</InputLabel>
+            <InputLabel style={{fontSize: "0.9vw"}}>Currency</InputLabel>
             <Select
               value={props.currency}
               onChange={(e) => props.setCurrency(e.target.value)}
@@ -81,10 +82,10 @@ export default function Step2(props) {
               <MenuItem value="AMD">AMD(֏)</MenuItem>
               <MenuItem value="RUR">RUR(₽)</MenuItem>
             </Select>
-            <FormHelperText>Required</FormHelperText>
+            <FormHelperText style={{fontSize: "0.9vw"}}>Required</FormHelperText>
           </FormControl>
           <FormControl required>
-            <InputLabel>Term</InputLabel>
+            <InputLabel style={{fontSize: "0.9vw"}}>Term</InputLabel>
             <Select
               value={props.term}
               onChange={(e) => props.setTerm(e.target.value)}
@@ -93,7 +94,7 @@ export default function Step2(props) {
               <MenuItem value="monthly">Monthly</MenuItem>
               <MenuItem value="daily">Daily</MenuItem>
             </Select>
-            <FormHelperText>Required</FormHelperText>
+            <FormHelperText style={{fontSize: "0.9vw"}}>Required</FormHelperText>
           </FormControl>
           <div
             style={{
