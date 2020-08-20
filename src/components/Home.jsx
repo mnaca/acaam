@@ -13,7 +13,19 @@ const HomeImagesWrapper = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   width: 75vw;
   padding: 0.5vw;
-  margin: 2vw auto 0;
+  margin: 2vw auto 0;  
+  &::-webkit-scrollbar {
+    width: 0.21vw;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 0.3125vw rgba(0, 0, 0, 0.3);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #364f6b;
+    outline: 0.052vw solid slategrey;
+  }
 `;
 const HomeInfo = styled.div`
   margin-bottom: 4vw;
