@@ -66,7 +66,7 @@ padding:1.04vw;
 const AptInfo = styled.div`
 oreder: 1;
 `;
-const Asd= styled.div`
+const AmenitiesInfo= styled.div`
 display: grid;
 grid-template-columns: 1fr 1fr 1fr 1fr;
 `;
@@ -128,7 +128,9 @@ export default function Home(props) {
       <MainInfo> 
         <AptInfo>        
             <HomeInfo style={{fontSize: "2vw"}}>
-              < LocationOnIcon/><b>{home ? home.city +", "+ home.district  : null}</b></HomeInfo>           
+              < LocationOnIcon/><b>{home ? home.city.slice(0,1).toUpperCase()+ home.city.slice(1) +", "+
+               home.district.slice(0,1).toUpperCase()+ home.district.slice(1)  : null}</b>
+            </HomeInfo>           
             <HomeInfo>
               {home ? home.guests : null}:guests  {home ? home.bedrooms : null}:bedrooms  {home ? home.bathrooms : null}:bathrooms
              </HomeInfo>
@@ -138,7 +140,7 @@ export default function Home(props) {
             <HomeInfo style={{borderBottom: "0.052vw solid #c3c3c3",paddingBottom: "2.04vw"}}>{home ? home.description : null}</HomeInfo>
             <b style={{fontSize: "2vw" , color:"#364f6b"}}>Amenitis:</b>
             
-            <HomeInfo ><Asd> {home ? (
+            <HomeInfo style={{borderBottom: "0.052vw solid #c3c3c3",paddingBottom: "2.04vw"}}><AmenitiesInfo> {home ? (
               Object.entries(home.amenities).map((option) => (
             
               <Amenities>
@@ -147,7 +149,7 @@ export default function Home(props) {
             
             ))) 
             : null}
-            </Asd>
+            </AmenitiesInfo>
             </HomeInfo>            
       <div style={{ height: "3.9vw" }}></div>
     </HomeCmp>
