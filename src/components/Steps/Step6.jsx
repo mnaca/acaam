@@ -17,7 +17,7 @@ export default function Step6(props) {
               Please choose the amenities
             </h2>
             <h4 style={{ marginBottom: 15 }}>STEP {props.step}</h4>
-            {[
+            {[              
               "WiFi",
               "TV",
               "Heat",
@@ -26,6 +26,10 @@ export default function Step6(props) {
               "Game console",
               "Fireplace",
               "Workspace",
+              "Essentials",
+              "Private entrance",
+              "Hair dryer",
+              "Iron",
             ].map((label) => {
               return (
                 <FormControlLabel

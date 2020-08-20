@@ -59,7 +59,7 @@ export default function Step8(props) {
           type="text"
           value={props.title}
           onChange={(e) => props.setTitle(e.target.value)}
-          maxLength={100}
+          maxLength={55}
           style={{
             border: "0.104vw solid #364f6b",
             borderRadius: "0.2604vw",
