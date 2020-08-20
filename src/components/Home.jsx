@@ -6,19 +6,30 @@ import styled from "styled-components";
 import CheckIcon from "@material-ui/icons/Check";
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
-
 const HomeCmp = styled.div`
-margin: 2vw 11vw 0;
+  margin: 2vw 11vw 0;
 `;
 const HomeImagesWrapper = styled.div`
-  height: 7.51vw; 
-  overflow-y: scroll;
+  height: 9.5vw; 
+  overflow-y: auto;
   display: grid;
   grid-gap: 0 0.5vw;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  width: 75vw;
   padding: 0.5vw;
   margin: 2vw auto 0;  
+
+  &::-webkit-scrollbar {
+    width: 0.6vw;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 0.3125vw rgba(0, 0, 0, 0.3);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #364f6b;
+    outline: 0.052vw solid slategrey;
+  }
 `;
 const HomeInfo = styled.div`
   margin: 0.3vw;
@@ -27,12 +38,10 @@ const HomeInfo = styled.div`
   max-width: 75vw;
   color: #364f6b;
   font-size: 1.5vw;
-  
-  `;
+`;
 const HomeImageWrap = styled.div`
-  height: ${(props) => (props.main ? "40vw" : "8.5vw")};
-  
-  grid-column-end: ${(props) => (props.main ? 6 : null)};
+  display: ${(props) => (props.main ? "none" : null)};
+  height: 8.5vw;
   border-radius: 0.2604vw;
   box-shadow: 0vw 0vw 0.52vw 0.052vw rgba(93, 120, 148, 1);
   padding: 0.5vw;
@@ -51,28 +60,28 @@ const Amenities = styled.li`
   font-size: 1.5vw; 
 `;
 const Title = styled.div`
-font-size: x-large;
-font-weight: 700; 
+  font-size: x-large;
+  font-weight: 700; 
 `;
 
 const MainInfo = styled.div`
-display: flex;
-justify-content: space-between;
-font-size: 1.5vw;
-border-bottom: 0.052vw solid #c3c3c3;
-margin-bottom : 1.04vw;
-padding:1.04vw;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5vw;
+  border-bottom: 0.052vw solid #c3c3c3;
+  margin-bottom: 1.04vw;
+  padding: 1.04vw;
 `;
 const AptInfo = styled.div`
-oreder: 1;
+  
 `;
 const AmenitiesInfo= styled.div`
-display: grid;
-grid-template-columns: 1fr 1fr 1fr 1fr;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 `;
 
 const MainPicture =styled.img`
-  width: 100%;
+  width: 75vw;
   height: 40vw;
   border-radius: 0.2604vw; 
   object-fit: cover;
@@ -118,15 +127,14 @@ export default function Home(props) {
       <HomeInfo>{home ? home.title : null}</HomeInfo>
       </Title>
       <MainPicture
-      src={houseImages[0]}
-      alt=""
-      key="url"
+        src={houseImages[0]}
+        alt=""
+        key="url"
       />      
       <HomeImagesWrapper>
         {houseImages.map((url, index) => (
           <HomeImageWrap main={index === 0}>
             <HomeImage
-              // main={index === 0}
               src={url}
               alt=""
               key="url"
