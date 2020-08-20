@@ -11,14 +11,14 @@ const HomeCmp = styled.div`
 margin: 2vw 11vw 0;
 `;
 const HomeImagesWrapper = styled.div`
-  height: 51.51vw;
+  height: 7.51vw; 
   overflow-y: scroll;
   display: grid;
   grid-gap: 0 0.5vw;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   width: 75vw;
   padding: 0.5vw;
-  margin: 2vw auto 0;
+  margin: 2vw auto 0;  
 `;
 const HomeInfo = styled.div`
   margin: 0.3vw;
@@ -31,7 +31,7 @@ const HomeInfo = styled.div`
   `;
 const HomeImageWrap = styled.div`
   height: ${(props) => (props.main ? "40vw" : "8.5vw")};
-  grid-column-start: ${(props) => (props.main ? 1 : null)};
+  
   grid-column-end: ${(props) => (props.main ? 6 : null)};
   border-radius: 0.2604vw;
   box-shadow: 0vw 0vw 0.52vw 0.052vw rgba(93, 120, 148, 1);
@@ -71,6 +71,17 @@ display: grid;
 grid-template-columns: 1fr 1fr 1fr 1fr;
 `;
 
+const MainPicture =styled.img`
+  width: 100%;
+  height: 40vw;
+  border-radius: 0.2604vw; 
+  object-fit: cover;
+  border-radius: 0.2604vw;
+  box-shadow: 0vw 0vw 0.52vw 0.052vw rgba(93, 120, 148, 1);
+  padding: 0.5vw;
+  margin-bottom: 0.52vw;
+`; 
+
 
 export default function Home(props) {
   const { homeId } = useParams();
@@ -106,11 +117,16 @@ export default function Home(props) {
       <Title>
       <HomeInfo>{home ? home.title : null}</HomeInfo>
       </Title>
+      <MainPicture
+      src={houseImages[0]}
+      alt=""
+      key="url"
+      />      
       <HomeImagesWrapper>
         {houseImages.map((url, index) => (
           <HomeImageWrap main={index === 0}>
             <HomeImage
-              main={index === 0}
+              // main={index === 0}
               src={url}
               alt=""
               key="url"
@@ -122,7 +138,7 @@ export default function Home(props) {
                 setHouseImages([...houseImages]);
               }}
             />
-          </HomeImageWrap>
+           </HomeImageWrap>
         ))}
       </HomeImagesWrapper> 
       <MainInfo> 
