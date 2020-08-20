@@ -11,14 +11,26 @@ const HomeCmp = styled.div`
 margin: 2vw 11vw 0;
 `;
 const HomeImagesWrapper = styled.div`
-  height: 7.51vw; 
-  overflow-y: scroll;
+  height: 9.51vw; 
+  overflow-y: auto;
   display: grid;
   grid-gap: 0 0.5vw;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   width: 75vw;
   padding: 0.5vw;
-  margin: 2vw auto 0;  
+  margin: 2vw auto 0; 
+  &::-webkit-scrollbar {
+    width: 0.6vw;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 0.3125vw rgba(0, 0, 0, 0.3);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #364f6b;
+    outline: 0.052vw solid slategrey;
+  } 
 `;
 const HomeInfo = styled.div`
   margin: 0.3vw;
@@ -30,14 +42,14 @@ const HomeInfo = styled.div`
   
   `;
 const HomeImageWrap = styled.div`
-  height: ${(props) => (props.main ? "40vw" : "8.5vw")};
-  
+  height: 8.5vw;  
   grid-column-end: ${(props) => (props.main ? 6 : null)};
   border-radius: 0.2604vw;
   box-shadow: 0vw 0vw 0.52vw 0.052vw rgba(93, 120, 148, 1);
   padding: 0.5vw;
   margin-bottom: 0.52vw;
-`;
+  display: ${(props) => (props.main ? "none" : null)};
+  `;
 const HomeImage = styled.img`
   cursor: pointer;
   width: 100%;
@@ -72,7 +84,7 @@ grid-template-columns: 1fr 1fr 1fr 1fr;
 `;
 
 const MainPicture =styled.img`
-  width: 100%;
+  width: 75vw;
   height: 40vw;
   border-radius: 0.2604vw; 
   object-fit: cover;
