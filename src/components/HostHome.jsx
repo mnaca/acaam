@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import HostHomeStep from "./HostHomeStep";
 import styled from "styled-components";
+import { useParams } from "react-router";
+import { useEffect } from "react";
+import { db } from "../firebase";
 
 const Progress = styled.div`
   position: relative;
@@ -18,6 +21,10 @@ const Progress = styled.div`
 `;
 
 export default function HostHome(props) {
+  let { edit, homeId, homeType } = useParams();
+  console.log(homeId, homeType);
+  if (edit === "create") edit = false;
+  else edit = true;
   const [step, setStep] = useState(1);
   const [options] = useState({});
   const setOption = (keys, values) => {
@@ -25,13 +32,26 @@ export default function HostHome(props) {
       options[keys[i]] = values[i];
     }
   };
+  const [home, setHome] = useState(null);
+
+  useEffect(() => {
+    if (edit) {
+      db.collection("offers")
+        .doc(homeType)
+        .collection("homes")
+        .doc(homeId)
+        .get()
+        .then((doc) => setHome(doc.data()))
+    }
+  }, [homeId]);
 
   return (
     <>
       <Progress step={step}></Progress>
       <HostHomeStep
         step={step}
-        options={options}
+        edit={edit}
+        options={home ? home : options}
         setOption={setOption}
         setStep={setStep}
       />

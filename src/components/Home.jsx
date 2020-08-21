@@ -5,19 +5,19 @@ import { useState } from "react";
 import styled from "styled-components";
 import CheckIcon from "@material-ui/icons/Check";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
+import { Link } from "react-router-dom";
 
 const HomeCmp = styled.div`
   margin: 2vw 11vw 0;
 `;
 const HomeImagesWrapper = styled.div`
-  height: 9.5vw;
+  height: 9.51vw;
   overflow-y: auto;
   display: grid;
   grid-gap: 0 0.5vw;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   padding: 0.5vw;
   margin: 2vw auto 0;
-
   &::-webkit-scrollbar {
     width: 0.6vw;
   }
@@ -41,10 +41,12 @@ const HomeInfo = styled.div`
 const HomeImageWrap = styled.div`
   display: ${(props) => (props.main ? "none" : null)};
   height: 8.5vw;
+  grid-column-end: ${(props) => (props.main ? 6 : null)};
   border-radius: 0.2604vw;
   box-shadow: 0vw 0vw 0.52vw 0.052vw rgba(93, 120, 148, 1);
-  padding: 0.5vw;
+  padding: 0.7vw;
   margin-bottom: 0.52vw;
+  display: ${(props) => (props.main ? "none" : null)};
 `;
 const HomeImage = styled.img`
   cursor: pointer;
@@ -87,11 +89,22 @@ const MainPicture = styled.img`
   padding: 0.5vw;
   margin-bottom: 0.52vw;
 `;
+const Owner = styled.img`
+  width: 5.083vw;
+  height: 5.083vw;
+  border-radius: 50%;
+  margin-left: 0.52vw;
+`;
+const OwnerInfo = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 export default function Home(props) {
   const { homeId } = useParams();
   const [home, setHome] = useState(null);
   const [houseImages, setHouseImages] = useState([]);
+  const [ownerImages, setOwnerImages] = useState(null);
 
   useEffect(() => {
     db.collection("offers")
@@ -103,14 +116,17 @@ export default function Home(props) {
         if (!home) {
           setHome(doc.data());
         } else {
+          let allPromises = [];
           const storageRef = storage.ref();
           home.images.forEach((item) => {
             const houseImagesRef = storageRef.child("house-images/" + item);
-            houseImagesRef.getDownloadURL().then((url) => {
-              houseImages.push(url);
-              setHouseImages([...houseImages]);
-            });
+            allPromises.push(houseImagesRef.getDownloadURL());
           });
+          Promise.all(allPromises).then(docs => setHouseImages(docs))
+          const profileImagesRef = storageRef.child(
+            "profile-images/" + home.owner.profileImage
+          );
+          profileImagesRef.getDownloadURL().then((url) => setOwnerImages(url));
         }
       });
   }, [homeId, props.type, home]);
@@ -122,14 +138,14 @@ export default function Home(props) {
       <Title>
         <HomeInfo>{home ? home.title : null}</HomeInfo>
       </Title>
-      <MainPicture src={houseImages[0]} alt="" key="url" />
+      <MainPicture src={houseImages[0]} alt="" />
       <HomeImagesWrapper>
         {houseImages.map((url, index) => (
-          <HomeImageWrap main={index === 0}>
+          <HomeImageWrap main={index === 0} key={url}>
             <HomeImage
               src={url}
               alt=""
-              key="url"
+              key={url}
               onClick={() => {
                 [houseImages[0], houseImages[index]] = [
                   houseImages[index],
@@ -144,7 +160,9 @@ export default function Home(props) {
       <MainInfo>
         <AptInfo>
           <HomeInfo style={{ fontSize: "2vw" }}>
-            <LocationOnIcon style={{position: "relative", top: "0.26vw", fontSize: "3.5vw"}} />
+            <LocationOnIcon
+              style={{ fontSize: "2.7vw", position: "relative", top: "0.26vw" }}
+            />
             <b>
               {home
                 ? home.city.slice(0, 1).toUpperCase() +
@@ -163,6 +181,18 @@ export default function Home(props) {
         <HomeInfo>
           <b style={{ fontSize: "2vw" }}>${home ? home.price : null}</b>/ Per
           night
+          <OwnerInfo>
+            Owner
+            {home ? (
+              <Link to={`/profile/${home.owner.id}`}>
+                <Owner
+                  src={ownerImages}
+                  alt=""
+                  key={home.owner.id}
+                />
+              </Link>
+            ) : null}
+          </OwnerInfo>
         </HomeInfo>
       </MainInfo>
       <HomeInfo
@@ -181,10 +211,9 @@ export default function Home(props) {
         }}
       >
         <AmenitiesInfo>
-          {" "}
           {home
             ? Object.entries(home.amenities).map((option) => (
-                <Amenities>
+                <Amenities key={option[0]}>
                   <CheckIcon
                     style={{ marginRight: "0.2604vw", fontSize: "1.2vw" }}
                   />
@@ -194,7 +223,7 @@ export default function Home(props) {
             : null}
         </AmenitiesInfo>
       </HomeInfo>
-      <div style={{ height: "5vw" }}></div>
+      <div style={{ height: "3.9vw" }}></div>
     </HomeCmp>
   );
 }

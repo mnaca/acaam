@@ -53,8 +53,6 @@ function Main() {
 
   useEffect(
     function () {
-      // JSON.parse(temp1.data().homes[0])
-
       db.collection("offers")
         .doc("apartments")
         .collection("homes")
@@ -139,7 +137,7 @@ function Main() {
         <Route path="/rooms/:homeId">
           <Home type="sharedRooms" />
         </Route>
-        <Route path="/host">
+        <Route path="/host/:edit/:homeType?/:homeId?">
           {/* {auth.currentUser ? <HostHome /> : <Redirect to="/" />} */}
           <HostHome />
         </Route>
@@ -160,6 +158,7 @@ function Main() {
         </Route>
         <Redirect to="/" />
       </Switch>
+      <div style={{ height: "5vw" }}></div>
       <Footer />
     </MainCmp>
   );

@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import apartments from "../images/apartments.jpg";
-import vacationRentals from "../images/vacation-rentals.jpg";
-import sharedRooms from "../images/shared-rooms.jpg";
+import apartmentsImg from "../images/apartments.jpg";
+import vacationRentalsImg from "../images/vacation-rentals.jpg";
+import sharedRoomsImg from "../images/shared-rooms.jpg";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const CategoriesCmp = styled.div`
   display: flex;
@@ -25,27 +26,31 @@ const StyledLink = styled(Link)`
 `;
 
 export default function Categories(props) {
+  const apartments = useSelector((state) => state.apartments);
+  const vacationRentals = useSelector((state) => state.vacationRentals);
+  const sharedRooms = useSelector((state) => state.sharedRooms);
+
   return (
     <CategoriesCmp>
       <StyledLink to="/apartments">
         <div>
-          <img src={apartments} style={{ width: "100%" }} alt="" />
+          <img src={apartmentsImg} style={{ width: "100%" }} alt="" />
           <h3>Apartments</h3>
-          <p>156,786 properties</p>
+          <p>{apartments.length} properties</p>
         </div>
       </StyledLink>
       <StyledLink to="/rentals">
         <div>
-          <img src={vacationRentals} style={{ width: "100%" }} alt="" />
+          <img src={vacationRentalsImg} style={{ width: "100%" }} alt="" />
           <h3>Vacation Rentals</h3>
-          <p>156,786 properties</p>
+          <p>{vacationRentals.length} properties</p>
         </div>
       </StyledLink>
       <StyledLink to="/rooms" marginright="0px">
         <div>
-          <img src={sharedRooms} style={{ width: "100%" }} alt="" />
+          <img src={sharedRoomsImg} style={{ width: "100%" }} alt="" />
           <h3>Shared rooms</h3>
-          <p>156,786 properties</p>
+          <p>{sharedRooms.length} properties</p>
         </div>
       </StyledLink>
     </CategoriesCmp>

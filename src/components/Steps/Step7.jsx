@@ -64,6 +64,7 @@ const ImageControl = styled.li`
 
 export default function Step7(props) {
   const classes = useStyles();
+  console.log(props.images);
 
   return (
     <HostHomeStepCmp>
@@ -78,7 +79,7 @@ export default function Step7(props) {
           setValidFiles={props.setImages}
           images={props.images}
         />
-        {props.images.length > 0 ? (
+        {props.images.length > 0 || props.defaultImages.length > 0 ? (
           <div
             style={{
               display: "grid",
@@ -123,7 +124,87 @@ export default function Step7(props) {
                       );
                       props.setHidden(hiddenCopy);
                     }}
-                    style={{ display: "none", width: "2vw", height: "4vw", right: 0, top: 0 }}
+                    style={{
+                      display: "none",
+                      width: "2vw",
+                      height: "4vw",
+                      right: 0,
+                      top: 0,
+                    }}
+                    className="menu"
+                  />
+                  <Controls dnone={props.hidden[index]}>
+                    <ImageControl
+                      onClick={() => {
+                        [props.images[0], props.images[index]] = [
+                          props.images[index],
+                          props.images[0],
+                        ];
+                        [props.hidden[0], props.hidden[index]] = [
+                          props.hidden[index],
+                          props.hidden[0],
+                        ];
+                        props.setImages([...props.images]);
+                      }}
+                    >
+                      Set as main image
+                    </ImageControl>
+                    <ImageControl
+                      onClick={() => {
+                        props.images.splice(index, 1);
+                        props.hidden.splice(index, 1);
+                        props.setImages([...props.images]);
+                      }}
+                    >
+                      Delete
+                    </ImageControl>
+                  </Controls>
+                </HouseImages>
+              );
+            })}
+            {props.defaultImages.map((item, index) => {
+              if (props.hidden[index] === undefined) props.hidden[index] = true;
+              return (
+                <HouseImages
+                  onMouseLeave={() => {
+                    const hiddenCopy = props.hidden.map((item, hiddenIndex) => {
+                      if (index === hiddenIndex) return true;
+                      return item;
+                    });
+                    props.setHidden(hiddenCopy);
+                  }}
+                  key={item}
+                  index={index}
+                >
+                  <ImageBackground dnone={props.hidden[index]} />
+                  <img
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      borderRadius: "0.2604vw",
+                    }}
+                    src={item}
+                    alt=""
+                    key={item}
+                  />
+                  <MoreVertIcon
+                    onClick={() => {
+                      const hiddenCopy = props.hidden.map(
+                        (item, hiddenIndex) => {
+                          if (index === hiddenIndex) return !item;
+                          return item;
+                        }
+                      );
+                      props.setHidden(hiddenCopy);
+                    }}
+                    style={{
+                      display: "none",
+                      width: "2vw",
+                      height: "4vw",
+                      right: 0,
+                      top: 0,
+                    }}
                     className="menu"
                   />
                   <Controls dnone={props.hidden[index]}>

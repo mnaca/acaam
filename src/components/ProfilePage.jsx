@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { db, auth, storage } from "../firebase";
+import { db, storage } from "../firebase";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { createSetUser } from "../actions/actions";
 import { StyledButton } from "./HostHomeStep";
+import Proposal from "./Proposal";
+import { Link } from "react-router-dom";
 
 const ProfilePageCmp = styled.div`
   display: flex;
@@ -55,15 +57,28 @@ const Info = styled.div`
   &::-webkit-scrollbar {
     height: 0.21vw;
   }
-
   &::-webkit-scrollbar-track {
     box-shadow: inset 0 0 0.3125vw rgba(0, 0, 0, 0.3);
   }
-
   &::-webkit-scrollbar-thumb {
     background-color: #364f6b;
     outline: 0.052vw solid slategrey;
   }
+`;
+
+const Offers = styled.div`
+  width: 70vw;
+  margin: 0 auto;
+`;
+
+const OffersItem = styled.div`
+  position: relative;
+`;
+
+const EditButton = styled(StyledButton)`
+  position: absolute !important;
+  top: 0.52vw;
+  right: 0.52vw;
 `;
 
 export default function ProfilePage(props) {
@@ -75,162 +90,220 @@ export default function ProfilePage(props) {
   const [selfDescription, setSelfDescription] = useState("");
   const [editModeDescription, setEditModeDescription] = useState(false);
   const [myPage, setMyPage] = useState(null);
+  const [apartments, setApartments] = useState([]);
+  const [vacationRentals, setVacationRentals] = useState([]);
+  const [sharedRooms, setSharedRooms] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(userInfo);
+    const thisUser = db.collection("users").doc(userId);
 
-    if (auth.currentUser || userInfo) {
-      db.collection("users")
-        .doc(userId)
-        .get()
-        .then((user) => {
-          setUser(user.data());
-          if (userInfo.id === user.data().id) setMyPage(true);
-          else setMyPage(false);
-          setSelfDescription(
-            user.data().selfDescription
-              ? user.data().selfDescription
-              : "No information"
-          );
-          const storageRef = storage.ref();
-          const profileImagesRef = storageRef.child(
-            "profile-images/" + user.data().profileImage
-          );
-          profileImagesRef.getDownloadURL().then((url) => setProfileImage(url));
-        });
-    }
+    thisUser.get().then((user) => {
+      setUser(user.data());
+      if (userInfo && userInfo.id === user.data().id) setMyPage(true);
+      else setMyPage(false);
+      setSelfDescription(
+        user.data().selfDescription
+          ? user.data().selfDescription
+          : "No information"
+      );
+      const storageRef = storage.ref();
+      const profileImagesRef = storageRef.child(
+        "profile-images/" + user.data().profileImage
+      );
+      profileImagesRef.getDownloadURL().then((url) => {
+        setProfileImage(url);
+        thisUser
+          .collection("apartments")
+          .get()
+          .then((data) => {
+            setApartments(data.docs.map((item) => item.data()));
+            thisUser
+              .collection("vacationRentals")
+              .get()
+              .then((data) => {
+                setVacationRentals(data.docs.map((item) => item.data()));
+                thisUser
+                  .collection("sharedRooms")
+                  .get()
+                  .then((data) => {
+                    setSharedRooms(data.docs.map((item) => item.data()));
+                  });
+              });
+          });
+      });
+    });
   }, [userId, userInfo]);
+
+  console.log(apartments, vacationRentals, sharedRooms);
 
   return (
     <>
       {user ? (
-        <ProfilePageCmp>
-          <ImgStyled>
-            <div style={{ height: "10.416vw" }}>
-              <img
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                src={profileImage}
-                alt=""
-              />
-            </div>
-            {myPage ? (
-              <>
-                <label
-                  htmlFor="file-upload"
-                  style={{
-                    cursor: "pointer",
-                    display: "block",
-                    textAlign: "center",
-                    padding: "0.3125vw 0.677vw",
-                    backgroundColor: "#364f6b",
-                    color: "white",
-                    borderRadius: "0.2083vw",
-                    margin: "0.625vw 0.2604vw",
-                  }}
+        <>
+          <ProfilePageCmp>
+            <ImgStyled>
+              <div style={{ height: "10.416vw" }}>
+                <img
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  src={profileImage}
+                  alt=""
+                />
+              </div>
+              {myPage ? (
+                <>
+                  <label
+                    htmlFor="file-upload"
+                    style={{
+                      cursor: "pointer",
+                      display: "block",
+                      textAlign: "center",
+                      padding: "0.3125vw 0.677vw",
+                      backgroundColor: "#364f6b",
+                      color: "white",
+                      borderRadius: "0.2083vw",
+                      margin: "0.625vw 0.2604vw",
+                    }}
+                  >
+                    Update the photo
+                  </label>
+                  <input
+                    style={{ display: "none" }}
+                    id="file-upload"
+                    type="file"
+                    onChange={(e) => {
+                      const file = e.target.files[0];
+                      setProfileImage(URL.createObjectURL(e.target.files[0]));
+                      db.collection("users").doc(userId).update({
+                        profileImage: file.name,
+                      });
+                      storageRef
+                        .child("profile-images/" + file.name)
+                        .put(file)
+                        .then(function () {
+                          console.log("Uploaded a blob or file!");
+                          dispatch(
+                            createSetUser({
+                              ...userInfo,
+                              profileImage: file.name,
+                            })
+                          );
+                        });
+                    }}
+                  />
+                </>
+              ) : null}
+              <Info>
+                <b>Email:</b> {user.mail}
+              </Info>
+              <Info>
+                <b>Tel:</b> {user.tel}
+              </Info>
+            </ImgStyled>
+            <ProfilInfo>
+              <NameDiv>Hi I'm {user.firstName + " " + user.lastName}</NameDiv>
+              {editModeDescription && myPage ? (
+                <StyledTextArea
+                  value={selfDescription}
+                  onChange={(e) => setSelfDescription(e.target.value)}
+                  placeholder="Say something about you ..."
+                ></StyledTextArea>
+              ) : (
+                <p
+                  style={{ margin: "1.042vw 0" }}
+                  onClick={() => setEditModeDescription(true)}
                 >
-                  Update the photo
-                </label>
-                <input
-                  style={{ display: "none" }}
-                  id="file-upload"
-                  type="file"
-                  onChange={(e) => {
-                    const file = e.target.files[0];
-                    setProfileImage(URL.createObjectURL(e.target.files[0]));
-                    db.collection("users").doc(userId).update({
-                      profileImage: file.name,
-                    });
-                    storageRef
-                      .child("profile-images/" + file.name)
-                      .put(file)
-                      .then(function () {
-                        console.log("Uploaded a blob or file!");
+                  {selfDescription || "No information"}
+                </p>
+              )}
+              {myPage && editModeDescription ? (
+                <>
+                  <StyledButton
+                    variant="contained"
+                    color="primary"
+                    style={{
+                      backgroundColor: "#364f6b",
+                      marginRight: "0.52vw",
+                      color: "white",
+                    }}
+                    onClick={() => {
+                      if (userInfo.selfDescription !== selfDescription) {
+                        setEditModeDescription(false);
                         dispatch(
                           createSetUser({
                             ...userInfo,
-                            profileImage: file.name,
+                            selfDescription,
                           })
                         );
-                      });
-                  }}
-                />
-              </>
-            ) : null}
-            <Info>
-              <b>Email:</b> {user.mail}
-            </Info>
-            <Info>
-              <b>Tel:</b> {user.tel}
-            </Info>
-          </ImgStyled>
-          <ProfilInfo>
-            <NameDiv>Hi I'm {user.firstName + " " + user.lastName}</NameDiv>
-            {editModeDescription && myPage ? (
-              <StyledTextArea
-                value={selfDescription}
-                onChange={(e) => setSelfDescription(e.target.value)}
-                placeholder="Say something about you ..."
-              ></StyledTextArea>
-            ) : (
-              <p
-                style={{ margin: "1.042vw 0" }}
-                onClick={() => setEditModeDescription(true)}
-              >
-                {selfDescription || "No information"}
-              </p>
-            )}
-            {myPage && editModeDescription ? (
-              <>
-                <StyledButton
-                  variant="contained"
-                  color="primary"
-                  style={{ backgroundColor: "#364f6b", marginRight: "0.52vw", color: "white" }}
-                  onClick={() => {
-                    if (userInfo.selfDescription !== selfDescription) {
-                      setEditModeDescription(false);
-                      dispatch(
-                        createSetUser({
-                          ...userInfo,
+                        db.collection("users").doc(userId).update({
                           selfDescription,
-                        })
-                      );
-                      db.collection("users").doc(userId).update({
-                        selfDescription,
-                      });
-                    }
-                  }}
-                >
-                  Submit the changes
-                </StyledButton>
+                        });
+                      }
+                    }}
+                  >
+                    Submit the changes
+                  </StyledButton>
+                  <StyledButton
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => {
+                      setEditModeDescription(false);
+                      setSelfDescription(userInfo.selfDescription);
+                    }}
+                    style={{ color: "white" }}
+                  >
+                    CANCEL
+                  </StyledButton>
+                </>
+              ) : myPage ? (
                 <StyledButton
-                  variant="contained"
-                  color="secondary"
-                  onClick={() => {
-                    setEditModeDescription(false);
-                    setSelfDescription(userInfo.selfDescription);
+                  style={{
+                    marginLeft: "auto",
+                    display: "block",
+                    borderWidth: "0.052vw",
                   }}
-                  style={{color: "white"}}
+                  variant="outlined"
+                  color="primary"
+                  onClick={() => setEditModeDescription(true)}
                 >
-                  CANCEL
+                  Edit
                 </StyledButton>
-              </>
-            ) : myPage ? (
-              <StyledButton
-                style={{
-                  marginLeft: "auto",
-                  display: "block",
-                  borderWidth: "0.052vw",
-                }}
-                variant="outlined"
-                color="primary"
-                onClick={() => setEditModeDescription(true)}
-              >
-                Edit
-              </StyledButton>
-            ) : null}
-          </ProfilInfo>
-        </ProfilePageCmp>
+              ) : null}
+            </ProfilInfo>
+          </ProfilePageCmp>
+          <Offers>
+            {apartments.map((home) => (
+              <OffersItem>
+                <Proposal home={home} key={home.id} type="apartments" />
+                <Link to={`/host/edit/apartments/${home.id}`}>
+                  <EditButton variant="outlined" color="primary">
+                    EDIT
+                  </EditButton>
+                </Link>
+              </OffersItem>
+            ))}
+            {vacationRentals.map((home) => (
+              <OffersItem>
+                <Proposal home={home} key={home.id} type="rentals" />
+                <Link to={`/host/edit/rentals/${home.id}`}>
+                  <EditButton variant="outlined" color="primary">
+                    EDIT
+                  </EditButton>
+                </Link>
+              </OffersItem>
+            ))}
+            {sharedRooms.map((home) => (
+              <OffersItem>
+                <Proposal home={home} key={home.id} type="rooms" />
+                <Link to={`/host/edit/rooms/${home.id}`}>
+                  <EditButton variant="outlined" color="primary">
+                    EDIT
+                  </EditButton>
+                </Link>
+              </OffersItem>
+            ))}
+          </Offers>
+        </>
       ) : null}
     </>
   );

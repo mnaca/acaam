@@ -77,7 +77,7 @@ function ProfileHiddenMenu(props) {
           <StyledLink to="/register">Register</StyledLink>
         </>
       )}
-      <StyledLink to={auth.currentUser ? "/host" : "/login"}>Host your home</StyledLink>
+      <StyledLink to={auth.currentUser ? "/host/create" : "/login"}>Host your home</StyledLink>
     </HiddenMenu>
   ) : null;
 }

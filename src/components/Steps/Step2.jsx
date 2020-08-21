@@ -57,7 +57,7 @@ export default function Step2(props) {
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr 1fr",
-            gridColumnGap: "20px",
+            gridColumnGap: "1vw",
           }}
         >
           <FormControl className={classes.formControl} required>
@@ -128,8 +128,7 @@ export default function Step2(props) {
               gridColumnStart: 1,
               gridColumnEnd: 4,
               justifyContent: "space-between",
-              marginTop: 20,
-              marginBottom: 100,
+              marginTop: "1vw",
             }}
           >
             <BackStyledButton

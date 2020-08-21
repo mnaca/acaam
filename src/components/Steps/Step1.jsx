@@ -29,17 +29,17 @@ export default function Step1(props) {
   return (
     <HostHomeStepCmp>
       <HostHomeStepText>
-        <h3 style={{ marginTop: 10 }}>
+        <h3 style={{ marginTop: "0.5vw" }}>
           Hi, {props.user ? props.user.email : "Stranger"}! You're welcome in
           our travelling site. Let's get started
         </h3>
-        <h4 style={{ marginTop: 10 }}>STEP {props.step}</h4>
-        <h2 style={{ marginTop: 12 }}>What kind of place do you have?</h2>
+        <h4 style={{ marginTop: "0.5vw" }}>STEP {props.step}</h4>
+        <h2 style={{ marginTop: "0.55vw" }}>What kind of place do you have?</h2>
         <form
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr 1fr",
-            gridColumnGap: "20px",
+            gridColumnGap: "1vw",
           }}
         >
           <FormControl className={classes.formControl} required>
@@ -111,8 +111,7 @@ export default function Step1(props) {
               gridColumnStart: 1,
               gridColumnEnd: 4,
               justifyContent: "space-between",
-              marginTop: 20,
-              marginBottom: 100,
+              marginTop: "1vw",
             }}
           >
             <NextStyledButton

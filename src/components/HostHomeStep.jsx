@@ -11,6 +11,8 @@ import Step3 from "./Steps/Step3";
 import Step2 from "./Steps/Step2";
 import Step1 from "./Steps/Step1";
 import Step9 from "./Steps/Step9";
+import { useEffect } from "react";
+import { storage } from "../firebase";
 
 export const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,12 +47,14 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: "0.9vw",
     "& ul": {
       padding: 0,
-      maxHeight: "10vw",
     },
     "& li": {
       padding: "0.5vw",
       minHeight: "3em",
     },
+  },
+  dropDownMenu: {
+    maxHeight: "35vw",
   },
   textField: {
     "& input": {
@@ -135,10 +139,41 @@ export default function HostHomeStep(props) {
   const [currency, setCurrency] = useState("USD");
   const [term, setTerm] = useState("daily");
   const [images, setImages] = useState([]);
+  const [defaultImages, setDefaultImages] = useState([]);
   const [hidden, setHidden] = useState([]);
   const [amenities, setAmenities] = useState({});
   const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
+
+  console.log(props.options);
+
+  useEffect(() => {
+    setHouse(props.options.house);
+    setCity(props.options.city);
+    setDistrict(props.options.district);
+    setGuests(props.options.guests);
+    setBathrooms(props.options.bathrooms);
+    setBedrooms(props.options.bedrooms);
+    setBedroomsOptions(props.options["bedrooms-options"]);
+    setPrice(props.options.price);
+    setAmenities(props.options.amenities);
+    setDescription(props.options.description);
+    setTitle(props.options.title);
+    let allPromises = [];
+    const storageRef = storage.ref();
+    console.log(props.options);
+    if (props.options.images) {
+      props.options.images.forEach((item) => {
+        const houseImagesRef = storageRef.child("house-images/" + item);
+        allPromises.push(houseImagesRef.getDownloadURL());
+      });
+      Promise.all(allPromises).then((docs) => {
+        console.log(docs);
+        setDefaultImages(docs);
+      });
+      console.log("pxk")
+    }
+  }, [props.options]);
 
   if (props.step === 1) {
     returnedJSX = (
@@ -223,6 +258,7 @@ export default function HostHomeStep(props) {
         setOption={props.setOption}
         images={images}
         setImages={setImages}
+        defaultImages={defaultImages}
         hidden={hidden}
         setHidden={setHidden}
       />
