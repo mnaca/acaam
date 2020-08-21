@@ -78,12 +78,12 @@ padding:1.04vw;
 const AptInfo = styled.div`
 oreder: 1;
 `;
-const AmenitiesInfo= styled.div`
+const AmenitiesInfo = styled.div`
 display: grid;
 grid-template-columns: 1fr 1fr 1fr 1fr;
 `;
 
-const MainPicture =styled.img`
+const MainPicture = styled.img`
   width: 75vw;
   height: 40vw;
   border-radius: 0.2604vw; 
@@ -92,13 +92,24 @@ const MainPicture =styled.img`
   box-shadow: 0vw 0vw 0.52vw 0.052vw rgba(93, 120, 148, 1);
   padding: 0.5vw;
   margin-bottom: 0.52vw;
-`; 
+`;
+const Owner = styled.img`
+  width: 5.083vw;
+  height: 5.083vw;
+  border-radius: 50%;
+  margin-left: 0.52vw;
+ `;
+const OwnerInfo = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 
 export default function Home(props) {
   const { homeId } = useParams();
   const [home, setHome] = useState(null);
   const [houseImages, setHouseImages] = useState([]);
+  const [ownerImages, setOwnerImages] = useState(null)
 
   useEffect(() => {
     db.collection("offers")
@@ -118,22 +129,27 @@ export default function Home(props) {
               setHouseImages([...houseImages]);
             });
           });
+          const profileImagesRef = storageRef.child(
+            "profile-images/" + home.owner.profileImage
+          );
+          profileImagesRef.getDownloadURL().then((url) => setOwnerImages(url));
         }
       });
   }, [homeId, props.type, home]);
 
   console.log(home);
 
+
   return (
     <HomeCmp>
       <Title>
-      <HomeInfo>{home ? home.title : null}</HomeInfo>
+        <HomeInfo>{home ? home.title : null}</HomeInfo>
       </Title>
       <MainPicture
-      src={houseImages[0]}
-      alt=""
-      key="url"
-      />      
+        src={houseImages[0]}
+        alt=""
+        key="url"
+      />
       <HomeImagesWrapper>
         {houseImages.map((url, index) => (
           <HomeImageWrap main={index === 0}>
@@ -150,35 +166,42 @@ export default function Home(props) {
                 setHouseImages([...houseImages]);
               }}
             />
-           </HomeImageWrap>
+          </HomeImageWrap>
         ))}
-      </HomeImagesWrapper> 
-      <MainInfo> 
-        <AptInfo>        
-            <HomeInfo style={{fontSize: "2vw"}}>
-              < LocationOnIcon/><b>{home ? home.city.slice(0,1).toUpperCase()+ home.city.slice(1) +", "+
-               home.district.slice(0,1).toUpperCase()+ home.district.slice(1)  : null}</b>
-            </HomeInfo>           
-            <HomeInfo>
-              {home ? home.guests : null}:guests  {home ? home.bedrooms : null}:bedrooms  {home ? home.bathrooms : null}:bathrooms
+      </HomeImagesWrapper>
+      <MainInfo>
+        <AptInfo>
+          <HomeInfo style={{ fontSize: "2vw" }}>
+            < LocationOnIcon /><b>{home ? home.city.slice(0, 1).toUpperCase() + home.city.slice(1) + ", " +
+              home.district.slice(0, 1).toUpperCase() + home.district.slice(1) : null}</b>
+          </HomeInfo>
+          <HomeInfo>
+            {home ? home.guests : null}:guests  {home ? home.bedrooms : null}:bedrooms  {home ? home.bathrooms : null}:bathrooms
              </HomeInfo>
         </AptInfo>
-            <HomeInfo><b style={{fontSize: "2vw"}}>${home ? home.price : null}</b>/ Per night</HomeInfo> 
-      </MainInfo>    
-            <HomeInfo style={{borderBottom: "0.052vw solid #c3c3c3",paddingBottom: "2.04vw"}}>{home ? home.description : null}</HomeInfo>
-            <b style={{fontSize: "2vw" , color:"#364f6b"}}>Amenitis:</b>
-            
-            <HomeInfo style={{borderBottom: "0.052vw solid #c3c3c3",paddingBottom: "2.04vw"}}><AmenitiesInfo> {home ? (
-              Object.entries(home.amenities).map((option) => (
-            
-              <Amenities>
-                <CheckIcon style={{ marginRight: "0.2604vw", fontSize: "1.2vw"}} />{option[0]}
-              </Amenities>
-            
-            ))) 
-            : null}
-            </AmenitiesInfo>
-            </HomeInfo>            
+        <HomeInfo><b style={{ fontSize: "2vw" }}>${home ? home.price : null}</b>/ Per night
+            <OwnerInfo>
+            Owner
+            {home ?
+              <Owner
+                src={ownerImages}
+                alt=""
+                key={home.owner.id}
+              /> : null}
+          </ OwnerInfo>
+        </HomeInfo>
+      </MainInfo>
+      <HomeInfo style={{ borderBottom: "0.052vw solid #c3c3c3", paddingBottom: "2.04vw" }}>{home ? home.description : null}</HomeInfo>
+      <b style={{ fontSize: "2vw", color: "#364f6b" }}>Amenitis:</b>
+      <HomeInfo style={{ borderBottom: "0.052vw solid #c3c3c3", paddingBottom: "2.04vw" }}><AmenitiesInfo> {home ? (
+        Object.entries(home.amenities).map((option) => (
+          <Amenities>
+            <CheckIcon style={{ marginRight: "0.2604vw", fontSize: "1.2vw" }} />{option[0]}
+          </Amenities>
+        )))
+        : null}
+      </AmenitiesInfo>
+      </HomeInfo>
       <div style={{ height: "3.9vw" }}></div>
     </HomeCmp>
   );
