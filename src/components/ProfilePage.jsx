@@ -78,6 +78,8 @@ export default function ProfilePage(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log(userInfo);
+
     if (auth.currentUser || userInfo) {
       db.collection("users")
         .doc(userId)

@@ -48,6 +48,7 @@ export default function Step9(props) {
             className={classes.button}
             onClick={() => {
               const options = { ...props.options };
+              options.owner = userInfo;
               options.images = options.images.map(item => item.name);
               console.log(options);
               const id = uniqid();

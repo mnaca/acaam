@@ -13,6 +13,11 @@ import Step1 from "./Steps/Step1";
 import Step9 from "./Steps/Step9";
 
 export const useStyles = makeStyles((theme) => ({
+  root: {
+    "& .MuiFormLabel-root": {
+      fontSize: "0.9vw",
+    },
+  },
   formControl: {
     margin: theme.spacing(1),
     minWidth: "6.25vw",
@@ -25,6 +30,32 @@ export const useStyles = makeStyles((theme) => ({
   },
   input: {
     display: "none",
+  },
+  inputLabel: {
+    fontSize: "0.9vw",
+  },
+  formHelperText: {
+    fontSize: "0.9vw",
+  },
+  menuItem: {
+    fontSize: "0.9vw",
+    padding: "0.8vw",
+  },
+  select: {
+    fontSize: "0.9vw",
+    "& ul": {
+      padding: 0,
+      maxHeight: "10vw",
+    },
+    "& li": {
+      padding: "0.5vw",
+      minHeight: "3em",
+    },
+  },
+  textField: {
+    "& input": {
+      fontSize: "0.9vw",
+    },
   },
 }));
 export const HostHomeStepCmp = styled.div`
