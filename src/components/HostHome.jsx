@@ -22,7 +22,8 @@ const Progress = styled.div`
 
 export default function HostHome(props) {
   let { edit, homeId, homeType } = useParams();
-  console.log(homeId, homeType);
+  if (homeType === "rentals") homeType = "vacationRentals";
+  else if (homeType === "rooms") homeType = "sharedRooms";
   if (edit === "create") edit = false;
   else edit = true;
   const [step, setStep] = useState(1);
@@ -41,9 +42,11 @@ export default function HostHome(props) {
         .collection("homes")
         .doc(homeId)
         .get()
-        .then((doc) => setHome(doc.data()))
+        .then((doc) => {
+          setHome(doc.data());
+        });
     }
-  }, [homeId]);
+  }, [homeId, edit, homeType]);
 
   return (
     <>

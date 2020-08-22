@@ -7,6 +7,7 @@ import { createSetUser } from "../actions/actions";
 import { StyledButton } from "./HostHomeStep";
 import Proposal from "./Proposal";
 import { Link } from "react-router-dom";
+import { createLoadAllHomes } from "../actions/actions";
 
 const ProfilePageCmp = styled.div`
   display: flex;
@@ -78,7 +79,17 @@ const OffersItem = styled.div`
 const EditButton = styled(StyledButton)`
   position: absolute !important;
   top: 0.52vw;
+  right: 7vw;
+`;
+
+const DeleteButton = styled(StyledButton)`
+  position: absolute !important;
+  top: 0.52vw;
   right: 0.52vw;
+  background-color: #f50057 !important;
+  color: white !important;
+  width: 6vw;
+  border: 0.073vw solid #f50057 !important;
 `;
 
 export default function ProfilePage(props) {
@@ -272,7 +283,7 @@ export default function ProfilePage(props) {
             </ProfilInfo>
           </ProfilePageCmp>
           <Offers>
-            {apartments.map((home) => (
+            {apartments.map((home, index, array) => (
               <OffersItem>
                 <Proposal home={home} key={home.id} type="apartments" />
                 <Link to={`/host/edit/apartments/${home.id}`}>
@@ -280,9 +291,40 @@ export default function ProfilePage(props) {
                     EDIT
                   </EditButton>
                 </Link>
+                <DeleteButton
+                  onClick={() => {
+                    db.collection("offers")
+                      .doc("apartments")
+                      .collection("homes")
+                      .doc(home.id)
+                      .delete()
+                      .then(() => {
+                        console.log("pxk");
+                        db.collection("users")
+                          .doc(user.id)
+                          .collection("apartments")
+                          .doc(home.id)
+                          .delete()
+                          .then(() => {
+                            console.log("pxk");
+                            array.splice(index);
+                            setApartments([...array]);
+                            dispatch(
+                              createLoadAllHomes(
+                                apartments,
+                                vacationRentals,
+                                sharedRooms
+                              )
+                            );
+                          });
+                      });
+                  }}
+                >
+                  Delete
+                </DeleteButton>
               </OffersItem>
             ))}
-            {vacationRentals.map((home) => (
+            {vacationRentals.map((home, index, array) => (
               <OffersItem>
                 <Proposal home={home} key={home.id} type="rentals" />
                 <Link to={`/host/edit/rentals/${home.id}`}>
@@ -290,9 +332,40 @@ export default function ProfilePage(props) {
                     EDIT
                   </EditButton>
                 </Link>
+                <DeleteButton
+                  onClick={() => {
+                    db.collection("offers")
+                      .doc("vacationRentals")
+                      .collection("homes")
+                      .doc(home.id)
+                      .delete()
+                      .then(() => {
+                        console.log("pxk");
+                        db.collection("users")
+                          .doc(user.id)
+                          .collection("vacationRentals")
+                          .doc(home.id)
+                          .delete()
+                          .then(() => {
+                            console.log("pxk");
+                            array.splice(index);
+                            setVacationRentals([...array]);
+                            dispatch(
+                              createLoadAllHomes(
+                                apartments,
+                                vacationRentals,
+                                sharedRooms
+                              )
+                            );
+                          });
+                      });
+                  }}
+                >
+                  Delete
+                </DeleteButton>
               </OffersItem>
             ))}
-            {sharedRooms.map((home) => (
+            {sharedRooms.map((home, index, array) => (
               <OffersItem>
                 <Proposal home={home} key={home.id} type="rooms" />
                 <Link to={`/host/edit/rooms/${home.id}`}>
@@ -300,6 +373,37 @@ export default function ProfilePage(props) {
                     EDIT
                   </EditButton>
                 </Link>
+                <DeleteButton
+                  onClick={() => {
+                    db.collection("offers")
+                      .doc("sharedRooms")
+                      .collection("homes")
+                      .doc(home.id)
+                      .delete()
+                      .then(() => {
+                        console.log("pxk");
+                        db.collection("users")
+                          .doc(user.id)
+                          .collection("sharedRooms")
+                          .doc(home.id)
+                          .delete()
+                          .then(() => {
+                            console.log("pxk");
+                            array.splice(index);
+                            setSharedRooms([...array]);
+                            dispatch(
+                              createLoadAllHomes(
+                                apartments,
+                                vacationRentals,
+                                sharedRooms
+                              )
+                            );
+                          });
+                      });
+                  }}
+                >
+                  Delete
+                </DeleteButton>
               </OffersItem>
             ))}
           </Offers>

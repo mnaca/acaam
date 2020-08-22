@@ -9,19 +9,9 @@ import {
 import {
   HostHomeStepCmp,
   HostHomeStepText,
-  BackStyledButton,
   NextStyledButton,
   useStyles,
 } from "../HostHomeStep";
-import styled from "styled-components";
-
-const dropdownMenuProps = {
-  menuStyle: {
-    border: "1px solid black",
-    borderRadius: "5%",
-    backgroundColor: "red",
-  },
-};
 
 export default function Step1(props) {
   const classes = useStyles();

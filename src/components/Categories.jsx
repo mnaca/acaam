@@ -49,7 +49,7 @@ export default function Categories(props) {
       <StyledLink to="/rooms" marginright="0px">
         <div>
           <img src={sharedRoomsImg} style={{ width: "100%" }} alt="" />
-          <h3>Shared rooms</h3>
+          <h3>Shared Rooms</h3>
           <p>{sharedRooms.length} properties</p>
         </div>
       </StyledLink>

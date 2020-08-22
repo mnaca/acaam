@@ -144,36 +144,33 @@ export default function HostHomeStep(props) {
   const [amenities, setAmenities] = useState({});
   const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
-
-  console.log(props.options);
-
+  
   useEffect(() => {
-    setHouse(props.options.house);
-    setCity(props.options.city);
-    setDistrict(props.options.district);
-    setGuests(props.options.guests);
-    setBathrooms(props.options.bathrooms);
-    setBedrooms(props.options.bedrooms);
-    setBedroomsOptions(props.options["bedrooms-options"]);
-    setPrice(props.options.price);
-    setAmenities(props.options.amenities);
-    setDescription(props.options.description);
-    setTitle(props.options.title);
-    let allPromises = [];
-    const storageRef = storage.ref();
-    console.log(props.options);
-    if (props.options.images) {
-      props.options.images.forEach((item) => {
-        const houseImagesRef = storageRef.child("house-images/" + item);
-        allPromises.push(houseImagesRef.getDownloadURL());
-      });
-      Promise.all(allPromises).then((docs) => {
-        console.log(docs);
-        setDefaultImages(docs);
-      });
-      console.log("pxk")
+    if (props.edit) {
+      setHouse(props.options.house);
+      setCity(props.options.city);
+      setDistrict(props.options.district);
+      setGuests(props.options.guests);
+      setBathrooms(props.options.bathrooms);
+      setBedrooms(props.options.bedrooms);
+      setBedroomsOptions(props.options["bedrooms-options"]);
+      setPrice(props.options.price);
+      setAmenities(props.options.amenities);
+      setDescription(props.options.description);
+      setTitle(props.options.title);
+      let allPromises = [];
+      const storageRef = storage.ref();
+      if (props.options.images) {
+        props.options.images.forEach((item) => {
+          const houseImagesRef = storageRef.child("house-images/" + item);
+          allPromises.push(houseImagesRef.getDownloadURL());
+        });
+        Promise.all(allPromises).then((docs) => {
+          setDefaultImages(docs);
+        });
+      }
     }
-  }, [props.options]);
+  }, [props.options, props.edit]);
 
   if (props.step === 1) {
     returnedJSX = (
