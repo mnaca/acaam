@@ -31,7 +31,7 @@ export default function Step2(props) {
           }}
         >
           <FormControl className={classes.formControl} required>
-            <InputLabel className={classes.inputLabel}>Select one</InputLabel>
+            <InputLabel className={classes.inputLabel}>Property Type</InputLabel>
             <Select
               className={classes.select}
               value={props.house}
@@ -45,7 +45,7 @@ export default function Step2(props) {
                 Vacatiom Rentals
               </MenuItem>
               <MenuItem className={classes.menuItem} value="sharedRooms">
-                Shared room
+                Shared Room
               </MenuItem>
             </Select>
             <FormHelperText className={classes.formHelperText}>
@@ -149,6 +149,7 @@ export default function Step2(props) {
                 if (props.term !== "daily") price /= 30;
                 if (props.currency === "AMD") price /= 483;
                 if (props.currency === "RUR") price /= 7.52;
+                price = Math.round(price);
                 props.setOption(["house", "price"], [props.house, price]);
               }}
             >

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import Banner from "./Banner";
 import styled from "styled-components";
@@ -46,8 +46,19 @@ const MainCmp = styled.div`
   min-height: 100vh;
 `;
 
+const DarkBackground = styled.div`
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+`;
+
 function Main() {
   const userInfo = useSelector((state) => state.userInfo);
+  const [searchOpened, setSearchOpened] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -104,62 +115,59 @@ function Main() {
     };
   }, [dispatch]);
   return (
-    <MainCmp>
-      <HeaderWrapper>
-        <Header />
-        <Profile />
-      </HeaderWrapper>
-      <Switch>
-        <Route exact path="/apartments">
-          <BannerWrapper
-            url={apartmentsBanner}
-          ></BannerWrapper>
-          <AllProposals type="apartments" />
-        </Route>
-        <Route path="/apartments/:homeId">
-          <Home type="apartments" />
-        </Route>
-        <Route exact path="/rentals">
-          <BannerWrapper
-            url={vacationRentalsBanner}
-          ></BannerWrapper>
-          <AllProposals type="rentals" />
-        </Route>
-        <Route path="/rentals/:homeId">
-          <Home type="vacationRentals" />
-        </Route>
-        <Route exact path="/rooms">
-          <BannerWrapper
-            url={sharedRoomsBanner}
-          ></BannerWrapper>
-          <AllProposals type="rooms" />
-        </Route>
-        <Route path="/rooms/:homeId">
-          <Home type="sharedRooms" />
-        </Route>
-        <Route path="/host/:edit/:homeType?/:homeId?">
-          {auth.currentUser ? <HostHome /> : <Redirect to="/" />}
-        </Route>
-        <Route path="/login">
-          {!auth.currentUser ? <Login /> : <Redirect to="/" />}
-        </Route>
-        <Route path="/register">
-          {!auth.currentUser ? <Register /> : <Redirect to="/" />}
-        </Route>
-        <Route path="/profile/:userId">
-          <ProfilePage id={userInfo ? userInfo.id : null} />
-        </Route>
-        <Route exact path="/">
-          <BannerWrapper>
-            <Banner />
-          </BannerWrapper>
-          <Categories />
-        </Route>
-        <Redirect to="/" />
-      </Switch>
-      <div style={{ height: "5vw" }}></div>
-      <Footer />
-    </MainCmp>
+    <>
+      {searchOpened ? <DarkBackground></DarkBackground> : null}
+      <MainCmp>
+        <HeaderWrapper>
+          <Header />
+          <Profile searchOpened={searchOpened} setSearchOpened={setSearchOpened} />
+        </HeaderWrapper>
+        <Switch>
+          <Route exact path="/apartments">
+            <BannerWrapper url={apartmentsBanner}></BannerWrapper>
+            <AllProposals type="apartments" />
+          </Route>
+          <Route path="/apartments/:homeId">
+            <Home type="apartments" />
+          </Route>
+          <Route exact path="/rentals">
+            <BannerWrapper url={vacationRentalsBanner}></BannerWrapper>
+            <AllProposals type="rentals" />
+          </Route>
+          <Route path="/rentals/:homeId">
+            <Home type="vacationRentals" />
+          </Route>
+          <Route exact path="/rooms">
+            <BannerWrapper url={sharedRoomsBanner}></BannerWrapper>
+            <AllProposals type="rooms" />
+          </Route>
+          <Route path="/rooms/:homeId">
+            <Home type="sharedRooms" />
+          </Route>
+          <Route path="/host/:edit/:homeType?/:homeId?">
+            {auth.currentUser ? <HostHome /> : <Redirect to="/" />}
+          </Route>
+          <Route path="/login">
+            {!auth.currentUser ? <Login /> : <Redirect to="/" />}
+          </Route>
+          <Route path="/register">
+            {!auth.currentUser ? <Register /> : <Redirect to="/" />}
+          </Route>
+          <Route path="/profile/:userId">
+            <ProfilePage id={userInfo ? userInfo.id : null} />
+          </Route>
+          <Route exact path="/">
+            <BannerWrapper>
+              <Banner />
+            </BannerWrapper>
+            <Categories />
+          </Route>
+          <Redirect to="/" />
+        </Switch>
+        <div style={{ height: "5vw" }}></div>
+        <Footer />
+      </MainCmp>
+    </>
   );
 }
 

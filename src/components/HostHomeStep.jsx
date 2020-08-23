@@ -54,7 +54,8 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   dropDownMenu: {
-    maxHeight: "35vw",
+    maxHeight: "10vw",
+    height: "10vw"
   },
   textField: {
     "& input": {

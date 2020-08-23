@@ -1,11 +1,71 @@
 * {
   padding: 0;
   margin: 0;
-  
 }
 
 .MuiInputLabel-shrink {
   font-size: 0.9vw;
+}
+
+.MuiSelect-icon {
+  font-size: 3vw !important;
+  top: inherit !important;
+}
+
+label + .MuiInput-formControl {
+  margin-top: 0.6vw !important;
+}
+
+.MuiInputBase-input {
+  padding: 1vw 0 1.1vw !important;
+}
+
+.MuiInput-underline:before {
+  border-bottom: 0.052vw solid rgba(0, 0, 0, 0.42) !important;
+}
+
+.makeStyles-select-9 ul {
+  max-height: 20vw !important;
+}
+
+.makeStyles-formControl-2 {
+  margin: 0.5vw !important;
+}
+
+.MuiSelect-select.MuiSelect-select {
+  color: #364f6b !important;
+  font-size: 1vw !important;
+}
+
+
+.MuiSlider-root {
+  padding: 0.67vw !important;
+  color: #364f6b !important;
+  box-sizing: border-box !important;
+}
+
+.MuiSlider-thumb {
+  width: 0.85vw !important;
+  height: 0.85vw !important;
+  margin: 0 !important;
+  margin-top: -0.4vw !important;
+}
+
+.MuiSlider-thumb:hover {
+  box-shadow: 0px 0px 0px 0.4vw rgba(63, 81, 181, 0.16) !important;
+}
+
+.MuiSlider-thumb:active {
+  box-shadow: 0px 0px 0px 0.7vw rgba(63, 81, 181, 0.16) !important;
+}
+
+.MuiSlider-track {
+  height: 0.104vw !important;
+}
+
+.MuiSlider-rail {
+  left: 0 !important;
+  height: 0.104vw !important;
 }
 
 .menu {

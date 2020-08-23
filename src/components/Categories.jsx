@@ -10,7 +10,7 @@ const CategoriesCmp = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 2.083vw;
-  padding: 0 2.604vw 6.25vw 2.604vw;
+  padding: 0 2.604vw 3.25vw 2.604vw;
   font-size: 0.9vw;
 `;
 

@@ -13,7 +13,6 @@ const ProfileWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  position: relative;
 `;
 
 const ProfileMenu = styled.div`
@@ -67,7 +66,7 @@ function Profile(props) {
 
   return (
     <ProfileWrapper>
-      <Search />
+      <Search searchOpened={props.searchOpened} setSearchOpened={props.setSearchOpened} />
       <Language />
       <ProfileMenu onClick={onHandleMenu}>
         <StyledMenuIcon style={{ width: "1.5625vw", height: "2.31vw" }} />
