@@ -36,7 +36,7 @@ const SearchLogo = styled.div`
 const SearchForm = styled.div`
   position: absolute;
   box-sizing: border-box;
-  padding: 0.6vw;
+  padding: 1.5vw 0.6vw 0.6vw 0.6vw;
   width: 50vw;
   z-index: 2;
   top: 7vw;
@@ -46,6 +46,9 @@ const SearchForm = styled.div`
 `;
 
 const StyledCloseIcon = styled(CloseIcon)`
+  position: absolute;
+  right: 0vw;
+  top: 0vw;
   cursor: pointer;
   display: block !important;
   margin-left: auto;
