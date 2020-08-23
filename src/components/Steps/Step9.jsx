@@ -75,25 +75,29 @@ export default function Step9(props) {
                   ...prevOptions.images,
                 ];
                 options.id = id;
-                db.collection("users")
-                  .doc(userInfo.id)
-                  .collection(props.prevHouse)
-                  .doc(id)
-                  .delete()
-                  .then(() => {
-                    console.log("Deleted");
-                    db.collection("offers")
-                      .doc(props.prevHouse)
-                      .collection("homes")
-                      .doc(id)
-                      .delete()
-                      .then(() => {
-                        console.log("Success");
-                        console.log(homes);
-                        const prevHouse = homes.find((item) => item.id === options.id);
-                        dispatch(createDeleteHome(prevHouse));
-                      });
-                  });
+                if (props.edit) {
+                  db.collection("users")
+                    .doc(userInfo.id)
+                    .collection(props.prevHouse)
+                    .doc(id)
+                    .delete()
+                    .then(() => {
+                      console.log("Deleted");
+                      db.collection("offers")
+                        .doc(props.prevHouse)
+                        .collection("homes")
+                        .doc(id)
+                        .delete()
+                        .then(() => {
+                          console.log("Success");
+                          console.log(homes);
+                          const prevHouse = homes.find(
+                            (item) => item.id === options.id
+                          );
+                          dispatch(createDeleteHome(prevHouse));
+                        });
+                    });
+                }
                 db.collection("users")
                   .doc(userInfo.id)
                   .collection(props.house)

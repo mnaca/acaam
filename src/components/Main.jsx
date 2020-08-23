@@ -138,8 +138,7 @@ function Main() {
           <Home type="sharedRooms" />
         </Route>
         <Route path="/host/:edit/:homeType?/:homeId?">
-          {/* {auth.currentUser ? <HostHome /> : <Redirect to="/" />} */}
-          <HostHome />
+          {auth.currentUser ? <HostHome /> : <Redirect to="/" />}
         </Route>
         <Route path="/login">
           {!auth.currentUser ? <Login /> : <Redirect to="/" />}

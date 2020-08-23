@@ -282,7 +282,8 @@ export default function HostHomeStep(props) {
         prevOptions={props.prevOptions}
         defaultImages={defaultImages}
         house={house}
-        prevHouse={props.prevOptions.house}
+        edit={props.edit}
+        prevHouse={props.prevOptions ? props.prevOptions.house : null}
       />
     );
   }

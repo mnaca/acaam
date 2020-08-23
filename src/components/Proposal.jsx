@@ -10,7 +10,6 @@ const ProposalCmp = styled.div`
   position: relative;
   display: flex;
   padding: 0.52vw 1.04vw;
-  box-shadow: 0vw 0vw 0.52vw 0.052vw rgba(93, 120, 148, 1);
   cursor: pointer;
   color: #364f6b;
   border-radius: 0.2604vw;
@@ -43,6 +42,20 @@ const ImageWrapper = styled.div`
   height: 16vw;
 `;
 
+const StyledLink = styled(Link)`
+  position: relative;
+  top: 0;
+  display: block;
+  margin-bottom: 1.5vw;
+  transition: 0.2s top;
+  text-decoration: none;
+  box-shadow: 0vw 0vw 0.52vw 0.052vw rgba(93, 120, 148, 1);
+  &:hover {
+    top: -0.5vw;
+    box-shadow: 0vw 0vw 1.5vw 0.104vw rgba(93, 120, 148, 1);
+  }
+`;
+
 function jsUcfirst(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
@@ -55,7 +68,7 @@ export default function Proposal(props) {
   houseImagesRef.getDownloadURL().then((url) => setMainImage(url));
 
   return (
-    <Link to={`/${props.type}/${home.id}`} style={{textDecoration: "none"}}>
+    <StyledLink to={`/${props.type}/${home.id}`}>
       <ProposalCmp>
         <ImageWrapper>
           <StyledImg src={mainImage} alt="Picture" />
@@ -83,6 +96,6 @@ export default function Proposal(props) {
         </div>
         <Price>{home.price}$</Price>
       </ProposalCmp>
-    </Link>
+    </StyledLink>
   );
 }
