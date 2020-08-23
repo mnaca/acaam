@@ -28,6 +28,7 @@ const StyledLink = styled(Link)`
   margin-right: ${(props) => (props.marginright ? props.marginright : "2.604vw")};
   &:hover {
     top: -1vw;
+    box-shadow: 0vw 0vw 1.5vw 0.104vw rgba(93, 120, 148, 1);
   }
 `;
 
