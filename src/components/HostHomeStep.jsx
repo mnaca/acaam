@@ -140,28 +140,28 @@ export default function HostHomeStep(props) {
   const [term, setTerm] = useState("daily");
   const [images, setImages] = useState([]);
   const [defaultImages, setDefaultImages] = useState([]);
-  const [hidden, setHidden] = useState([]);
+  const [hidden, setHidden] = useState([[], []]);
   const [amenities, setAmenities] = useState({});
   const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
-  
+
   useEffect(() => {
-    if (props.edit) {
-      setHouse(props.options.house);
-      setCity(props.options.city);
-      setDistrict(props.options.district);
-      setGuests(props.options.guests);
-      setBathrooms(props.options.bathrooms);
-      setBedrooms(props.options.bedrooms);
-      setBedroomsOptions(props.options["bedrooms-options"]);
-      setPrice(props.options.price);
-      setAmenities(props.options.amenities);
-      setDescription(props.options.description);
-      setTitle(props.options.title);
+    if (props.edit && props.prevOptions) {
+      setHouse(props.prevOptions.house);
+      setCity(props.prevOptions.city);
+      setDistrict(props.prevOptions.district);
+      setGuests(props.prevOptions.guests);
+      setBathrooms(props.prevOptions.bathrooms);
+      setBedrooms(props.prevOptions.bedrooms);
+      setBedroomsOptions(props.prevOptions["bedrooms-options"]);
+      setPrice(props.prevOptions.price);
+      setAmenities(props.prevOptions.amenities);
+      setDescription(props.prevOptions.description);
+      setTitle(props.prevOptions.title);
       let allPromises = [];
       const storageRef = storage.ref();
-      if (props.options.images) {
-        props.options.images.forEach((item) => {
+      if (props.prevOptions.images) {
+        props.prevOptions.images.forEach((item) => {
           const houseImagesRef = storageRef.child("house-images/" + item);
           allPromises.push(houseImagesRef.getDownloadURL());
         });
@@ -170,7 +170,7 @@ export default function HostHomeStep(props) {
         });
       }
     }
-  }, [props.options, props.edit]);
+  }, [props.prevOptions, props.edit]);
 
   if (props.step === 1) {
     returnedJSX = (
@@ -256,6 +256,7 @@ export default function HostHomeStep(props) {
         images={images}
         setImages={setImages}
         defaultImages={defaultImages}
+        setDefaultImages={setDefaultImages}
         hidden={hidden}
         setHidden={setHidden}
       />
@@ -278,7 +279,10 @@ export default function HostHomeStep(props) {
         step={props.step}
         setStep={props.setStep}
         options={props.options}
+        prevOptions={props.prevOptions}
+        defaultImages={defaultImages}
         house={house}
+        prevHouse={props.prevOptions.house}
       />
     );
   }

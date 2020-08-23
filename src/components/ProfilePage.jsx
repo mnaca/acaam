@@ -286,124 +286,137 @@ export default function ProfilePage(props) {
             {apartments.map((home, index, array) => (
               <OffersItem>
                 <Proposal home={home} key={home.id} type="apartments" />
-                <Link to={`/host/edit/apartments/${home.id}`}>
-                  <EditButton variant="outlined" color="primary">
-                    EDIT
-                  </EditButton>
-                </Link>
-                <DeleteButton
-                  onClick={() => {
-                    db.collection("offers")
-                      .doc("apartments")
-                      .collection("homes")
-                      .doc(home.id)
-                      .delete()
-                      .then(() => {
-                        console.log("pxk");
-                        db.collection("users")
-                          .doc(user.id)
-                          .collection("apartments")
+                {myPage ? (
+                  <>
+                    <Link to={`/host/edit/apartments/${home.id}`}>
+                      <EditButton variant="outlined" color="primary">
+                        EDIT
+                      </EditButton>
+                    </Link>
+                    <DeleteButton
+                      onClick={() => {
+                        db.collection("offers")
+                          .doc("apartments")
+                          .collection("homes")
                           .doc(home.id)
                           .delete()
                           .then(() => {
                             console.log("pxk");
-                            array.splice(index);
-                            setApartments([...array]);
-                            dispatch(
-                              createLoadAllHomes(
-                                apartments,
-                                vacationRentals,
-                                sharedRooms
-                              )
-                            );
+                            db.collection("users")
+                              .doc(user.id)
+                              .collection("apartments")
+                              .doc(home.id)
+                              .delete()
+                              .then(() => {
+                                console.log("pxk");
+                                array.splice(index, 1);
+                                setApartments([...array]);
+                                dispatch(
+                                  createLoadAllHomes(
+                                    apartments,
+                                    vacationRentals,
+                                    sharedRooms
+                                  )
+                                );
+                              });
                           });
-                      });
-                  }}
-                >
-                  Delete
-                </DeleteButton>
+                      }}
+                    >
+                      Delete
+                    </DeleteButton>
+                  </>
+                ) : null}
               </OffersItem>
             ))}
             {vacationRentals.map((home, index, array) => (
               <OffersItem>
                 <Proposal home={home} key={home.id} type="rentals" />
-                <Link to={`/host/edit/rentals/${home.id}`}>
-                  <EditButton variant="outlined" color="primary">
-                    EDIT
-                  </EditButton>
-                </Link>
-                <DeleteButton
-                  onClick={() => {
-                    db.collection("offers")
-                      .doc("vacationRentals")
-                      .collection("homes")
-                      .doc(home.id)
-                      .delete()
-                      .then(() => {
-                        console.log("pxk");
-                        db.collection("users")
-                          .doc(user.id)
-                          .collection("vacationRentals")
+                {myPage ? (
+                  <>
+                    {" "}
+                    <Link to={`/host/edit/rentals/${home.id}`}>
+                      <EditButton variant="outlined" color="primary">
+                        EDIT
+                      </EditButton>
+                    </Link>
+                    <DeleteButton
+                      onClick={() => {
+                        db.collection("offers")
+                          .doc("vacationRentals")
+                          .collection("homes")
                           .doc(home.id)
                           .delete()
                           .then(() => {
                             console.log("pxk");
-                            array.splice(index);
-                            setVacationRentals([...array]);
-                            dispatch(
-                              createLoadAllHomes(
-                                apartments,
-                                vacationRentals,
-                                sharedRooms
-                              )
-                            );
+                            db.collection("users")
+                              .doc(user.id)
+                              .collection("vacationRentals")
+                              .doc(home.id)
+                              .delete()
+                              .then(() => {
+                                console.log("pxk");
+                                array.splice(index, 1);
+                                setVacationRentals([...array]);
+                                dispatch(
+                                  createLoadAllHomes(
+                                    apartments,
+                                    vacationRentals,
+                                    sharedRooms
+                                  )
+                                );
+                              });
                           });
-                      });
-                  }}
-                >
-                  Delete
-                </DeleteButton>
+                      }}
+                    >
+                      Delete
+                    </DeleteButton>
+                  </>
+                ) : null}
               </OffersItem>
             ))}
             {sharedRooms.map((home, index, array) => (
               <OffersItem>
                 <Proposal home={home} key={home.id} type="rooms" />
-                <Link to={`/host/edit/rooms/${home.id}`}>
-                  <EditButton variant="outlined" color="primary">
-                    EDIT
-                  </EditButton>
-                </Link>
-                <DeleteButton
-                  onClick={() => {
-                    db.collection("offers")
-                      .doc("sharedRooms")
-                      .collection("homes")
-                      .doc(home.id)
-                      .delete()
-                      .then(() => {
-                        console.log("pxk");
-                        db.collection("users")
-                          .doc(user.id)
-                          .collection("sharedRooms")
+                {myPage ? (
+                  <>
+                    <Link to={`/host/edit/rooms/${home.id}`}>
+                      <EditButton variant="outlined" color="primary">
+                        EDIT
+                      </EditButton>
+                    </Link>
+                    <DeleteButton
+                      onClick={() => {
+                        db.collection("offers")
+                          .doc("sharedRooms")
+                          .collection("homes")
                           .doc(home.id)
                           .delete()
                           .then(() => {
                             console.log("pxk");
-                            array.splice(index);
-                            setSharedRooms([...array]);
-                            dispatch(
-                              createLoadAllHomes(
-                                apartments,
-                                vacationRentals,
-                                sharedRooms
-                              )
-                            );
+                            db.collection("users")
+                              .doc(user.id)
+                              .collection("sharedRooms")
+                              .doc(home.id)
+                              .delete()
+                              .then(() => {
+                                console.log("pxk");
+                                array.splice(index, 1);
+                                setSharedRooms([...array]);
+                                dispatch(
+                                  createLoadAllHomes(
+                                    apartments,
+                                    vacationRentals,
+                                    sharedRooms
+                                  )
+                                );
+                              });
                           });
-                      });
-                  }}
-                >
-                  Delete
-                </DeleteButton>
+                      }}
+                    >
+                      Delete
+                    </DeleteButton>
+                  </>
+                ) : null}
               </OffersItem>
             ))}
           </Offers>

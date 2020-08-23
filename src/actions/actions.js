@@ -4,6 +4,7 @@ export const TOGGLE_LANGUAGE_HIDDEN_MENU = "TOGGLE_LANGUAGE_HIDDEN_MENU";
 export const SET_USER = "SET_USER";
 export const HOST_HOME = "HOST_HOME";
 export const LOAD_ALL_HOMES = "LOAD_ALL_HOMES";
+export const DELETE_HOME = "DELETE_HOME";
 
 export const createCloseAllMenu = () => {
   return {
@@ -67,5 +68,12 @@ export const createHostHome = (home) => {
     type: HOST_HOME,
     home
   }
-} 
+}
+
+export const createDeleteHome = (home) => {
+  return {
+    type: DELETE_HOME,
+    home
+  }
+}
 

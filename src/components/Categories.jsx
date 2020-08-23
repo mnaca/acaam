@@ -15,6 +15,8 @@ const CategoriesCmp = styled.div`
 `;
 
 const StyledLink = styled(Link)`
+  position: relative;
+  transition: 0.25s top;
   display: block;
   cursor: pointer;
   color: #364f6b;
@@ -22,7 +24,11 @@ const StyledLink = styled(Link)`
   border-radius: 0.2604vw;
   box-shadow: 0vw 0vw 0.52vw 0.052vw rgba(93, 120, 148, 1);
   flex: 1;
+  top: 0;
   margin-right: ${(props) => (props.marginright ? props.marginright : "2.604vw")};
+  &:hover {
+    top: -1vw;
+  }
 `;
 
 export default function Categories(props) {

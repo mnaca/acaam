@@ -54,7 +54,8 @@ export default function HostHome(props) {
       <HostHomeStep
         step={step}
         edit={edit}
-        options={home ? home : options}
+        options={options}
+        prevOptions={home ? home : null}
         setOption={setOption}
         setStep={setStep}
       />

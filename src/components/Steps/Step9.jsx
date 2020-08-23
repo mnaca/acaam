@@ -8,7 +8,7 @@ import {
 } from "../HostHomeStep";
 import finish from "../../images/finish-removebg-preview.png";
 import { useDispatch, useSelector } from "react-redux";
-import { createHostHome } from "../../actions/actions";
+import { createHostHome, createDeleteHome } from "../../actions/actions";
 import { db } from "../../firebase";
 import uniqid from "uniqid";
 import { Redirect } from "react-router";
@@ -18,6 +18,8 @@ export default function Step9(props) {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.userInfo);
   const [done, setDone] = useState(false);
+  const homes = useSelector((state) => state[props.prevHouse]);
+  console.log(props.options);
 
   return (
     <HostHomeStepCmp>
@@ -57,22 +59,53 @@ export default function Step9(props) {
               className={classes.button}
               onClick={() => {
                 const options = { ...props.options };
-                const id = uniqid();
+                const prevOptions = props.prevOptions
+                  ? { ...props.prevOptions }
+                  : {};
+                prevOptions.images = props.defaultImages.map((item) =>
+                  item.slice(
+                    item.indexOf("%2F") + 3,
+                    item.indexOf("?alt", item.indexOf("%2F") + 3)
+                  )
+                );
+                const id = prevOptions.id ? prevOptions.id : uniqid();
                 options.owner = userInfo;
-                options.images = options.images.map((item) => item.name);
+                options.images = [
+                  ...options.images.map((item) => item.name),
+                  ...prevOptions.images,
+                ];
                 options.id = id;
+                db.collection("users")
+                  .doc(userInfo.id)
+                  .collection(props.prevHouse)
+                  .doc(id)
+                  .delete()
+                  .then(() => {
+                    console.log("Deleted");
+                    db.collection("offers")
+                      .doc(props.prevHouse)
+                      .collection("homes")
+                      .doc(id)
+                      .delete()
+                      .then(() => {
+                        console.log("Success");
+                        console.log(homes);
+                        const prevHouse = homes.find((item) => item.id === options.id);
+                        dispatch(createDeleteHome(prevHouse));
+                      });
+                  });
                 db.collection("users")
                   .doc(userInfo.id)
                   .collection(props.house)
                   .doc(id)
-                  .set({ id, ...options })
+                  .set({ id, ...prevOptions, ...options })
                   .then(() => {
                     console.log("Success");
                     db.collection("offers")
                       .doc(props.house)
                       .collection("homes")
                       .doc(id)
-                      .set({ ...options })
+                      .set({ id, ...prevOptions, ...options })
                       .then(() => {
                         console.log("Success");
                         dispatch(createHostHome(options));

@@ -1,4 +1,4 @@
-import { TOGGLE_PROFILE_HIDDEN_MENU, TOGGLE_LANGUAGE_HIDDEN_MENU, CLOSE_ALL_MENU, SET_USER, HOST_HOME, LOAD_ALL_HOMES } from '../actions/actions';
+import { TOGGLE_PROFILE_HIDDEN_MENU, TOGGLE_LANGUAGE_HIDDEN_MENU, CLOSE_ALL_MENU, SET_USER, HOST_HOME, LOAD_ALL_HOMES, DELETE_HOME } from '../actions/actions';
 
 const initialState = {
   languageHiddenMenuOpened: false,
@@ -40,6 +40,11 @@ export default function reducer(state = initialState, action) {
       }
     case HOST_HOME:
       state[action.home.house].push(action.home)
+      return {
+        ...state
+      }
+    case DELETE_HOME:
+      state[action.home.house].splice(state[action.home.house].indexOf(state[action.home]), 1);
       return {
         ...state
       }

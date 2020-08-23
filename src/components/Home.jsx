@@ -34,7 +34,6 @@ const HomeImagesWrapper = styled.div`
 const HomeInfo = styled.div`
   padding: 0.8vw;
   overflow-wrap: break-word;
-  max-width: 75vw;
   color: #364f6b;
   font-size: 1.5vw;
 `;
@@ -80,11 +79,11 @@ const AmenitiesInfo = styled.div`
 `;
 
 const MainPicture = styled.img`
-  width: 75vw;
+  width: 100%;
   height: 40vw;
+  box-sizing: border-box;
   border-radius: 0.2604vw;
   object-fit: cover;
-  border-radius: 0.2604vw;
   box-shadow: 0vw 0vw 0.52vw 0.052vw rgba(93, 120, 148, 1);
   padding: 0.5vw;
   margin-bottom: 0.52vw;

@@ -15,6 +15,39 @@ import {
 
 export default function Step1(props) {
   const classes = useStyles();
+  const districts = {
+    yerevan: [
+      "arabkir",
+      "HAT",
+      "shengavit",
+      "ajapnyak",
+      "davtashen",
+      "kentron",
+      "erebuni",
+      "qanaqer-Zeytun",
+      "avan",
+      "nor Norq",
+      "jrvej",
+    ],
+    shirak: ["gyumri", "artik", "maralik"],
+    lori: ["alaverdi", "vanadzor", "tashir", "stepanavan", "spitak"],
+    tavush: ["dilijan", "ijevan", "noyemberyan", "berd", "ayrum"],
+    aragatsotn: ["ashtarak", "aparan", "talin"],
+    kotayq: [
+      "abovyan",
+      "charencavan",
+      "hrazdan",
+      "tsaxkadzor",
+      "byurexavan",
+      "exvard",
+      "nor Hachn"
+    ],
+    gexarquniq: ["gavar", "sevan", "chambarak", "martuni", "vardenis"],
+    armavir: ["armavir", "vaxarshapat", "metsamor"],
+    ararat: ["masis", "artashat", "ararat", "vedi"],
+    "vayoc Dzor": ["exegnadzor", "vayq", "jermuk"],
+    syuniq: ["kapan", "mexri", "goris", "qajaran", "sisian", "agarak"]
+  };
 
   return (
     <HostHomeStepCmp>
@@ -37,12 +70,35 @@ export default function Step1(props) {
             <Select
               className={classes.select}
               value={props.city}
-              onChange={(e) => props.setCity(e.target.value)}
+              onChange={(e) => {
+                props.setCity(e.target.value);
+                props.setDistrict(districts[e.target.value][0]);
+              }}
               MenuProps={{ classes: { paper: classes.select } }}
             >
-              <MenuItem className={classes.menuItem} value="yerevan">
-                Yerevan
-              </MenuItem>
+              {[
+                "yerevan",
+                "shirak",
+                "lori",
+                "tavush",
+                "aragatsotn",
+                "kotayq",
+                "gexarquniq",
+                "armavir",
+                "ararat",
+                "vayoc Dzor",
+                "syuniq",
+              ].map((city) => {
+                return (
+                  <MenuItem
+                    className={classes.menuItem}
+                    value={city}
+                    key={city}
+                  >
+                    {city.slice(0, 1).toUpperCase() + city.slice(1)}
+                  </MenuItem>
+                );
+              })}
             </Select>
             <FormHelperText className={classes.formHelperText}>
               Required
@@ -56,18 +112,17 @@ export default function Step1(props) {
               onChange={(e) => props.setDistrict(e.target.value)}
               MenuProps={{ classes: { paper: classes.select } }}
             >
-              <MenuItem className={classes.menuItem} value="arabkir">
-                Arabkir
-              </MenuItem>
-              <MenuItem className={classes.menuItem} value="bangladesh">
-                Bangladesh
-              </MenuItem>
-              <MenuItem className={classes.menuItem} value="shengavit">
-                Shengavit
-              </MenuItem>
-              <MenuItem className={classes.menuItem} value="ajapnyak">
-                Ajapnyak
-              </MenuItem>
+              {districts[props.city].map((district) => {
+                return (
+                  <MenuItem
+                    className={classes.menuItem}
+                    value={district}
+                    key={district}
+                  >
+                    {district.slice(0, 1).toUpperCase() + district.slice(1)}
+                  </MenuItem>
+                );
+              })}
             </Select>
             <FormHelperText className={classes.formHelperText}>
               Required
