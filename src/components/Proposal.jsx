@@ -13,7 +13,6 @@ const ProposalCmp = styled.div`
   cursor: pointer;
   color: #364f6b;
   border-radius: 0.2604vw;
-  margin-top: 0.78125vw;
 `;
 
 const StyledImg = styled.img`
@@ -38,7 +37,7 @@ const Amenities = styled.li`
 `;
 
 const ImageWrapper = styled.div`
-  width: 30%;
+  width: 45%;
   height: 16vw;
 `;
 
@@ -46,14 +45,23 @@ const StyledLink = styled(Link)`
   position: relative;
   top: 0;
   display: block;
-  margin-bottom: 1.5vw;
+  margin-bottom: ${(props) => (props.profile ? "1.5vw" : null)};
   transition: 0.2s top;
   text-decoration: none;
   box-shadow: 0vw 0vw 0.52vw 0.052vw rgba(93, 120, 148, 1);
   &:hover {
-    top: -0.5vw;
-    box-shadow: 0vw 0vw 1.5vw 0.104vw rgba(93, 120, 148, 1);
+    top: ${(props) => (!props.profile ? "-0.5vw" : null)};
+    box-shadow: ${(props) =>
+      !props.profile ? "0vw 0vw 1.5vw 0.104vw rgba(93, 120, 148, 1)" : null};
   }
+`;
+
+const AmenitiesWrap = styled.ul`
+  list-style-type: none;
+  margin-top: 0.42vw;
+  display: grid;
+  grid-column-gap: 1vw;
+  grid-template-columns: 1fr 1fr;
 `;
 
 function jsUcfirst(string) {
@@ -68,7 +76,10 @@ export default function Proposal(props) {
   houseImagesRef.getDownloadURL().then((url) => setMainImage(url));
 
   return (
-    <StyledLink to={`/${props.type}/${home.id}`}>
+    <StyledLink
+      profile={props.profile ? props.profile : null}
+      to={`/${props.type}/${home.id}`}
+    >
       <ProposalCmp>
         <ImageWrapper>
           <StyledImg src={mainImage} alt="Picture" />
@@ -77,24 +88,21 @@ export default function Proposal(props) {
           <h4 style={{ marginBottom: "0.52vw", fontSize: "1vw" }}>
             {jsUcfirst(home.city)}, {jsUcfirst(home.district)}
           </h4>
-          <p style={{ marginBottom: "0.26vw", fontSize: "1vw" }}>{home.title}</p>
-          <ul
-            style={{
-              listStyleType: "none",
-              marginTop: "0.42vw",
-              display: "grid",
-              gridColumnGap: "0.26vw",
-              gridTemplateColumns: "1fr 1fr",
-            }}
-          >
+          <p style={{ marginBottom: "0.26vw", fontSize: "1vw" }}>
+            {home.title}
+          </p>
+          <AmenitiesWrap>
             {Object.entries(home.amenities).map((option) => (
-              <Amenities>
-                <CheckIcon style={{ marginRight: "0.2604vw", fontSize: "1.2vw"}} />{option[0]}
+              <Amenities key={option[0]}>
+                <CheckIcon
+                  style={{ marginRight: "0.2604vw", fontSize: "1.2vw" }}
+                />
+                {option[0]}
               </Amenities>
             ))}
-          </ul>
+          </AmenitiesWrap>
         </div>
-        <Price>{home.price}$</Price>
+        <Price>{home.price}$ / Per night</Price>
       </ProposalCmp>
     </StyledLink>
   );

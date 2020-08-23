@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { connect, useSelector } from "react-redux";
 import Proposal from "./Proposal";
 import styled from "styled-components";
+import Pagination from "./Pagination";
 
 const AllProposalsCmp = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 0 5vw 8vw 5vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1.5vw;
+  padding: 0 2.5vw 0 2.5vw;
   margin-top: 2.604vw;
 `;
 
@@ -17,21 +19,28 @@ function AllProposals(props) {
   const [page, setPage] = useState(1);
   const [startIndex, setStartIndex] = useState(0);
   const [endIndex, setEndIndex] = useState(9);
+  const homesArray =
+    props.type === "apartments"
+      ? apartments
+      : props.type === "rentals"
+      ? vacationRentals
+      : sharedRooms;
 
   return (
-    <AllProposalsCmp>
-      {props.type === "apartments"
-        ? apartments.map((home, index) => {
-            return <Proposal home={home} key={home.price} type={props.type} />;
-          })
-        : props.type === "rentals"
-        ? vacationRentals.map((home) => {
-            return <Proposal home={home} key={home.price} type={props.type} />;
-          })
-        : sharedRooms.map((home) => {
-            return <Proposal home={home} key={home.price} type={props.type} />;
-          })}
-    </AllProposalsCmp>
+    <div>
+      <AllProposalsCmp>
+        {homesArray.slice(startIndex, endIndex + 1).map((home) => {
+          return <Proposal home={home} key={home.price} type={props.type} />;
+        })}
+      </AllProposalsCmp>
+      <Pagination
+        pagesCount={Math.ceil(apartments.length / 10)}
+        page={page}
+        setPage={setPage}
+        setStartIndex={setStartIndex}
+        setEndIndex={setEndIndex}
+      />
+    </div>
   );
 }
 

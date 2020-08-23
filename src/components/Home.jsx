@@ -97,6 +97,7 @@ const Owner = styled.img`
 const OwnerInfo = styled.div`
   display: flex;
   align-items: center;
+  margin-top: 0.5vw;
 `;
 
 export default function Home(props) {
@@ -121,7 +122,7 @@ export default function Home(props) {
             const houseImagesRef = storageRef.child("house-images/" + item);
             allPromises.push(houseImagesRef.getDownloadURL());
           });
-          Promise.all(allPromises).then(docs => setHouseImages(docs))
+          Promise.all(allPromises).then((docs) => setHouseImages(docs));
           const profileImagesRef = storageRef.child(
             "profile-images/" + home.owner.profileImage
           );
@@ -178,17 +179,17 @@ export default function Home(props) {
           </HomeInfo>
         </AptInfo>
         <HomeInfo>
-          <b style={{ fontSize: "2vw" }}>${home ? home.price : null}</b>/ Per
-          night
+          <div>
+            <b style={{ fontSize: "2vw" }}>
+              ${home ? home.price : null}
+            </b>
+            <span> / Per night</span>
+          </div>
           <OwnerInfo>
             Owner
             {home ? (
               <Link to={`/profile/${home.owner.id}`}>
-                <Owner
-                  src={ownerImages}
-                  alt=""
-                  key={home.owner.id}
-                />
+                <Owner src={ownerImages} alt="" key={home.owner.id} />
               </Link>
             ) : null}
           </OwnerInfo>

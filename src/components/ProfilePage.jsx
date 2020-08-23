@@ -69,7 +69,7 @@ const Info = styled.div`
 
 const Offers = styled.div`
   width: 70vw;
-  margin: 0 auto;
+  margin: 2vw auto 0 auto;
 `;
 
 const OffersItem = styled.div`
@@ -146,8 +146,6 @@ export default function ProfilePage(props) {
     });
   }, [userId, userInfo]);
 
-  console.log(apartments, vacationRentals, sharedRooms);
-
   return (
     <>
       {user ? (
@@ -216,12 +214,19 @@ export default function ProfilePage(props) {
               {editModeDescription && myPage ? (
                 <StyledTextArea
                   value={selfDescription}
-                  onChange={(e) => setSelfDescription(e.target.value)}
+                  onChange={(e) => {
+                    setSelfDescription(e.target.value);
+                  }}
                   placeholder="Say something about you ..."
+                  maxLength={800}
                 ></StyledTextArea>
               ) : (
                 <p
-                  style={{ margin: "1.042vw 0" }}
+                  style={{
+                    margin: "1.042vw 0",
+                    width: "34.2vw",
+                    overflowWrap: "break-word",
+                  }}
                   onClick={() => setEditModeDescription(true)}
                 >
                   {selfDescription || "No information"}
@@ -239,16 +244,21 @@ export default function ProfilePage(props) {
                     }}
                     onClick={() => {
                       if (userInfo.selfDescription !== selfDescription) {
-                        setEditModeDescription(false);
-                        dispatch(
-                          createSetUser({
-                            ...userInfo,
+                        db.collection("users")
+                          .doc(userId)
+                          .update({
                             selfDescription,
                           })
-                        );
-                        db.collection("users").doc(userId).update({
-                          selfDescription,
-                        });
+                          .then(() => {
+                            setEditModeDescription(false);
+                            dispatch(
+                              createSetUser({
+                                ...userInfo,
+                                selfDescription,
+                              })
+                            );
+                            setSelfDescription(selfDescription);
+                          });
                       }
                     }}
                   >
@@ -284,8 +294,8 @@ export default function ProfilePage(props) {
           </ProfilePageCmp>
           <Offers>
             {apartments.map((home, index, array) => (
-              <OffersItem>
-                <Proposal home={home} key={home.id} type="apartments" />
+              <OffersItem key={home.id}>
+                <Proposal profile={"profile"} home={home} type="apartments" />
                 {myPage ? (
                   <>
                     <Link to={`/host/edit/apartments/${home.id}`}>
@@ -329,8 +339,8 @@ export default function ProfilePage(props) {
               </OffersItem>
             ))}
             {vacationRentals.map((home, index, array) => (
-              <OffersItem>
-                <Proposal home={home} key={home.id} type="rentals" />
+              <OffersItem key={home.id}>
+                <Proposal profile={"profile"} home={home} type="rentals" />
                 {myPage ? (
                   <>
                     {" "}
@@ -375,8 +385,8 @@ export default function ProfilePage(props) {
               </OffersItem>
             ))}
             {sharedRooms.map((home, index, array) => (
-              <OffersItem>
-                <Proposal home={home} key={home.id} type="rooms" />
+              <OffersItem key={home.id}>
+                <Proposal profile={"profile"} home={home} type="rooms" />
                 {myPage ? (
                   <>
                     <Link to={`/host/edit/rooms/${home.id}`}>
