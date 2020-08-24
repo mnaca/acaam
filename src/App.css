@@ -17,7 +17,11 @@ label + .MuiInput-formControl {
 }
 
 .MuiInputBase-input {
-  padding: 1vw 0 1.1vw !important;
+  padding: 0.7vw 0 0.5vw !important;
+}
+
+.MuiInputBase-input.sign {
+  padding: 18.5px 14px !important;
 }
 
 .MuiInput-underline:before {
@@ -37,7 +41,6 @@ label + .MuiInput-formControl {
   font-size: 1vw !important;
 }
 
-
 .MuiSlider-root {
   padding: 0.67vw !important;
   color: #364f6b !important;
@@ -49,6 +52,7 @@ label + .MuiInput-formControl {
   height: 0.85vw !important;
   margin: 0 !important;
   margin-top: -0.4vw !important;
+  transform: translateX(-0.5vw);
 }
 
 .MuiSlider-thumb:hover {

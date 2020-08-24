@@ -48,6 +48,7 @@ const StyledLink = styled(Link)`
   margin-bottom: ${(props) => (props.profile ? "1.5vw" : null)};
   transition: 0.2s top;
   text-decoration: none;
+  border-radius: 0.4vw;
   box-shadow: 0vw 0vw 0.52vw 0.052vw rgba(93, 120, 148, 1);
   &:hover {
     top: ${(props) => (!props.profile ? "-0.5vw" : null)};

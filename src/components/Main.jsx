@@ -23,6 +23,7 @@ import HostHome from "./HostHome";
 import Register from "./Register";
 import ProfilePage from "./ProfilePage";
 import Home from "./Home";
+import FilteredHomes from "./FilteredHomes";
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -58,7 +59,7 @@ const DarkBackground = styled.div`
 
 function Main() {
   const userInfo = useSelector((state) => state.userInfo);
-  const [searchOpened, setSearchOpened] = useState(true);
+  const [searchOpened, setSearchOpened] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -155,6 +156,9 @@ function Main() {
           </Route>
           <Route path="/profile/:userId">
             <ProfilePage id={userInfo ? userInfo.id : null} />
+          </Route>
+          <Route path="/homes/:house/:city/:district/:price/:guests/:bedrooms">
+            <FilteredHomes />
           </Route>
           <Route exact path="/">
             <BannerWrapper>

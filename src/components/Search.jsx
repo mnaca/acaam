@@ -8,10 +8,12 @@ import {
   Select,
   MenuItem,
   Slider,
+  Button,
 } from "@material-ui/core";
-import { useStyles } from "./HostHomeStep";
+import { useStyles, PlusMinusButton } from "./HostHomeStep";
 import { districts } from "../district";
 import { jsUcfirst } from "./Proposal";
+import { Link } from "react-router-dom";
 
 const SearchCmp = styled.div`
   display: flex;
@@ -95,6 +97,25 @@ const Dollar = styled.span`
   font-weight: normal;
 `;
 
+const SearchGuestBedroom = styled.div`
+  display: inline-block;
+  margin: 0 3.646vw;
+  color: #364f6b;
+  font-size: 1.3vw;
+`;
+
+const SearchGuestBedroomWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 0.5vw;
+`;
+
+const SearchButton = styled(Button)`
+  border-color: #364f6b !important;
+  color: #364f6b !important;
+  width: 25vw !important;
+`;
+
 export default function Search(props) {
   const classes = useStyles();
 
@@ -102,10 +123,12 @@ export default function Search(props) {
     props.setSearchOpened(true);
   };
 
-  const [city, setCity] = useState("yerevan");
-  const [district, setDistrict] = useState("arabkir");
-  const [house, setHouse] = useState("apartments");
-  const [price, setPrice] = useState([0, 100]);
+  const [house, setHouse] = useState("all");
+  const [city, setCity] = useState("all");
+  const [district, setDistrict] = useState("all");
+  const [price, setPrice] = useState([0, 1000000]);
+  const [guests, setGuests] = useState(1);
+  const [bedrooms, setBedrooms] = useState(1);
 
   return (
     <SearchCmp>
@@ -129,13 +152,27 @@ export default function Search(props) {
                   onChange={(e) => setHouse(e.target.value)}
                   MenuProps={{ classes: { paper: classes.select } }}
                 >
-                  {["apartments", "vacationRentals", "sharedRooms"].map(
-                    (type) => (
-                      <MenuItem className={classes.menuItem} value={type}>
-                        {jsUcfirst(type)}
-                      </MenuItem>
-                    )
-                  )}
+                  {[
+                    "all",
+                    "apartments",
+                    "vacation Rentals",
+                    "shared Rooms",
+                  ].map((type) => (
+                    <MenuItem
+                      className={classes.menuItem}
+                      value={
+                        type === "apartments"
+                          ? type
+                          : type === "vacation Rentals"
+                          ? "vacationRentals"
+                          : type === "shared Rooms"
+                          ? "sharedRooms"
+                          : "all"
+                      }
+                    >
+                      {jsUcfirst(type)}
+                    </MenuItem>
+                  ))}
                 </Select>
               </StyledFormControl>
             </FilterSelects>
@@ -159,6 +196,7 @@ export default function Search(props) {
                   MenuProps={{ className: classes.select }}
                 >
                   {[
+                    "all",
                     "yerevan",
                     "shirak",
                     "lori",
@@ -207,7 +245,13 @@ export default function Search(props) {
             </FilterSelects>
           </Filter>
           <Filter style={{ marginRight: "0.5vw" }}>
-            <FilterTitle>Price</FilterTitle>
+            <FilterTitle>
+              Price{" "}
+              <span style={{ fontSize: "1.1vw", fontWeight: "normal" }}>
+                {" "}
+                / per night
+              </span>
+            </FilterTitle>
             <PriceSlider>
               <PriceWrapper>
                 <Price>
@@ -223,10 +267,67 @@ export default function Search(props) {
                 value={price}
                 onChange={(e, newValue) => setPrice(newValue)}
                 aria-labelledby="range-slider"
-                max={10e2}
+                max={10e5}
               />
             </PriceSlider>
           </Filter>
+          <div style={{ display: "flex", justifyContent: "space-around" }}>
+            <Filter>
+              <FilterTitle>Guests</FilterTitle>
+              <SearchGuestBedroomWrapper>
+                <PlusMinusButton
+                  variant="outlined"
+                  color="primary"
+                  onClick={() => (guests >= 2 ? setGuests(guests - 1) : null)}
+                >
+                  -
+                </PlusMinusButton>
+                <SearchGuestBedroom>{guests}</SearchGuestBedroom>
+                <PlusMinusButton
+                  variant="outlined"
+                  color="primary"
+                  onClick={() => (guests < 9 ? setGuests(guests + 1) : null)}
+                >
+                  +
+                </PlusMinusButton>
+              </SearchGuestBedroomWrapper>
+            </Filter>
+            <Filter>
+              <FilterTitle>Bedrooms</FilterTitle>
+              <SearchGuestBedroomWrapper>
+                <PlusMinusButton
+                  variant="outlined"
+                  color="primary"
+                  onClick={() =>
+                    bedrooms >= 2 ? setBedrooms(guests - 1) : null
+                  }
+                >
+                  -
+                </PlusMinusButton>
+                <SearchGuestBedroom>{bedrooms}</SearchGuestBedroom>
+                <PlusMinusButton
+                  variant="outlined"
+                  color="primary"
+                  onClick={() =>
+                    bedrooms < 9 ? setBedrooms(guests + 1) : null
+                  }
+                >
+                  +
+                </PlusMinusButton>
+              </SearchGuestBedroomWrapper>
+            </Filter>
+          </div>
+          <Link style={{ textDecoration: "none" }} to={`/homes/${house}/${city}/${district}/${price}/${guests}/${bedrooms}`}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <SearchButton
+                variant="outlined"
+                color="primary"
+                onClick={() => props.setSearchOpened(false)}
+              >
+                SEARCH
+              </SearchButton>
+            </div>
+          </Link>
         </SearchForm>
       ) : null}
       <SearchLogo onClick={onHandleSearch}>

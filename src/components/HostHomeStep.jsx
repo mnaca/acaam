@@ -145,6 +145,7 @@ export default function HostHomeStep(props) {
   const [amenities, setAmenities] = useState({});
   const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
+  const [maxPrice, setMaxPrice] = useState(1000000);
 
   useEffect(() => {
     if (props.edit && props.prevOptions) {
@@ -205,6 +206,8 @@ export default function HostHomeStep(props) {
         setCurrency={setCurrency}
         term={term}
         setTerm={setTerm}
+        maxPrice={maxPrice}
+        setMaxPrice={setMaxPrice}
       />
     );
   } else if (props.step === 3) {

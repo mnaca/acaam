@@ -51,6 +51,8 @@ function Login() {
         </Typography>
         <form style={{ marginBottom: 100 }} className={classes.form} noValidate>
           <TextField
+            inputProps={{ className: "sign" }}
+            className="sign"
             variant="outlined"
             margin="normal"
             required
@@ -64,6 +66,7 @@ function Login() {
             onChange={(e) => setMail(e.target.value)}
           />
           <TextField
+            inputProps={{ className: "sign" }}
             variant="outlined"
             margin="normal"
             required

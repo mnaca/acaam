@@ -31,7 +31,9 @@ export default function Step2(props) {
           }}
         >
           <FormControl className={classes.formControl} required>
-            <InputLabel className={classes.inputLabel}>Property Type</InputLabel>
+            <InputLabel className={classes.inputLabel}>
+              Property Type
+            </InputLabel>
             <Select
               className={classes.select}
               value={props.house}
@@ -60,19 +62,24 @@ export default function Step2(props) {
             gridColumnGap: "1vw",
           }}
         >
-          <FormControl className={classes.formControl} required>
+          <FormControl style={{marginTop: "0.17vw"}} className={classes.formControl} required>
             <TextField
               id="standard-basic"
               value={props.price}
               onChange={(e) => {
+                console.log(e.target.value, props.maxPrice);
                 if (
                   isNaN(parseFloat(e.target.value)) ||
                   parseFloat(e.target.value) < 0 ||
-                  e.target.value.length > 10
+                  e.target.value >= props.maxPrice
                 ) {
+                  if (!(isNaN(parseFloat(e.target.value))))
+                    props.setPrice(props.maxPrice);
+
                   return false;
+                } else {
+                  props.setPrice(parseFloat(e.target.value));
                 }
-                props.setPrice(parseFloat(e.target.value));
               }}
               className={classes.textField + " " + classes.root}
               label="Price*"
@@ -86,7 +93,43 @@ export default function Step2(props) {
             <Select
               className={classes.select}
               value={props.currency}
-              onChange={(e) => props.setCurrency(e.target.value)}
+              onChange={(e) => {
+                if (props.currency === "USD" && e.target.value === "AMD") {
+                  props.setPrice(Math.round(props.price * 483))
+                  props.setMaxPrice(Math.round(props.maxPrice * 483));
+                } else if (
+                  props.currency === "USD" &&
+                  e.target.value === "RUR"
+                ) {
+                  props.setPrice(Math.round(props.price * 64.23));
+                  props.setMaxPrice(Math.round(props.maxPrice * 64.23));
+                } else if (
+                  props.currency === "RUR" &&
+                  e.target.value === "AMD"
+                ) {
+                  props.setPrice(Math.round(props.price * 7.52));
+                  props.setMaxPrice(Math.round(props.maxPrice * 7.52));
+                } else if (
+                  props.currency === "RUR" &&
+                  e.target.value === "USD"
+                ) {
+                  props.setPrice(Math.round(props.price / 64.23));
+                  props.setMaxPrice(Math.round(props.maxPrice / 64.23));
+                } else if (
+                  props.currency === "AMD" &&
+                  e.target.value === "USD"
+                ) {
+                  props.setPrice(Math.round(props.price / 483));
+                  props.setMaxPrice(Math.round(props.maxPrice / 483));
+                } else if (
+                  props.currency === "AMD" &&
+                  e.target.value === "RUR"
+                ) {
+                  props.setPrice(Math.round(props.price / 7.52));
+                  props.setMaxPrice(Math.round(props.maxPrice / 7.52));
+                }
+                props.setCurrency(e.target.value);
+              }}
               MenuProps={{ classes: { paper: classes.select } }}
             >
               <MenuItem className={classes.menuItem} value="USD">
@@ -108,7 +151,16 @@ export default function Step2(props) {
             <Select
               className={classes.select}
               value={props.term}
-              onChange={(e) => props.setTerm(e.target.value)}
+              onChange={(e) => {
+                if (props.term === "monthly" && e.target.value === "daily") {
+                  props.setMaxPrice(Math.round(props.maxPrice / 30));
+                  props.setPrice(Math.round(props.price / 30));
+                } else {
+                  props.setMaxPrice(props.maxPrice * 30);
+                  props.setPrice(props.price * 30);
+                }
+                props.setTerm(e.target.value);
+              }}
               MenuProps={{ classes: { paper: classes.select } }}
             >
               <MenuItem className={classes.menuItem} value="monthly">
