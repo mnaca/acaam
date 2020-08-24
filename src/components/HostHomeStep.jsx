@@ -46,7 +46,7 @@ export const useStyles = makeStyles((theme) => ({
   select: {
     fontSize: "0.9vw",
     "& ul": {
-      padding: 0,
+      padding: "1vw 0",
     },
     "& li": {
       padding: "0.5vw",

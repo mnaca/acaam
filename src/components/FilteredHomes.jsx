@@ -20,29 +20,83 @@ export default function FilteredHomes() {
   const [startIndex, setStartIndex] = useState(0);
   const [endIndex, setEndIndex] = useState(9);
   const allHomes = [...apartments, ...vacationRentals, ...sharedRooms];
-  const filters = useParams();
-  console.log(filters);
+  let { bedrooms, guests, city, district, house, price } = useParams();
+  price = price.split(",");
+  const filteredArr = allHomes
+    .filter((home) => {
+      if (bedrooms === "none") return true;
+      return +home.bedrooms === +bedrooms;
+    })
+    .filter((home) => {
+      if (guests === "none") return true;
+      return +home.guests === +guests;
+    })
+    .filter((home) => {
+      if (city === "all") return true;
+      return home.city === city;
+    })
+    .filter((home) => {
+      if (district === "all") return true;
+      return home.district === district;
+    })
+    .filter((home) => {
+      if (house === "all") return true;
+      return home.house === house;
+    })
+    .filter((home) => {
+      if (+price[1] === 1000) price[1] = Infinity;
+      return +home.price >= price[0] && +home.price <= price[1];
+    });
+  const pagesCount = Math.ceil(filteredArr.length / 10);
 
   return (
     <div>
       <FilteredHomesCmp>
-        {allHomes.slice(startIndex, endIndex + 1).map((home) => {
-          return (
-            <Proposal
-              home={home}
-              type={
-                home.house === "apartments"
-                  ? home.house
-                  : home.house === "vacationRentals"
-                  ? "rentals"
-                  : "rooms"
-              }
-            />
-          );
-        })}
+        {allHomes
+          .filter((home) => {
+            if (bedrooms === "none") return true;
+            return +home.bedrooms === +bedrooms;
+          })
+          .filter((home) => {
+            if (guests === "none") return true;
+            return +home.guests === +guests;
+          })
+          .filter((home) => {
+            if (city === "all") return true;
+            return home.city === city;
+          })
+          .filter((home) => {
+            if (district === "all") return true;
+            return home.district === district;
+          })
+          .filter((home) => {
+            if (house === "all") return true;
+            return home.house === house;
+          })
+          .filter((home) => {
+            if (+price[1] === 1000) price[1] = Infinity;
+            return +home.price >= price[0] && +home.price <= price[1];
+          })
+          .slice(startIndex, endIndex + 1)
+          .map((home) => {
+            console.log(home);
+            return (
+              <Proposal
+                home={home}
+                key={home.id}
+                type={
+                  home.house === "apartments"
+                    ? home.house
+                    : home.house === "vacationRentals"
+                    ? "rentals"
+                    : "rooms"
+                }
+              />
+            );
+          })}
       </FilteredHomesCmp>
       <Pagination
-        pagesCount={Math.ceil(apartments.length / 10)}
+        pagesCount={pagesCount}
         page={page}
         setPage={setPage}
         setStartIndex={setStartIndex}

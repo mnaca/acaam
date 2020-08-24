@@ -4,12 +4,12 @@
 }
 
 .MuiInputLabel-shrink {
-  font-size: 0.9vw;
+  font-size: 0.9vw !important;
 }
 
 .MuiSelect-icon {
-  font-size: 3vw !important;
-  top: inherit !important;
+  font-size: 2.4vw !important;
+  top: 0.5vw !important;
 }
 
 label + .MuiInput-formControl {
@@ -28,12 +28,28 @@ label + .MuiInput-formControl {
   border-bottom: 0.052vw solid rgba(0, 0, 0, 0.42) !important;
 }
 
+.MuiMenuItem-root {
+  min-height: 0px !important;
+}
+
+.makeStyles-select-9 {
+  border-radius: 0.3vw !important;
+}
+
 .makeStyles-select-9 ul {
-  max-height: 20vw !important;
+  max-height: 30vw !important;
+}
+
+.MuiSelect-select.MuiSelect-select {
+  margin-top: 0.5vw !important;
 }
 
 .makeStyles-formControl-2 {
   margin: 0.5vw !important;
+}
+
+.MuiButton-outlinedPrimary {
+  border-width: 0.104vw !important;
 }
 
 .MuiSelect-select.MuiSelect-select {

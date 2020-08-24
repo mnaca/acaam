@@ -36,7 +36,7 @@ const SearchLogo = styled.div`
 `;
 
 const SearchForm = styled.div`
-  position: absolute;
+  position: fixed;
   box-sizing: border-box;
   padding: 1.5vw 0.6vw 0.6vw 0.6vw;
   width: 50vw;
@@ -100,6 +100,8 @@ const Dollar = styled.span`
 const SearchGuestBedroom = styled.div`
   display: inline-block;
   margin: 0 3.646vw;
+  width: 3.5vw;
+  text-align: center;
   color: #364f6b;
   font-size: 1.3vw;
 `;
@@ -111,9 +113,13 @@ const SearchGuestBedroomWrapper = styled.div`
 `;
 
 const SearchButton = styled(Button)`
+  border-width: 0.104vw !important;
   border-color: #364f6b !important;
   color: #364f6b !important;
   width: 25vw !important;
+  font-size: 1vw !important;
+  padding: 0.8vw !important;
+  border-radius: 0.5vw !important;
 `;
 
 export default function Search(props) {
@@ -126,9 +132,10 @@ export default function Search(props) {
   const [house, setHouse] = useState("all");
   const [city, setCity] = useState("all");
   const [district, setDistrict] = useState("all");
-  const [price, setPrice] = useState([0, 1000000]);
-  const [guests, setGuests] = useState(1);
-  const [bedrooms, setBedrooms] = useState(1);
+  const [price, setPrice] = useState([0, 1000]);
+  const [printPrice, setPrintPrice] = useState(["0", "1000+"]);
+  const [guests, setGuests] = useState("none");
+  const [bedrooms, setBedrooms] = useState("none");
 
   return (
     <SearchCmp>
@@ -229,7 +236,7 @@ export default function Search(props) {
                   onChange={(e) => setDistrict(e.target.value)}
                   MenuProps={{ classes: { paper: classes.select } }}
                 >
-                  {districts[city].map((district) => {
+                  {["all", ...districts[city]].map((district) => {
                     return (
                       <MenuItem
                         className={classes.menuItem}
@@ -256,29 +263,44 @@ export default function Search(props) {
               <PriceWrapper>
                 <Price>
                   <Dollar>$</Dollar>
-                  {price[0]}
+                  {printPrice[0]}
                 </Price>
                 <Price value="max">
-                  {price[1]}
                   <Dollar>$</Dollar>
+                  {printPrice[1]}
                 </Price>
               </PriceWrapper>
               <Slider
                 value={price}
-                onChange={(e, newValue) => setPrice(newValue)}
+                onChange={(e, newValue) => {
+                  setPrice(newValue);
+                  if (price[1] === 1000) {
+                    setPrintPrice([newValue[0], price[1] + "+"]);
+                  } else {
+                    setPrintPrice(newValue)
+                  }
+                }}
                 aria-labelledby="range-slider"
-                max={10e5}
+                max={10e2}
               />
             </PriceSlider>
           </Filter>
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              textAlign: "center",
+            }}
+          >
             <Filter>
               <FilterTitle>Guests</FilterTitle>
               <SearchGuestBedroomWrapper>
                 <PlusMinusButton
                   variant="outlined"
                   color="primary"
-                  onClick={() => (guests >= 2 ? setGuests(guests - 1) : null)}
+                  onClick={() =>
+                    guests >= 2 ? setGuests(guests - 1) : setGuests("none")
+                  }
                 >
                   -
                 </PlusMinusButton>
@@ -286,7 +308,13 @@ export default function Search(props) {
                 <PlusMinusButton
                   variant="outlined"
                   color="primary"
-                  onClick={() => (guests < 9 ? setGuests(guests + 1) : null)}
+                  onClick={() => {
+                    if (guests === "none") {
+                      setGuests(1);
+                    } else {
+                      setGuests(guests + 1);
+                    }
+                  }}
                 >
                   +
                 </PlusMinusButton>
@@ -299,7 +327,9 @@ export default function Search(props) {
                   variant="outlined"
                   color="primary"
                   onClick={() =>
-                    bedrooms >= 2 ? setBedrooms(guests - 1) : null
+                    bedrooms >= 2
+                      ? setBedrooms(guests - 1)
+                      : setBedrooms("none")
                   }
                 >
                   -
@@ -308,17 +338,30 @@ export default function Search(props) {
                 <PlusMinusButton
                   variant="outlined"
                   color="primary"
-                  onClick={() =>
-                    bedrooms < 9 ? setBedrooms(guests + 1) : null
-                  }
+                  onClick={() => {
+                    if (bedrooms === "none") {
+                      setBedrooms(1);
+                    } else {
+                      setBedrooms(bedrooms + 1);
+                    }
+                  }}
                 >
                   +
                 </PlusMinusButton>
               </SearchGuestBedroomWrapper>
             </Filter>
           </div>
-          <Link style={{ textDecoration: "none" }} to={`/homes/${house}/${city}/${district}/${price}/${guests}/${bedrooms}`}>
-            <div style={{ display: "flex", justifyContent: "center" }}>
+          <Link
+            style={{ textDecoration: "none" }}
+            to={`/homes/${house}/${city}/${district}/${price}/${guests}/${bedrooms}`}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginBottom: "0.7vw",
+              }}
+            >
               <SearchButton
                 variant="outlined"
                 color="primary"

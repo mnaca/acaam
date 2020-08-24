@@ -22,7 +22,7 @@ export default function Step2(props) {
     <HostHomeStepCmp>
       <HostHomeStepText>
         <h2 style={{ color: "#364f6b" }}>Choose a property type</h2>
-        <h4 style={{ marginTop: 10 }}>STEP {props.step}</h4>
+        <h4 style={{ marginTop: "0.5vw" }}>STEP {props.step}</h4>
         <form
           style={{
             display: "flex",
@@ -64,6 +64,7 @@ export default function Step2(props) {
         >
           <FormControl style={{marginTop: "0.17vw"}} className={classes.formControl} required>
             <TextField
+              style={{paddingTop: "0.6vw"}}
               id="standard-basic"
               value={props.price}
               onChange={(e) => {

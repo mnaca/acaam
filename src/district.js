@@ -1,5 +1,5 @@
 export const districts = {
-  all: ["all"],
+  all: [],
   yerevan: [
     "arabkir",
     "HAT",
