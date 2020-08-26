@@ -122,8 +122,10 @@ function Main() {
       <MainCmp>
         <HeaderWrapper>
           <Header />
-          <Profile searchOpened={searchOpened} setSearchOpened={setSearchOpened} />
-          <CarouselComponent />
+          <Profile
+            searchOpened={searchOpened}
+            setSearchOpened={setSearchOpened}
+          />
         </HeaderWrapper>
         <Switch>
           <Route exact path="/apartments">
@@ -167,6 +169,7 @@ function Main() {
               <Banner />
             </BannerWrapper>
             <Categories />
+            <CarouselComponent />
           </Route>
           <Redirect to="/" />
         </Switch>
