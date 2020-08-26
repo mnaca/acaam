@@ -129,7 +129,7 @@ export default function Register() {
               <TextField
                 inputProps={{ className: "sign" }}
                 variant="outlined"
-                label="Phone Number"
+                label="Phone Number *"
                 name="phoneNumber"
                 type="tel"
                 error={tel.length && tel.length < 12}

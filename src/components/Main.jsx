@@ -24,6 +24,7 @@ import Register from "./Register";
 import ProfilePage from "./ProfilePage";
 import Home from "./Home";
 import FilteredHomes from "./FilteredHomes";
+import CarouselComponent from "./Carousel";
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -122,6 +123,7 @@ function Main() {
         <HeaderWrapper>
           <Header />
           <Profile searchOpened={searchOpened} setSearchOpened={setSearchOpened} />
+          <CarouselComponent />
         </HeaderWrapper>
         <Switch>
           <Route exact path="/apartments">
