@@ -41,7 +41,7 @@ const SearchForm = styled.div`
   padding: 1.5vw 0.6vw 0.6vw 0.6vw;
   width: 50vw;
   z-index: 2;
-  top: 7vw;
+  top: 7vh;
   left: 25%;
   background-color: white;
   border-radius: 0.7vw;
@@ -115,8 +115,8 @@ const SearchGuestBedroomWrapper = styled.div`
 const SearchButton = styled(Button)`
   border-width: 0.104vw !important;
   border-color: #364f6b !important;
-  color: #364f6b !important;
   width: 25vw !important;
+  color: #364f6b !important;
   font-size: 1vw !important;
   padding: 0.8vw !important;
   border-radius: 0.5vw !important;
@@ -166,6 +166,7 @@ export default function Search(props) {
                     "shared Rooms",
                   ].map((type) => (
                     <MenuItem
+                      key={type}
                       className={classes.menuItem}
                       value={
                         type === "apartments"
@@ -198,7 +199,7 @@ export default function Search(props) {
                   value={city}
                   onChange={(e) => {
                     setCity(e.target.value);
-                    setDistrict(districts[e.target.value][0]);
+                    setDistrict("all");
                   }}
                   MenuProps={{ className: classes.select }}
                 >
@@ -277,7 +278,7 @@ export default function Search(props) {
                   if (price[1] === 1000) {
                     setPrintPrice([newValue[0], price[1] + "+"]);
                   } else {
-                    setPrintPrice(newValue)
+                    setPrintPrice(newValue);
                   }
                 }}
                 aria-labelledby="range-slider"
@@ -351,26 +352,27 @@ export default function Search(props) {
               </SearchGuestBedroomWrapper>
             </Filter>
           </div>
-          <Link
-            style={{ textDecoration: "none" }}
-            to={`/homes/${house}/${city}/${district}/${price}/${guests}/${bedrooms}`}
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: "0.7vw",
+            }}
           >
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                marginBottom: "0.7vw",
-              }}
+            <Link
+              style={{ textDecoration: "none" }}
+              to={`/homes/${house}/${city}/${district}/${price}/${guests}/${bedrooms}`}
+              onClick={() => props.setSearchOpened(false)}
             >
               <SearchButton
                 variant="outlined"
                 color="primary"
-                onClick={() => props.setSearchOpened(false)}
               >
                 SEARCH
               </SearchButton>
-            </div>
-          </Link>
+            </Link>
+          </div>
         </SearchForm>
       ) : null}
       <SearchLogo onClick={onHandleSearch}>

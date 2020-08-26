@@ -63,10 +63,15 @@ export default function Register() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form style={{ marginBottom: "5.2vw" }} className={classes.form} noValidate>
+        <form
+          style={{ marginBottom: "5.2vw" }}
+          className={classes.form}
+          noValidate
+        >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
+                inputProps={{ className: "sign" }}
                 autoComplete="fname"
                 name="firstName"
                 variant="outlined"
@@ -83,6 +88,7 @@ export default function Register() {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
+                inputProps={{ className: "sign" }}
                 variant="outlined"
                 required
                 error={lastName === ""}
@@ -121,6 +127,7 @@ export default function Register() {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                inputProps={{ className: "sign" }}
                 variant="outlined"
                 label="Phone Number"
                 name="phoneNumber"
@@ -163,6 +170,7 @@ export default function Register() {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                inputProps={{ className: "sign" }}
                 variant="outlined"
                 required
                 fullWidth
@@ -178,6 +186,7 @@ export default function Register() {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                inputProps={{ className: "sign" }}
                 variant="outlined"
                 required
                 fullWidth
