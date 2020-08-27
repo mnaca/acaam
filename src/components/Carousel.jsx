@@ -1,5 +1,6 @@
 import React from "react";
 import Carousel from "react-material-ui-carousel";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Amberd from "../images/tourism/route-1/amberd.jpg";
 import Amberdimg from "../images/tourism/route-1/Amberd-1.jpg";
@@ -130,7 +131,8 @@ export default function CarouselComponent() {
       </SectorTourism>
       <AraratImg src={Ararat} alt="" />
       <CarouselWrap>
-        <RoutsWrap>
+        <Link to="/turizm">
+        <RoutsWrap >
         <CarouselCmp>
           {route_1.map((item) => (
             <CarouselImg src={item} alt="" key={item}/>
@@ -138,6 +140,7 @@ export default function CarouselComponent() {
         </CarouselCmp>
         <Routs>Routes</Routs>
       </RoutsWrap>
+      </Link>
       <RoutsWrap>
         <CarouselCmp>
           {route_2.map((item) => (

@@ -25,6 +25,7 @@ import ProfilePage from "./ProfilePage";
 import Home from "./Home";
 import FilteredHomes from "./FilteredHomes";
 import CarouselComponent from "./Carousel";
+import Turizm from "./Turizm"
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -164,13 +165,16 @@ function Main() {
           <Route path="/homes/:house/:city/:district/:price/:guests/:bedrooms">
             <FilteredHomes />
           </Route>
+          <Route  path="/turizm">            
+            <Turizm/>
+          </Route>
           <Route exact path="/">
             <BannerWrapper>
               <Banner />
             </BannerWrapper>
             <Categories />
             <CarouselComponent />
-          </Route>
+          </Route>          
           <Redirect to="/" />
         </Switch>
         <div style={{ height: "5vw" }}></div>
