@@ -1,12 +1,9 @@
 import React from "react";
 import Carousel from "react-material-ui-carousel";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
-import {Button} from "@material-ui/core"
 import Amberd from "../images/tourism/route-1/amberd.jpg";
 import Amberdimg from "../images/tourism/route-1/Amberd-1.jpg";
 import Aragats from "../images/tourism/route-1/aragats.jpg";
-import Ararat from "../images/tourism/ararat.jpg";
 import Astxaditaran from "../images/tourism/route-1/astxaditaran.jpg";
 import Byurakan from "../images/tourism/route-1/byurakan-astrophysical.jpg";
 import LakeQari from "../images/tourism/route-1/lake-qari.jpg";
@@ -60,146 +57,96 @@ import Arcax_2 from "../images/tourism/route-5/arcax-2.jpg";
 import Shushi from "../images/tourism/route-5/shushi.jpg";
 
 
-
-const CarouselCmp = styled(Carousel)`
+const PictureCarousel = styled(Carousel)`   
+    height:33vw;
+    width: 55vw;
+    border-radius: 0.2604vw;     
 `;
-
-const RoutsWrap = styled.div`
-position: relative;
-top: 0;
-transition: 0.25s top;
-width: 16.96vw;
-margin: 0.5vw;
-cursor: pointer;
-color: #364f6b;
-padding: 0.52vw;
-border-radius: 0.2604vw;
-box-shadow: 0vw 0vw 0.52vw 0.052vw rgba(93, 120, 148, 1);
-&:hover {
-  top: -0.7vw;
-  box-shadow: 0vw 0vw 1.5vw 0.104vw rgba(93, 120, 148, 1);
-}
-`;
-const Routes = styled.div`
-text-align: center;
-font-size: 1.2vw;
+ 
+const RoutDetails = styled.div`
+    position: relative;
+    top: 0;
+    transition: 0.25s top;
+    height: 32.2vw;
+    width: 90vw;
+    margin: 0.5vw;
+    cursor: pointer;
+    color: #364f6b;
+    padding: 0.52vw;
+    border-radius: 0.2604vw;
+    box-shadow: 0vw 0vw 0.52vw 0.052vw rgba(93, 120, 148, 1);
 `;
 
 const CarouselImg = styled.img`
-  width: 100%;
-  height: 10vw;
+  height:30vw;
+  width: 55vw;
   object-fit: cover;
+  border-radius: 0.2604vw; 
 `;
 
-const CarouselWrap = styled.div`
-  display: flex;
-  justify-content: center;
-  padding-top: 1.2vw
-`;
-
-const AraratImg = styled.img`
+const WrapTourism = styled.div`
     display: flex;
-    width: 93.5vw;
-    height: 20vw;
-    margin: 0 auto;    
-    padding: 0.3vw;
-    border-radius: 0.2604vw;
-    box-shadow: 0vw 0vw 0.52vw 0.052vw rgba(93,120,148,1);
-`;
-
-const SectorTourism = styled.div`
-    text-align: center;
-    color: #364f6b;
-    font-size: 1.6vw;
-    border-top: 0.104vw solid #c3c3c3;
-    padding: 0.8vw;
-    margin: 1vw 2.52vw;
-  `;
-
-  const SearchButton = styled(Button)`
-  border-width: 0.104vw !important;
-  border-color: #364f6b !important;
-  width: 56.5vw !important;
-  color: #364f6b !important;
-  font-size: 1vw !important;
-  padding: 0.8vw !important;
-  border-radius: 0.5vw !important;
-  text-decoration: none !important;
-  `;
-  const DetailsDiv = styled.div`
-    display: flex; 
     justify-content: center;
-    margin-top: 0.52vw;
   `;
 
-export default function CarouselComponent() {
-  const route_1 = [Amberd, Amberdimg, Astxaditaran, Byurakan, LakeQari, QariLij, Aragats, Tsaxkavanq, Saxmosavanq];
-  const route_2 = [Ejmiacin, Ejmiacin_1, Shoxakat, SurbGayane,  SurbHripsime, Zvartnoc, Sardarapat];
-  const route_3 = [Garni_1, Garni_2, Gexard_1, Gexard_2, XorVirap_1, XorVirap_2];
-  const route_4 = [Sevan_1, Sevan_2, Axtamar_1, Axtamar_2, ParzLich_1, ParzLich_2, Haghartsin_1, Haghartsin_2, Goshavanq_1, Goshavanq_2];
-  const route_5 = [Areni, Areni_1, Noravanq_1, Noravanq_2, Jermuk_1, Jermuk_2, Jermuk_3, Jermuk_4, Jermuk_5, Shaqe_1, Shaqe_2, ZoracQarer_1, 
+  const Route = styled.span`
+    color: #364f6b;
+    margin: 1vw;
+    font-size: 1.5vw;
+  `;
+export default function tourism(props){
+    const route_1 = [Amberd, Amberdimg, Astxaditaran, Byurakan, LakeQari, QariLij, Aragats, Tsaxkavanq, Saxmosavanq];
+    const route_2 = [Ejmiacin, Ejmiacin_1, Shoxakat, SurbGayane,  SurbHripsime, Zvartnoc, Sardarapat];
+    const route_3 = [Garni_1, Garni_2, Gexard_1, Gexard_2, XorVirap_1, XorVirap_2];
+    const route_4 = [Sevan_1, Sevan_2, Axtamar_1, Axtamar_2, ParzLich_1, ParzLich_2, Haghartsin_1, Haghartsin_2, Goshavanq_1, Goshavanq_2];
+    const route_5 = [Areni, Areni_1, Noravanq_1, Noravanq_2, Jermuk_1, Jermuk_2, Jermuk_3, Jermuk_4, Jermuk_5, Shaqe_1, Shaqe_2, ZoracQarer_1, 
                    ZoracQarer_2, TateviVanq, Chopanuxi, SataniKamurj_1, SataniKamurj_2, Xndzoresk_1, Xndzoresk_2, Arcax_1, Arcax_2, Shushi];
 
-  return (
-    <>
-      <SectorTourism>
-        <h4>Discover Armenia </h4>Top 5 destinations that have a lot to offer
-      </SectorTourism>
-      <AraratImg src={Ararat} alt="" />
-      <CarouselWrap>        
-        <RoutsWrap >
-        <CarouselCmp>
-          {route_1.map((item) => (
-            <CarouselImg src={item} alt="" key={item}/>
-          ))}          
-        </CarouselCmp>
-        <Routes>Route 1</Routes>
-      </RoutsWrap>
-      <RoutsWrap>
-        <CarouselCmp>
-          {route_2.map((item) => (
-            <CarouselImg src={item} alt="" key={item}/>
-          ))}          
-        </CarouselCmp>
-        <Routes>Route 2</Routes>
-      </RoutsWrap>
-      <RoutsWrap>
-        <CarouselCmp>
-          {route_3.map((item) => (
-            <CarouselImg src={item} alt="" key={item}/>
-          ))}          
-        </CarouselCmp>
-        <Routes>Route 3</Routes>
-      </RoutsWrap>
-      <RoutsWrap>
-        <CarouselCmp>
-          {route_4.map((item) => (
-            <CarouselImg src={item} alt="" key={item}/>
-          ))}          
-        </CarouselCmp>
-        <Routes>Route 4</Routes>
-      </RoutsWrap>
-      <RoutsWrap>
-        <CarouselCmp>
-          {route_5.map((item) => (
-            <CarouselImg src={item} alt="" key={item}/>
-          ))}          
-        </CarouselCmp>
-        <Routes>Route 5</Routes>
-      </RoutsWrap>
-      </CarouselWrap>
-      <DetailsDiv >
-      <Link to="/tourism"
-          style={{ textDecoration: "none" }}
-      >
-      <SearchButton
-        variant="outlined"
-        color="primary"
-      >
-      DETAILS
-      </SearchButton>
-      </Link>
-      </DetailsDiv>
-    </>
-  );
-}
+
+ return (
+     <WrapTourism>
+         <div style={{marginTop:"1vw"}}>
+         <Route>Route 1</Route>
+            <RoutDetails>            
+                <PictureCarousel>
+                    {route_1.map((item) => (
+                        <CarouselImg src={Amberd} alt="" key={item}/>
+                    ))}      
+                </PictureCarousel>
+            </RoutDetails>           
+            <Route>Route 2</Route>
+           <RoutDetails>          
+            <PictureCarousel>
+                {route_2.map((item) => (
+                    <CarouselImg src={item} alt="" key={item}/>
+                ))}      
+            </PictureCarousel>
+        </RoutDetails>
+        <Route>Route 3</Route>
+        <RoutDetails>       
+        <PictureCarousel>
+            {route_3.map((item) => (
+                <CarouselImg src={item} alt="" key={item}/>
+            ))}      
+        </PictureCarousel>
+        </RoutDetails>
+        <Route>Route 4</Route>
+        <RoutDetails>        
+                <PictureCarousel>
+                    {route_4.map((item) => (
+                        <CarouselImg src={item} alt="" key={item}/>
+                    ))}      
+                </PictureCarousel>
+            </RoutDetails>
+            <Route>Route 5</Route>
+            <RoutDetails>
+            <PictureCarousel>
+                {route_5.map((item) => (
+                    <CarouselImg src={item} alt="" key={item}/>
+                ))}      
+            </PictureCarousel>
+        </RoutDetails>
+    </div>
+  </WrapTourism>  
+ )
+};

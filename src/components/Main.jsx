@@ -25,7 +25,7 @@ import ProfilePage from "./ProfilePage";
 import Home from "./Home";
 import FilteredHomes from "./FilteredHomes";
 import CarouselComponent from "./Carousel";
-import Turizm from "./Turizm"
+import Tourism from "./Tourism"
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -165,8 +165,8 @@ function Main() {
           <Route path="/homes/:house/:city/:district/:price/:guests/:bedrooms">
             <FilteredHomes />
           </Route>
-          <Route  path="/turizm">            
-            <Turizm/>
+          <Route  path="/tourism">            
+            <Tourism/>
           </Route>
           <Route exact path="/">
             <BannerWrapper>

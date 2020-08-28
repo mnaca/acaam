@@ -6,6 +6,32 @@
 .MuiMenu-paper {
   max-height: 100% !important;
 }
+.Carousel-indicator-14 {
+  font-size: 0.75vw !important;
+}
+
+.CarouselItem {
+  display: flex !important;
+}
+
+.Carousel-indicators-13 {
+  display: flex !important;
+  justify-content: center !important;
+  margin-top: 0.52vw !important;
+}
+.Carousel-fullHeightHoverButton-19 {
+  transform: translateY(calc(-50% + 20px)) !important;
+}
+
+.MuiIconButton-root {
+  padding: 0.55vw !important;
+}
+.Carousel-button-18 {
+  margin: 0 0.52vw;
+}
+.Carousel-button-18 {
+  font-size: 1.5vw !important;
+}
 
 .MuiSelect-icon {
   font-size: 2.4vw !important;
