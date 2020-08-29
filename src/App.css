@@ -114,6 +114,7 @@ label + .MuiInput-formControl {
   height: 0.104vw !important;
 }
 
+
 .menu {
   position: absolute;
   z-index: 1;
