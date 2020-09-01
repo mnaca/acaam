@@ -18,7 +18,7 @@ import SurbGayane from "../images/tourism/route-2/surb-gayane.jpg";
 import SurbHripsime from "../images/tourism/route-2/surb-Hripsime.jpg";
 import Sardarapat from "../images/tourism/route-2/sardarapat.jpg";
 import Zvartnoc from "../images/tourism/route-2/zvartnoc.jpg";
-import Garni_1  from "../images/tourism/route-3/garni-2.jpg";
+import Garni_1 from "../images/tourism/route-3/garni-2.jpg";
 import Garni_2 from "../images/tourism/route-3/garni-1.jpg";
 import Gexard_1 from "../images/tourism/route-3/gexard-1.jpg";
 import Gexard_2 from "../images/tourism/route-3/gexard-2.jpg";
@@ -57,444 +57,517 @@ import Arcax_1 from "../images/tourism/route-5/arcax-1.jpg";
 import Arcax_2 from "../images/tourism/route-5/arcax-2.jpg";
 import Shushi from "../images/tourism/route-5/shushi.jpg";
 
-
-const PictureCarousel = styled(Carousel)`   
-    height:33vw;
-    width: 55vw;
-    border-radius: 0.2604vw;     
+const PictureCarousel = styled(Carousel)`
+  width: 55vw;
+  border-radius: 0.2604vw;
 `;
- 
+
 const RoutDetails = styled.div`
-    position: relative;
-    top: 0;
-    transition: 0.25s top;
-    height: 32.2vw;
-    width: 90vw;
-    margin: 0.5vw;
-    cursor: pointer;
-    color: #364f6b;
-    padding: 0.52vw;
-    border-radius: 0.2604vw;
-    box-shadow: 0vw 0vw 0.52vw 0.052vw rgba(93, 120, 148, 1);
+  position: relative;
+  top: 0;
+  transition: 0.25s top;
+  width: 90vw;
+  margin: 0.5vw;
+  cursor: pointer;
+  color: #364f6b;
+  padding: 0.52vw;
+  border-radius: 0.2604vw;
+  box-shadow: 0vw 0vw 0.52vw 0.052vw rgba(93, 120, 148, 1);
 `;
 
 const CarouselImg = styled.img`
-  height:30vw;
+  height: 30vw;
   width: 55vw;
   object-fit: cover;
-  border-radius: 0.2604vw; 
+  border-radius: 0.2604vw;
 `;
 
 const WrapTourism = styled.div`
-    display: flex;
-    justify-content: center;
-  `;
+  display: flex;
+  justify-content: center;
+`;
 
-  const Route = styled.div`
-    color: #364f6b;
-    margin: 3vw 0vw 1vw 2vw;
-    font-size: 1.5vw;
-      `;
+const Route = styled.div`
+  color: #364f6b;
+  margin: 3vw 0vw 1vw 2vw;
+  font-size: 1.5vw;
+`;
 
-  const CarouselBlock = styled.div`
-    display: flex;
-      `;
+const CarouselBlock = styled.div`
+  display: flex;
+`;
 
-  const CarouselDetails = styled.div`
-    margin-left: 1vw;
-  `;
+const CarouselDetails = styled.div`
+  margin-left: 1vw;
+`;
 
-  const DetailsList = styled.ul`
-    list-style-type: none;
-      `;
+const DetailsList = styled.ul`
+  list-style-type: none;
+`;
 
-  const DetailsItem = styled.li`
-    font-size: 1.1vw;
-  `;
+const DetailsItem = styled.li`
+  font-size: 1.1vw;
+`;
 
-  const DetailsTitles = styled.div`
-    margin-top: 0.5vw;
-    margin-bottom: 0.3vw;
-    font-size: 1.3vw;
-    font-weight: bold;
-  `;
+const DetailsTitles = styled.div`
+  margin-top: 0.5vw;
+  margin-bottom: 0.3vw;
+  font-size: 1.3vw;
+  font-weight: bold;
+`;
 
-  const CheckIconStyle = styled(CheckIcon)`
-    margin-right: 0.2604vw;
-    margin-left: 1vw; 
-    font-size: 1.2vw !important;
-   `;
+const CheckIconStyle = styled(CheckIcon)`
+  margin-right: 0.2604vw;
+  margin-left: 1vw;
+  font-size: 1.2vw !important;
+`;
 
-  const NestedDetailsItem = styled.li`
-    margin-left : 6.1vw;
-    list-style-type: disc;    
-   `;
+const NestedDetailsItem = styled.li`
+  margin-left: 6.1vw;
+  list-style-type: disc;
+`;
 
-export default function tourism(props){
-    const route_1 = [Amberd, Amberdimg, Astxaditaran, Byurakan, LakeQari, QariLij, Aragats, Tsaxkavanq, Saxmosavanq];
-    const route_2 = [Ejmiacin, Ejmiacin_1, Shoxakat, SurbGayane,  SurbHripsime, Zvartnoc, Sardarapat];
-    const route_3 = [Garni_1, Garni_2, Gexard_1, Gexard_2, XorVirap_1, XorVirap_2];
-    const route_4 = [Sevan_1, Sevan_2, Axtamar_1, Axtamar_2, ParzLich_1, ParzLich_2, Haghartsin_1, Haghartsin_2, Goshavanq_1, Goshavanq_2];
-    const route_5 = [Areni, Areni_1, Noravanq_1, Noravanq_2, Jermuk_1, Jermuk_2, Jermuk_3, Jermuk_4, Jermuk_5, Shaqe_1, Shaqe_2, ZoracQarer_1, 
-                   ZoracQarer_2, TateviVanq, Chopanuxi, SataniKamurj_1, SataniKamurj_2, Xndzoresk_1, Xndzoresk_2, Arcax_1, Arcax_2, Shushi];
+export default function tourism(props) {
+  const route_1 = [
+    Amberd,
+    Amberdimg,
+    Astxaditaran,
+    Byurakan,
+    LakeQari,
+    QariLij,
+    Aragats,
+    Tsaxkavanq,
+    Saxmosavanq,
+  ];
+  const route_2 = [
+    Ejmiacin,
+    Ejmiacin_1,
+    Shoxakat,
+    SurbGayane,
+    SurbHripsime,
+    Zvartnoc,
+    Sardarapat,
+  ];
+  const route_3 = [
+    Garni_1,
+    Garni_2,
+    Gexard_1,
+    Gexard_2,
+    XorVirap_1,
+    XorVirap_2,
+  ];
+  const route_4 = [
+    Sevan_1,
+    Sevan_2,
+    Axtamar_1,
+    Axtamar_2,
+    ParzLich_1,
+    ParzLich_2,
+    Haghartsin_1,
+    Haghartsin_2,
+    Goshavanq_1,
+    Goshavanq_2,
+  ];
+  const route_5 = [
+    Areni,
+    Areni_1,
+    Noravanq_1,
+    Noravanq_2,
+    Jermuk_1,
+    Jermuk_2,
+    Jermuk_3,
+    Jermuk_4,
+    Jermuk_5,
+    Shaqe_1,
+    Shaqe_2,
+    ZoracQarer_1,
+    ZoracQarer_2,
+    TateviVanq,
+    Chopanuxi,
+    SataniKamurj_1,
+    SataniKamurj_2,
+    Xndzoresk_1,
+    Xndzoresk_2,
+    Arcax_1,
+    Arcax_2,
+    Shushi,
+  ];
 
-
- return (
-     <WrapTourism>
-         <div>
-         <Route style={{marginTop:'1vw'}}>Explore treasures of Aragatsotn region</Route>
-            <RoutDetails>
-                <CarouselBlock>
-                <PictureCarousel>
-                    {route_1.map((item) => (
-                        <CarouselImg src={item} alt="" key={item}/>
-                    ))}
-                </PictureCarousel>
-                    <CarouselDetails>
-                        <DetailsTitles style = {{marginTop:'0'}}>Duration</DetailsTitles>
-                        <DetailsList>
-                            <DetailsItem>
-                                <CheckIconStyle/>
-                                One entire day
-                            </DetailsItem>
-                        </DetailsList>
-                        <DetailsTitles>Route details</DetailsTitles>
-                        <DetailsList>
-                            <DetailsItem>
-                                <CheckIconStyle/>
-                                Tsaghkavanq
-                            </DetailsItem>
-                            <DetailsItem>
-                                <CheckIconStyle/>
-                                Saghmosavanq
-                            </DetailsItem>
-                            <DetailsItem>
-                                <CheckIconStyle/>
-                                Amberd
-                            </DetailsItem>
-                            <DetailsItem>
-                                <CheckIconStyle/>
-                                Qari lake
-                            </DetailsItem>
-                            <DetailsItem>
-                                <CheckIconStyle/>
-                                Byurakan observatory
-                            </DetailsItem>
-                        </DetailsList>
-                        <DetailsTitles>Inclusions</DetailsTitles>
-                        <DetailsList>
-                            <DetailsItem>
-                                <CheckIconStyle/>
-                                Professional guide(Armenian, English, Russian)
-                            </DetailsItem>
-                            <DetailsItem>
-                                <CheckIconStyle/>
-                                Air-conditioned transport
-                            </DetailsItem>
-                            <DetailsItem>
-                                <CheckIconStyle/>
-                                Lunch
-                            </DetailsItem>
-                            <DetailsItem>
-                                <CheckIconStyle/>
-                                Light refreshments(water and sweets)
-                            </DetailsItem>
-                            <DetailsItem>
-                                <CheckIconStyle/>
-                                Entry/Admission - Byurakan observatory
-                            </DetailsItem>
-                        </DetailsList>
-                            <DetailsTitles>Price</DetailsTitles>
-                        <DetailsList>
-                            <DetailsItem>
-                                <CheckIconStyle/>
-                                $25 per/person
-                            </DetailsItem>
-                        </DetailsList>
-                    </CarouselDetails>
-                </CarouselBlock>
-            </RoutDetails>
-            <Route>Visit Vagharshapat, theological capital of Armenia</Route>
-           <RoutDetails>
-               <CarouselBlock>
-                   <PictureCarousel>
-                       {route_2.map((item) => (
-                           <CarouselImg src={item} alt="" key={item}/>
-                       ))}
-                   </PictureCarousel>
-                   <CarouselDetails>
-                       <DetailsTitles style = {{marginTop:'0'}}>Duration</DetailsTitles>
-                       <DetailsList>
-                           <DetailsItem>
-                               <CheckIconStyle/>
-                               One entire day
-                           </DetailsItem>
-                       </DetailsList>
-                       <DetailsTitles>Route details</DetailsTitles>
-                       <DetailsList>
-                           <DetailsItem>
-                               <CheckIconStyle/>
-                               Vagharshapat
-                           </DetailsItem>
-                           <DetailsItem>
-                               <CheckIconStyle/>
-                               Zvartnots
-                           </DetailsItem>
-                           </DetailsList>
-                       <DetailsTitles>Inclusions</DetailsTitles>
-                       <DetailsList>
-                           <DetailsItem>
-                               <CheckIconStyle/>
-                               Professional guide(Armenian, English, Russian)
-                           </DetailsItem>
-                           <DetailsItem>
-                               <CheckIconStyle/>
-                               Air-conditioned transport
-                           </DetailsItem>
-                           <DetailsItem>
-                               <CheckIconStyle/>
-                               Lunch
-                           </DetailsItem>
-                           <DetailsItem>
-                               <CheckIconStyle/>
-                               Light refreshments(water and sweets)
-                           </DetailsItem>
-                           </DetailsList>
-                       <DetailsTitles>Price</DetailsTitles>
-                       <DetailsList>
-                           <DetailsItem>
-                               <CheckIconStyle/>
-                               $15 per/person
-                           </DetailsItem>
-                       </DetailsList>
-
-                   </CarouselDetails>
-               </CarouselBlock>
-           </RoutDetails>
+  return (
+    <WrapTourism>
+      <div>
+        <Route style={{ marginTop: "1vw" }}>
+          Explore treasures of Aragatsotn region
+        </Route>
+        <RoutDetails>
+          <CarouselBlock>
+            <div id="carousel">
+              <PictureCarousel>
+                {route_1.map((item) => (
+                  <CarouselImg src={item} alt="" key={item} />
+                ))}
+              </PictureCarousel>
+            </div>
+            <CarouselDetails>
+              <DetailsTitles style={{ marginTop: "0" }}>Duration</DetailsTitles>
+              <DetailsList>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  One entire day
+                </DetailsItem>
+              </DetailsList>
+              <DetailsTitles>Route details</DetailsTitles>
+              <DetailsList>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Tsaghkavanq
+                </DetailsItem>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Saghmosavanq
+                </DetailsItem>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Amberd
+                </DetailsItem>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Qari lake
+                </DetailsItem>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Byurakan observatory
+                </DetailsItem>
+              </DetailsList>
+              <DetailsTitles>Inclusions</DetailsTitles>
+              <DetailsList>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Professional guide(Armenian, English, Russian)
+                </DetailsItem>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Air-conditioned transport
+                </DetailsItem>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Lunch
+                </DetailsItem>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Light refreshments(water and sweets)
+                </DetailsItem>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Entry/Admission - Byurakan observatory
+                </DetailsItem>
+              </DetailsList>
+              <DetailsTitles>Price</DetailsTitles>
+              <DetailsList>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  $25 per/person
+                </DetailsItem>
+              </DetailsList>
+            </CarouselDetails>
+          </CarouselBlock>
+        </RoutDetails>
+        <Route>Visit Vagharshapat, theological capital of Armenia</Route>
+        <RoutDetails>
+          <CarouselBlock>
+            <div id="carousel">
+              <PictureCarousel>
+                {route_2.map((item) => (
+                  <CarouselImg src={item} alt="" key={item} />
+                ))}
+              </PictureCarousel>
+            </div>
+            <CarouselDetails>
+              <DetailsTitles style={{ marginTop: "0" }}>Duration</DetailsTitles>
+              <DetailsList>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  One entire day
+                </DetailsItem>
+              </DetailsList>
+              <DetailsTitles>Route details</DetailsTitles>
+              <DetailsList>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Vagharshapat
+                </DetailsItem>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Zvartnots
+                </DetailsItem>
+              </DetailsList>
+              <DetailsTitles>Inclusions</DetailsTitles>
+              <DetailsList>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Professional guide(Armenian, English, Russian)
+                </DetailsItem>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Air-conditioned transport
+                </DetailsItem>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Lunch
+                </DetailsItem>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Light refreshments(water and sweets)
+                </DetailsItem>
+              </DetailsList>
+              <DetailsTitles>Price</DetailsTitles>
+              <DetailsList>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  $15 per/person
+                </DetailsItem>
+              </DetailsList>
+            </CarouselDetails>
+          </CarouselBlock>
+        </RoutDetails>
         <Route>Armenia - open sky museum</Route>
         <RoutDetails>
-            <CarouselBlock>
-                <PictureCarousel>
-                    {route_3.map((item) => (
-                        <CarouselImg src={item} alt="" key={item}/>
-                    ))}
-                </PictureCarousel>
-                <CarouselDetails>
-                    <DetailsTitles style = {{marginTop:'0'}}>Duration</DetailsTitles>
-                    <DetailsList>
-                        <DetailsItem>
-                            <CheckIconStyle/>
-                            One entire day
-                        </DetailsItem>
-                    </DetailsList>
-                    <DetailsTitles>Route details</DetailsTitles>
-                    <DetailsList>
-                        <DetailsItem>
-                            <CheckIconStyle/>
-                            Garni temple
-                        </DetailsItem>
-                        <DetailsItem>
-                            <CheckIconStyle/>
-                            Geghard monastery
-                        </DetailsItem>
-                        <DetailsItem>
-                            <CheckIconStyle/>
-                            Khor Virap
-                        </DetailsItem>
-                    </DetailsList>
-                    <DetailsTitles>Inclusions</DetailsTitles>
-                    <DetailsList>
-                        <DetailsItem>
-                            <CheckIconStyle/>
-                            Professional guide(Armenian, English, Russian)
-                        </DetailsItem>
-                        <DetailsItem>
-                            <CheckIconStyle/>
-                            Air-conditioned transport
-                        </DetailsItem>
-                        <DetailsItem>
-                            <CheckIconStyle/>
-                            Lunch
-                        </DetailsItem>
-                        <DetailsItem>
-                            <CheckIconStyle/>
-                            Light refreshments(water and sweets)
-                        </DetailsItem>
-                    </DetailsList>
-                    <DetailsTitles>Price</DetailsTitles>
-                    <DetailsList>
-                        <DetailsItem>
-                            <CheckIconStyle/>
-                            $25 per/person
-                        </DetailsItem>
-                    </DetailsList>
-                </CarouselDetails>
-            </CarouselBlock>
+          <CarouselBlock>
+            <div id="carousel">
+              <PictureCarousel>
+                {route_3.map((item) => (
+                  <CarouselImg src={item} alt="" key={item} />
+                ))}
+              </PictureCarousel>
+            </div>
+            <CarouselDetails>
+              <DetailsTitles style={{ marginTop: "0" }}>Duration</DetailsTitles>
+              <DetailsList>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  One entire day
+                </DetailsItem>
+              </DetailsList>
+              <DetailsTitles>Route details</DetailsTitles>
+              <DetailsList>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Garni temple
+                </DetailsItem>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Geghard monastery
+                </DetailsItem>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Khor Virap
+                </DetailsItem>
+              </DetailsList>
+              <DetailsTitles>Inclusions</DetailsTitles>
+              <DetailsList>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Professional guide(Armenian, English, Russian)
+                </DetailsItem>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Air-conditioned transport
+                </DetailsItem>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Lunch
+                </DetailsItem>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Light refreshments(water and sweets)
+                </DetailsItem>
+              </DetailsList>
+              <DetailsTitles>Price</DetailsTitles>
+              <DetailsList>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  $25 per/person
+                </DetailsItem>
+              </DetailsList>
+            </CarouselDetails>
+          </CarouselBlock>
         </RoutDetails>
-        <Route>Armenia’s pearl: discover secrets of mysterious Lake Sevan</Route>
+        <Route>
+          Armenia’s pearl: discover secrets of mysterious Lake Sevan
+        </Route>
         <RoutDetails>
-            <CarouselBlock>
-                <PictureCarousel>
-                    {route_4.map((item) => (
-                        <CarouselImg src={item} alt="" key={item}/>
-                    ))}
-                </PictureCarousel>
-                <CarouselDetails>
-                    <DetailsTitles style = {{marginTop:'0'}}>Duration</DetailsTitles>
-                    <DetailsList>
-                        <DetailsItem>
-                            <CheckIconStyle/>
-                            One entire day
-                        </DetailsItem>
-                    </DetailsList>
-                    <DetailsTitles>Route details</DetailsTitles>
-                    <DetailsList>
-                        <DetailsItem>
-                            <CheckIconStyle/>
-                            Lake Sevan and Akhtamat peninsula
-                        </DetailsItem>
-                        <DetailsItem>
-                            <CheckIconStyle/>
-                            Dilijan
-                        </DetailsItem>
-                        <DetailsItem>
-                            <CheckIconStyle/>
-                            Lake 'Parz Lich'
-                        </DetailsItem>
-                        <DetailsItem>
-                            <CheckIconStyle/>
-                            Goshavanq
-                        </DetailsItem>
-                        <DetailsItem>
-                            <CheckIconStyle/>
-                            Haghartsin monastery complex
-                        </DetailsItem>
-                    </DetailsList>
-                    <DetailsTitles>Inclusions</DetailsTitles>
-                    <DetailsList>
-                        <DetailsItem>
-                            <CheckIconStyle/>
-                            Professional guide(Armenian, English, Russian)
-                        </DetailsItem>
-                        <DetailsItem>
-                            <CheckIconStyle/>
-                            Air-conditioned transport
-                        </DetailsItem>
-                        <DetailsItem>
-                            <CheckIconStyle/>
-                            Lunch
-                        </DetailsItem>
-                        <DetailsItem>
-                            <CheckIconStyle/>
-                            Light refreshments(water and sweets)
-                        </DetailsItem>
-                    </DetailsList>
-                    <DetailsTitles>Price</DetailsTitles>
-                    <DetailsList>
-                        <DetailsItem>
-                            <CheckIconStyle/>
-                            $35 per/person
-                        </DetailsItem>
-                    </DetailsList>
-                </CarouselDetails>
-            </CarouselBlock>
-            </RoutDetails>
-            <Route>Discover mountains of Armenia</Route>
-            <RoutDetails>
-                <CarouselBlock>
-                    <PictureCarousel>
-                        {route_5.map((item) => (
-                            <CarouselImg src={item} alt="" key={item}/>
-                        ))}
-                    </PictureCarousel>
-                    <CarouselDetails>
-                        <div style = {{display:'flex'}}>
-                            <div>
-                        <DetailsTitles style = {{marginTop:'0'}}>Duration</DetailsTitles>
-                        <DetailsList>
-                            <DetailsItem>
-                                <CheckIconStyle/>
-                                Two nights
-                            </DetailsItem>
-                        </DetailsList>
-                                </div>
-                          <div style={{marginLeft: '7vw'}}>
-                        <DetailsTitles style={{marginTop: '0'}}>Route details</DetailsTitles>
-                        <DetailsList>
-                            <DetailsItem>
-                                <CheckIconStyle/>
-                                Areni village
-                            </DetailsItem>
-                            <DetailsItem>
-                                <CheckIconStyle/>
-                                Noravanq monastery complex
-                            </DetailsItem>
-                            <DetailsItem>
-                                <CheckIconStyle/>
-                                Jermuk sites
-                            </DetailsItem>
-                            <DetailsItem>
-                                <CheckIconStyle/>
-                                Shaqe waterfall
-                            </DetailsItem>
-                            <DetailsItem>
-                                <CheckIconStyle/>
-                                Carahunge
-                            </DetailsItem>
-                            <DetailsItem>
-                                <CheckIconStyle/>
-                                Tatev monastery complex
-                            </DetailsItem>
-                            <DetailsItem>
-                                <CheckIconStyle/>
-                                Khndzoresk village
-                            </DetailsItem>
-                            <DetailsItem>
-                                <CheckIconStyle/>
-                                Artsakh
-                            </DetailsItem>
-                        </DetailsList>
-                              </div>
-                        </div>
-                        <DetailsTitles style = {{marginTop:'0'}}>Inclusions</DetailsTitles>
-                        <DetailsList>
-                            <DetailsItem>
-                                <CheckIconStyle/>
-                                Professional guide(Armenian, English, Russian)
-                            </DetailsItem>
-                            <DetailsItem>
-                                <CheckIconStyle/>
-                                Air-conditioned transport
-                            </DetailsItem>
-                            <DetailsItem>
-                                <CheckIconStyle/>
-                                Lunch
-                            </DetailsItem>
-                            <DetailsItem>
-                                <CheckIconStyle/>
-                                Light refreshments(water and sweets)
-                            </DetailsItem>
-                            <DetailsItem>
-                                <CheckIconStyle/>
-                                Entry/Admission
-                                <DetailsList>
-                                    <NestedDetailsItem>Wine tasting in Areni</NestedDetailsItem>
-                                    <NestedDetailsItem>Tatev roapway</NestedDetailsItem>
-                                    <NestedDetailsItem>Two night hotel stay</NestedDetailsItem>
-                                </DetailsList>
-                            </DetailsItem>
-                        </DetailsList>
-                        <DetailsTitles style = {{marginTop:'0'}}>Price</DetailsTitles>
-                        <DetailsList>
-                            <DetailsItem>
-                                <CheckIconStyle/>
-                                $120 per/person
-                            </DetailsItem>
-                        </DetailsList>
-                    </CarouselDetails>
-                </CarouselBlock>
+          <CarouselBlock>
+            <div id="carousel">
+              <PictureCarousel>
+                {route_4.map((item) => (
+                  <CarouselImg src={item} alt="" key={item} />
+                ))}
+              </PictureCarousel>
+            </div>
+            <CarouselDetails>
+              <DetailsTitles style={{ marginTop: "0" }}>Duration</DetailsTitles>
+              <DetailsList>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  One entire day
+                </DetailsItem>
+              </DetailsList>
+              <DetailsTitles>Route details</DetailsTitles>
+              <DetailsList>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Lake Sevan and Akhtamat peninsula
+                </DetailsItem>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Dilijan
+                </DetailsItem>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Lake 'Parz Lich'
+                </DetailsItem>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Goshavanq
+                </DetailsItem>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Haghartsin monastery complex
+                </DetailsItem>
+              </DetailsList>
+              <DetailsTitles>Inclusions</DetailsTitles>
+              <DetailsList>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Professional guide(Armenian, English, Russian)
+                </DetailsItem>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Air-conditioned transport
+                </DetailsItem>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Lunch
+                </DetailsItem>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Light refreshments(water and sweets)
+                </DetailsItem>
+              </DetailsList>
+              <DetailsTitles>Price</DetailsTitles>
+              <DetailsList>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  $35 per/person
+                </DetailsItem>
+              </DetailsList>
+            </CarouselDetails>
+          </CarouselBlock>
         </RoutDetails>
-    </div>
-  </WrapTourism>  
- )
-};
+        <Route>Discover mountains of Armenia</Route>
+        <RoutDetails>
+          <CarouselBlock>
+            <div id="carousel">
+              <PictureCarousel>
+                {route_5.map((item) => (
+                  <CarouselImg src={item} alt="" key={item} />
+                ))}
+              </PictureCarousel>
+            </div>
+            <CarouselDetails>
+              <div style={{ display: "flex" }}>
+                <div>
+                  <DetailsTitles style={{ marginTop: "0" }}>
+                    Duration
+                  </DetailsTitles>
+                  <DetailsList>
+                    <DetailsItem>
+                      <CheckIconStyle />
+                      Two nights
+                    </DetailsItem>
+                  </DetailsList>
+                </div>
+                <div style={{ marginLeft: "7vw" }}>
+                  <DetailsTitles style={{ marginTop: "0" }}>
+                    Route details
+                  </DetailsTitles>
+                  <DetailsList>
+                    <DetailsItem>
+                      <CheckIconStyle />
+                      Areni village
+                    </DetailsItem>
+                    <DetailsItem>
+                      <CheckIconStyle />
+                      Noravanq monastery complex
+                    </DetailsItem>
+                    <DetailsItem>
+                      <CheckIconStyle />
+                      Jermuk sites
+                    </DetailsItem>
+                    <DetailsItem>
+                      <CheckIconStyle />
+                      Shaqe waterfall
+                    </DetailsItem>
+                    <DetailsItem>
+                      <CheckIconStyle />
+                      Carahunge
+                    </DetailsItem>
+                    <DetailsItem>
+                      <CheckIconStyle />
+                      Tatev monastery complex
+                    </DetailsItem>
+                    <DetailsItem>
+                      <CheckIconStyle />
+                      Khndzoresk village
+                    </DetailsItem>
+                    <DetailsItem>
+                      <CheckIconStyle />
+                      Artsakh
+                    </DetailsItem>
+                  </DetailsList>
+                </div>
+              </div>
+              <DetailsTitles style={{ marginTop: "0" }}>
+                Inclusions
+              </DetailsTitles>
+              <DetailsList>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Professional guide(Armenian, English, Russian)
+                </DetailsItem>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Air-conditioned transport
+                </DetailsItem>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Lunch
+                </DetailsItem>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Light refreshments(water and sweets)
+                </DetailsItem>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  Entry/Admission
+                  <DetailsList>
+                    <NestedDetailsItem>Wine tasting in Areni</NestedDetailsItem>
+                    <NestedDetailsItem>Tatev roapway</NestedDetailsItem>
+                    <NestedDetailsItem>Two night hotel stay</NestedDetailsItem>
+                  </DetailsList>
+                </DetailsItem>
+              </DetailsList>
+              <DetailsTitles style={{ marginTop: "0" }}>Price</DetailsTitles>
+              <DetailsList>
+                <DetailsItem>
+                  <CheckIconStyle />
+                  $120 per/person
+                </DetailsItem>
+              </DetailsList>
+            </CarouselDetails>
+          </CarouselBlock>
+        </RoutDetails>
+      </div>
+    </WrapTourism>
+  );
+}

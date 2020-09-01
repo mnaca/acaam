@@ -14,11 +14,35 @@
   display: flex !important;
 }
 
+.CarouselItem > * {
+  display: flex !important;
+  flex: 1 !important;
+}
+
+#carousel .Carousel-fullHeightHoverButton-19 {
+  padding: 0vw !important;
+  margin: 0 !important;
+  top: calc(50%) !important;
+  transform: translateY(-1vw) !important;
+}
+
+#carousel .MuiSvgIcon-root {
+  font-size: 3vw !important;
+}
+
 .Carousel-indicators-13 {
   display: flex !important;
   justify-content: center !important;
   margin-top: 0.52vw !important;
 }
+
+#carousel .Carousel-indicator-14 {
+  display: flex !important;
+  justify-content: center !important;
+  margin-top: 0.52vw !important;
+  font-size: 0.67vw !important;
+}
+
 .Carousel-fullHeightHoverButton-19 {
   transform: translateY(calc(-50% + 20px)) !important;
 }
@@ -113,7 +137,6 @@ label + .MuiInput-formControl {
   left: 0 !important;
   height: 0.104vw !important;
 }
-
 
 .menu {
   position: absolute;

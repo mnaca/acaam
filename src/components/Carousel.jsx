@@ -65,20 +65,20 @@ const CarouselCmp = styled(Carousel)`
 `;
 
 const RoutsWrap = styled.div`
-position: relative;
-top: 0;
-transition: 0.25s top;
-width: 16.96vw;
-margin: 0.5vw;
-cursor: pointer;
-color: #364f6b;
-padding: 0.52vw;
-border-radius: 0.2604vw;
-box-shadow: 0vw 0vw 0.52vw 0.052vw rgba(93, 120, 148, 1);
-&:hover {
-  top: -0.7vw;
-  box-shadow: 0vw 0vw 1.5vw 0.104vw rgba(93, 120, 148, 1);
-}
+  position: relative;
+  top: 0;
+  transition: 0.25s top;
+  width: 16.96vw;
+  margin: 0.5vw;
+  cursor: pointer;
+  color: #364f6b;
+  padding: 0.52vw;
+  border-radius: 0.2604vw;
+  box-shadow: 0vw 0vw 0.52vw 0.052vw rgba(93, 120, 148, 1);
+  &:hover {
+    top: -0.7vw;
+    box-shadow: 0vw 0vw 1.5vw 0.104vw rgba(93, 120, 148, 1);
+  }
 `;
 const Routes = styled.div`
 text-align: center;
@@ -98,25 +98,25 @@ const CarouselWrap = styled.div`
 `;
 
 const AraratImg = styled.img`
-    display: flex;
-    width: 93.5vw;
-    height: 20vw;
-    margin: 0 auto;    
-    padding: 0.3vw;
-    border-radius: 0.2604vw;
-    box-shadow: 0vw 0vw 0.52vw 0.052vw rgba(93,120,148,1);
+  display: flex;
+  width: 93.5vw;
+  height: 20vw;
+  margin: 0 auto;    
+  padding: 0.3vw;
+  border-radius: 0.2604vw;
+  box-shadow: 0vw 0vw 0.52vw 0.052vw rgba(93,120,148,1);
 `;
 
 const SectorTourism = styled.div`
-    text-align: center;
-    color: #364f6b;
-    font-size: 1.6vw;
-    border-top: 0.104vw solid #c3c3c3;
-    padding: 0.8vw;
-    margin: 1vw 2.52vw;
-  `;
+  text-align: center;
+  color: #364f6b;
+  font-size: 1.6vw;
+  border-top: 0.104vw solid #c3c3c3;
+  padding: 0.8vw;
+  margin: 1vw 2.52vw;
+`;
 
-  const SearchButton = styled(Button)`
+const SearchButton = styled(Button)`
   border-width: 0.104vw !important;
   border-color: #364f6b !important;
   width: 56.5vw !important;
@@ -125,12 +125,13 @@ const SectorTourism = styled.div`
   padding: 0.8vw !important;
   border-radius: 0.5vw !important;
   text-decoration: none !important;
-  `;
-  const DetailsDiv = styled.div`
-    display: flex; 
-    justify-content: center;
-    margin-top: 0.52vw;
-  `;
+`;
+
+const DetailsDiv = styled.div`
+  display: flex; 
+  justify-content: center;
+  margin-top: 0.52vw;
+`;
 
 export default function CarouselComponent() {
   const route_1 = [Amberd, Amberdimg, Astxaditaran, Byurakan, LakeQari, QariLij, Aragats, Tsaxkavanq, Saxmosavanq];
@@ -141,7 +142,7 @@ export default function CarouselComponent() {
                    ZoracQarer_2, TateviVanq, Chopanuxi, SataniKamurj_1, SataniKamurj_2, Xndzoresk_1, Xndzoresk_2, Arcax_1, Arcax_2, Shushi];
 
   return (
-    <>
+    <div id="carousel">
       <SectorTourism>
         <h4>Discover Armenia </h4>Top 5 destinations that have a lot to offer
       </SectorTourism>
@@ -200,6 +201,6 @@ export default function CarouselComponent() {
       </SearchButton>
       </Link>
       </DetailsDiv>
-    </>
+    </div>
   );
 }
